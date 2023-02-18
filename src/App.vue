@@ -79,9 +79,43 @@ const onSort = (columnName: string): void => {
       <!-- Table body -->
       <tbody>
         <tr v-for="verb in verbsData" :key="verb.infinitive" class="border-b border-gray-200 dark:border-gray-700">
-          <td scope="row" class="px-2 py-4 capitalize hover:bg-blue-100 dark:hover:bg-gray-600">{{ verb.infinitive }}</td>
-          <td class="px-2 py-4 capitalize bg-gray-100 dark:bg-gray-800 hover:bg-blue-100 dark:hover:bg-gray-600">{{ verb.pastSimple }}</td>
-          <td class="px-2 py-4 capitalize hover:bg-blue-100 dark:hover:bg-gray-600">{{ verb.pastParticiple }}</td>
+          <td scope="row" class="capitalize hover:bg-blue-100 dark:hover:bg-gray-600">
+            <a
+              :href="`https://context.reverso.net/translation/english-ukrainian/${verb.infinitive}`"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="px-2 py-4"
+              style="width: 100%; display: block"
+              :title="`Go to Reverso: ${verb.pastSimple}`"
+              data-tooltip-target="tooltip-default"
+            >
+              {{ verb.infinitive }}
+            </a>
+          </td>
+          <td class="capitalize bg-gray-100 dark:bg-gray-800 hover:bg-blue-100 dark:hover:bg-gray-600">
+            <a
+              :href="`https://context.reverso.net/translation/english-ukrainian/${verb.pastSimple}`"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="px-2 py-4"
+              style="width: 100%; display: block"
+              :title="`Go to Reverso: ${verb.pastSimple}`"
+            >
+              {{ verb.pastSimple }}
+            </a>
+          </td>
+          <td class="capitalize hover:bg-blue-100 dark:hover:bg-gray-600">
+            <a
+              :href="`https://context.reverso.net/translation/english-ukrainian/${verb.pastParticiple}`"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="px-2 py-4"
+              style="width: 100%; display: block"
+              :title="`Go to Reverso: ${verb.pastSimple}`"
+            >
+              {{ verb.pastParticiple }}
+            </a>
+          </td>
         </tr>
       </tbody>
     </table>
