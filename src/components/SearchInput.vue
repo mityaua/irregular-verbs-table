@@ -1,28 +1,31 @@
 <script setup lang="ts">
-import { ref, Ref } from "vue";
+import { ref, Ref, toRefs } from "vue";
 import IVerb from "../interfaces/Iverbs";
 
 const props = defineProps<{ data: Array<IVerb> }>();
-const emit = defineEmits(["update-search"]);
+const emit = defineEmits<{
+  (e: "update-search", data: Array<IVerb>): void;
+}>();
 
-const search: Ref<string> = ref("");
+const { data } = toRefs(props);
+const filter: Ref<string> = ref("");
 
 const onSearch = (): void => {
-  if (!search.value) {
-    emit("update-search", props.data);
+  if (!filter.value) {
+    emit("update-search", data.value);
     return;
   }
 
-  const results: IVerb[] = props.data.filter((verb: IVerb) =>
-    Object.keys(verb).some((item: string) => verb[item].toLowerCase().includes(search.value.toLowerCase()))
+  const results: IVerb[] = data.value.filter((verb: IVerb) =>
+    Object.keys(verb).some((item: string) => verb[item].toLowerCase().includes(filter.value.toLowerCase()))
   );
 
   emit("update-search", results);
 };
 
 const clearSearchResults = () => {
-  search.value = "";
-  emit("update-search", props.data);
+  filter.value = "";
+  emit("update-search", data.value);
 };
 </script>
 
@@ -51,7 +54,7 @@ const clearSearchResults = () => {
 
         <!-- Search input -->
         <input
-          v-model.trim="search"
+          v-model.trim="filter"
           @input="onSearch"
           type="text"
           id="table-search"
@@ -63,7 +66,7 @@ const clearSearchResults = () => {
 
     <!-- Сlear results button -->
     <button
-      v-show="search"
+      v-show="filter"
       type="button"
       class="py-1 px-2.5 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
       @click="clearSearchResults"
@@ -72,5 +75,3 @@ const clearSearchResults = () => {
     </button>
   </div>
 </template>
-
-<style scoped></style>
