@@ -46,7 +46,8 @@ const highlightMatches = (word: string, query: string) => {
 
 const startSpeech = (message: string) => {
   speaking.value = true;
-  const utterance = new SpeechSynthesisUtterance(message);
+  const normalizedMessage: string = message.split("/").join();
+  const utterance = new SpeechSynthesisUtterance(normalizedMessage);
   synthesizer.value?.speak(utterance);
 };
 
@@ -120,7 +121,7 @@ onUnmounted(() => {
           <tr v-for="verb in verbsData" :key="verb.infinitive" class="border-b border-gray-200 dark:border-gray-700">
             <td scope="row" class="hover:bg-blue-100 dark:hover:bg-gray-600">
               <a
-                :href="`https://context.reverso.net/translation/english-ukrainian/${verb.infinitive}`"
+                :href="`https://context.reverso.net/translation/english-ukrainian/${verb.infinitive.split('/')[0]}`"
                 target="_blank"
                 rel="noopener noreferrer"
                 class="px-2 py-4"
@@ -133,7 +134,7 @@ onUnmounted(() => {
             </td>
             <td class="bg-gray-100 dark:bg-gray-800 hover:bg-blue-100 dark:hover:bg-gray-600">
               <a
-                :href="`https://context.reverso.net/translation/english-ukrainian/${verb.pastSimple}`"
+                :href="`https://context.reverso.net/translation/english-ukrainian/${verb.pastSimple.split('/')[0]}`"
                 target="_blank"
                 rel="noopener noreferrer"
                 class="px-2 py-4"
@@ -146,7 +147,7 @@ onUnmounted(() => {
             </td>
             <td class="hover:bg-blue-100 dark:hover:bg-gray-600">
               <a
-                :href="`https://context.reverso.net/translation/english-ukrainian/${verb.pastParticiple}`"
+                :href="`https://context.reverso.net/translation/english-ukrainian/${verb.pastParticiple.split('/')[0]}`"
                 target="_blank"
                 rel="noopener noreferrer"
                 class="px-2 py-4"
