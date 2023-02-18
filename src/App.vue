@@ -4,6 +4,7 @@ import IVerb from "./interfaces/Iverbs";
 import { verbs } from "./data/verbs.json";
 import SearchInput from "./components/SearchInput.vue";
 import SearchResults from "./components/SearchResults.vue";
+import ScroolToTop from "./components/ScroolToTop.vue";
 
 const verbsData: Ref<IVerb[]> = ref(verbs);
 const sortDirection: Ref<boolean> = ref(false);
@@ -140,6 +141,8 @@ const onSort = (columnName: string): void => {
       </svg>
     </a>
   </p>
+
+  <ScroolToTop />
 </template>
 
 <style scoped></style>
