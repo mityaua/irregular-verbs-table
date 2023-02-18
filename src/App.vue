@@ -1,24 +1,21 @@
 <script setup lang="ts">
 import { ref, Ref } from "vue";
+import IVerb from "./interfaces/Iverbs";
 import { verbs } from "./data/verbs.json";
+import SearchInput from "./components/SearchInput.vue";
+import SearchResults from "./components/SearchResults.vue";
 
-const search: Ref<string> = ref("");
-const verbsData = ref(verbs);
-const sortDirection = ref(false);
+const verbsData: Ref<IVerb[]> = ref(verbs);
+const sortDirection: Ref<boolean> = ref(false);
 
-const onSearch = () => {
-  if (!search.value) {
-    verbsData.value = verbs;
-    return;
-  }
-
-  verbsData.value = verbs.filter((verb) => Object.keys(verb).some((item) => verb[item].toLowerCase().includes(search.value.toLowerCase())));
+const searchHandler = (searchResults: IVerb[]) => {
+  verbsData.value = searchResults;
 };
 
-const onSort = (columnName: any) => {
+const onSort = (columnName: string): void => {
   sortDirection.value = !sortDirection.value;
 
-  verbsData.value = [...verbsData.value].sort((a, b) =>
+  verbsData.value = [...verbsData.value].sort((a: IVerb, b: IVerb) =>
     sortDirection.value ? a[columnName].localeCompare(b[columnName]) : b[columnName].localeCompare(a[columnName])
   );
 };
@@ -27,48 +24,21 @@ const onSort = (columnName: any) => {
 <template>
   <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
     <table class="w-full text-sm text-center text-gray-500 dark:text-gray-400">
-      <caption class="p-4 text-lg font-semibold text-left text-gray-900 bg-white dark:text-white dark:bg-gray-800">
-        Irregular Verbs
+      <!-- Table caption -->
+      <caption class="px-4 py-1 text-lg font-semibold text-left text-gray-900 bg-blue-100 dark:text-white dark:bg-gray-800">
+        List of irregular verbs
+
         <!-- Search input -->
-        <div class="mt-2 bg-white dark:bg-gray-900">
-          <label for="table-search" class="sr-only">Search</label>
+        <search-input :data="verbs" @update-search="searchHandler" />
 
-          <div class="relative mt-1 dark:bg-gray-800">
-            <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-              <svg
-                class="w-5 h-5 text-gray-500 dark:text-gray-400"
-                aria-hidden="true"
-                fill="currentColor"
-                viewBox="0 0 20 20"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  fill-rule="evenodd"
-                  d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
-                  clip-rule="evenodd"
-                ></path>
-              </svg>
-            </div>
-
-            <input
-              v-model.trim="search"
-              @input="onSearch"
-              type="text"
-              id="table-search"
-              class="block p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-50 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              placeholder="Search for items"
-            />
-          </div>
-        </div>
-
-        <p v-if="verbsData.length" class="mt-1 text-sm font-normal text-gray-500 dark:text-gray-400">{{ verbsData.length }} results</p>
-
-        <p v-else class="mt-1 text-sm font-normal text-gray-500 dark:text-gray-400">Nothing found ☹️</p>
+        <!-- Search results -->
+        <search-results :results="verbsData.length" />
       </caption>
 
+      <!-- Table head -->
       <thead class="text-xs text-gray-700 uppercase dark:text-gray-400">
         <tr>
-          <th scope="col" class="px-3 py-3">
+          <th scope="col" class="px-3 py-3 bg-gray-50 dark:bg-gray-700">
             <div class="flex justify-center items-center">
               Infinitive
               <a href="#" @click="onSort('infinitive')"
@@ -80,7 +50,7 @@ const onSort = (columnName: any) => {
             </div>
           </th>
 
-          <th scope="col" class="px-3 py-3 bg-gray-50 dark:bg-gray-800">
+          <th scope="col" class="px-3 py-3 bg-gray-50 dark:bg-gray-700">
             <div class="flex justify-center items-center">
               Past simple
               <a href="#" @click="onSort('pastSimple')"
@@ -91,7 +61,8 @@ const onSort = (columnName: any) => {
               ></a>
             </div>
           </th>
-          <th scope="col" class="px-3 py-3">
+
+          <th scope="col" class="px-3 py-3 bg-gray-50 dark:bg-gray-700">
             <div class="flex justify-center items-center">
               Past participle
               <a href="#" @click="onSort('pastParticiple')"
@@ -105,15 +76,36 @@ const onSort = (columnName: any) => {
         </tr>
       </thead>
 
+      <!-- Table body -->
       <tbody>
         <tr v-for="verb in verbsData" :key="verb.infinitive" class="border-b border-gray-200 dark:border-gray-700">
-          <td scope="row" class="px-2 py-4 capitalize hover:bg-gray-50 dark:hover:bg-gray-600">{{ verb.infinitive }}</td>
-          <td class="px-2 py-4 capitalize bg-gray-50 dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600">{{ verb.pastSimple }}</td>
-          <td class="px-2 py-4 capitalize hover:bg-gray-50 dark:hover:bg-gray-600">{{ verb.pastParticiple }}</td>
+          <td scope="row" class="px-2 py-4 capitalize hover:bg-blue-100 dark:hover:bg-gray-600">{{ verb.infinitive }}</td>
+          <td class="px-2 py-4 capitalize bg-gray-100 dark:bg-gray-800 hover:bg-blue-100 dark:hover:bg-gray-600">{{ verb.pastSimple }}</td>
+          <td class="px-2 py-4 capitalize hover:bg-blue-100 dark:hover:bg-gray-600">{{ verb.pastParticiple }}</td>
         </tr>
       </tbody>
     </table>
   </div>
+
+  <!-- Source link -->
+  <p class="mt-4 text-gray-500 dark:text-gray-400">
+    List of irregular verbs
+    <a
+      href="https://www.academia.edu/22617451/Appendix_1_Regular_and_irregular_verbs"
+      class="inline-flex items-center font-medium text-blue-600 dark:text-blue-500 hover:underline"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      Source
+      <svg aria-hidden="true" class="w-5 h-5 ml-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+        <path
+          fill-rule="evenodd"
+          d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z"
+          clip-rule="evenodd"
+        ></path>
+      </svg>
+    </a>
+  </p>
 </template>
 
 <style scoped></style>
