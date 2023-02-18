@@ -1,5 +1,5 @@
 <template>
-  <div id="pagetop" class="fixed right-0 bottom-0 cursor-pointer" v-show="scrollY > 300" @click="toTop">
+  <div id="pagetop" class="fixed right-0 bottom-0 cursor-pointer" title="Scroll to top" v-show="scrollY > 300" @click="toTop">
     <svg
       xmlns="http://www.w3.org/2000/svg"
       width="48"
@@ -16,12 +16,12 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, onUnmounted, ref } from "vue";
+import { onMounted, onUnmounted, ref, Ref } from "vue";
 
-const timer = ref(0);
-const scrollY = ref(0);
+const timer: Ref<number> = ref(0);
+const scrollY: Ref<number> = ref(0);
 
-const handleScroll = () => {
+const handleScroll = (): void => {
   if (timer.value) return;
 
   timer.value = setTimeout(() => {
@@ -32,7 +32,7 @@ const handleScroll = () => {
   }, 100);
 };
 
-const toTop = () => {
+const toTop = (): void => {
   window.scrollTo({
     top: 0,
     behavior: "smooth",
