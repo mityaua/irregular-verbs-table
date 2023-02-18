@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import Table from "./components/Table.vue";
+import VerbsTable from "./components/VerbsTable.vue";
 import SourceLink from "./components/SourceLink.vue";
 import ScroolToTop from "./components/ScroolToTop.vue";
 </script>
 
 <template>
-  <Table />
+  <verbs-table />
   <source-link />
   <scrool-to-top />
 </template>
