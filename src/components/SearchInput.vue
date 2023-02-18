@@ -1,31 +1,34 @@
 <script setup lang="ts">
-import { ref, Ref, toRefs } from "vue";
+import { toRefs } from "vue";
 import IVerb from "../interfaces/Iverbs";
 
-const props = defineProps<{ data: Array<IVerb> }>();
+const props = defineProps<{ data: Array<IVerb>; filter: string }>();
 const emit = defineEmits<{
-  (e: "update-search", data: Array<IVerb>): void;
+  (e: "update-results", data: Array<IVerb>): void;
+  (e: "update-filter", filter: string): void;
 }>();
 
-const { data } = toRefs(props);
-const filter: Ref<string> = ref("");
+const { data, filter } = toRefs(props);
 
-const onSearch = (): void => {
-  if (!filter.value) {
-    emit("update-search", data.value);
+const handleSearch = (event: Event): void => {
+  const inputValue = (event.target as HTMLInputElement).value.trim();
+
+  if (!inputValue) {
+    emit("update-results", data.value);
     return;
   }
 
   const results: IVerb[] = data.value.filter((verb: IVerb) =>
-    Object.keys(verb).some((item: string) => verb[item].toLowerCase().includes(filter.value.toLowerCase()))
+    Object.keys(verb).some((item: string) => verb[item].toLowerCase().includes(inputValue.toLowerCase()))
   );
 
-  emit("update-search", results);
+  emit("update-filter", inputValue);
+  emit("update-results", results);
 };
 
 const clearSearchResults = () => {
-  filter.value = "";
-  emit("update-search", data.value);
+  emit("update-filter", "");
+  emit("update-results", data.value);
 };
 </script>
 
@@ -54,8 +57,8 @@ const clearSearchResults = () => {
 
         <!-- Search input -->
         <input
-          v-model.trim="filter"
-          @input="onSearch"
+          :value="filter"
+          @input="handleSearch"
           type="text"
           id="table-search"
           class="block p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-50 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"

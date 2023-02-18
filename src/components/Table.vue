@@ -6,12 +6,15 @@ import SearchInput from "../components/SearchInput.vue";
 import SearchResults from "../components/SearchResults.vue";
 
 const verbsData: Ref<IVerb[]> = ref(verbs);
+const filter: Ref<string> = ref("");
 const sortDirection: Ref<boolean> = ref(false);
 
 const searchResultsHandler = (results: IVerb[]) => {
   verbsData.value = results;
 };
-
+const filterHandler = (query: string) => {
+  filter.value = query;
+};
 const onSort = (columnName: string): void => {
   sortDirection.value = !sortDirection.value;
 
@@ -29,7 +32,7 @@ const onSort = (columnName: string): void => {
         List of irregular verbs
 
         <!-- Search input -->
-        <search-input :data="verbs" @update-search="searchResultsHandler" />
+        <search-input v-model:filter="filter" :data="verbs" @update-results="searchResultsHandler" @update-filter="filterHandler" />
 
         <!-- Search results -->
         <search-results :results="verbsData.length" />
