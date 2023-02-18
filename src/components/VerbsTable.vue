@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, Ref } from "vue";
+import { ref, Ref, onMounted, onUnmounted } from "vue";
 import IVerb from "../interfaces/Iverbs";
 import { verbs } from "../data/verbs.json";
 import SearchInput from "../components/SearchInput.vue";
@@ -8,6 +8,9 @@ import SearchResults from "../components/SearchResults.vue";
 const verbsData: Ref<IVerb[]> = ref(verbs);
 const filter: Ref<string> = ref("");
 const sortDirection: Ref<boolean> = ref(false);
+
+const synthesizer = ref<SpeechSynthesis | null>(null);
+const speaking: Ref<boolean> = ref(false);
 
 const searchResultsHandler = (results: IVerb[]) => {
   verbsData.value = results;
@@ -40,6 +43,20 @@ const highlightMatches = (word: string, query: string) => {
 
   return highlighted;
 };
+
+const startSpeech = (message: string) => {
+  speaking.value = true;
+  const utterance = new SpeechSynthesisUtterance(message);
+  synthesizer.value?.speak(utterance);
+};
+
+onMounted(() => {
+  synthesizer.value = window.speechSynthesis;
+});
+
+onUnmounted(() => {
+  synthesizer.value = null;
+});
 </script>
 
 <template>
@@ -99,46 +116,62 @@ const highlightMatches = (word: string, query: string) => {
 
       <!-- Table body -->
       <tbody>
-        <tr v-for="verb in verbsData" :key="verb.infinitive" class="border-b border-gray-200 dark:border-gray-700">
-          <td scope="row" class="hover:bg-blue-100 dark:hover:bg-gray-600">
-            <a
-              :href="`https://context.reverso.net/translation/english-ukrainian/${verb.infinitive}`"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="px-2 py-4"
-              style="width: 100%; display: block"
-              :title="`Go to Reverso: ${verb.infinitive}`"
-              data-tooltip-target="tooltip-default"
-            >
-              <span v-html="highlightMatches(verb.infinitive, filter)"></span>
-            </a>
-          </td>
-          <td class="bg-gray-100 dark:bg-gray-800 hover:bg-blue-100 dark:hover:bg-gray-600">
-            <a
-              :href="`https://context.reverso.net/translation/english-ukrainian/${verb.pastSimple}`"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="px-2 py-4"
-              style="width: 100%; display: block"
-              :title="`Go to Reverso: ${verb.pastSimple}`"
-            >
-              <span v-html="highlightMatches(verb.pastSimple, filter)"></span>
-            </a>
-          </td>
-          <td class="hover:bg-blue-100 dark:hover:bg-gray-600">
-            <a
-              :href="`https://context.reverso.net/translation/english-ukrainian/${verb.pastParticiple}`"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="px-2 py-4"
-              style="width: 100%; display: block"
-              :title="`Go to Reverso: ${verb.pastParticiple}`"
-            >
-              <span v-html="highlightMatches(verb.pastParticiple, filter)"></span>
-            </a>
-          </td>
-        </tr>
+        <transition-group name="list">
+          <tr v-for="verb in verbsData" :key="verb.infinitive" class="border-b border-gray-200 dark:border-gray-700">
+            <td scope="row" class="hover:bg-blue-100 dark:hover:bg-gray-600">
+              <a
+                :href="`https://context.reverso.net/translation/english-ukrainian/${verb.infinitive}`"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="px-2 py-4"
+                style="width: 100%; display: block"
+                :title="`Go to Reverso: ${verb.infinitive}`"
+                @click="startSpeech(verb.infinitive)"
+              >
+                <span v-html="highlightMatches(verb.infinitive, filter)"></span>
+              </a>
+            </td>
+            <td class="bg-gray-100 dark:bg-gray-800 hover:bg-blue-100 dark:hover:bg-gray-600">
+              <a
+                :href="`https://context.reverso.net/translation/english-ukrainian/${verb.pastSimple}`"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="px-2 py-4"
+                style="width: 100%; display: block"
+                :title="`Go to Reverso: ${verb.pastSimple}`"
+                @click="startSpeech(verb.pastSimple)"
+              >
+                <span v-html="highlightMatches(verb.pastSimple, filter)"></span>
+              </a>
+            </td>
+            <td class="hover:bg-blue-100 dark:hover:bg-gray-600">
+              <a
+                :href="`https://context.reverso.net/translation/english-ukrainian/${verb.pastParticiple}`"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="px-2 py-4"
+                style="width: 100%; display: block"
+                :title="`Go to Reverso: ${verb.pastParticiple}`"
+                @click="startSpeech(verb.pastParticiple)"
+              >
+                <span v-html="highlightMatches(verb.pastParticiple, filter)"></span>
+              </a>
+            </td>
+          </tr>
+        </transition-group>
       </tbody>
     </table>
   </div>
 </template>
+
+<style lang="css" scoped>
+.list-enter-active,
+.list-leave-active {
+  transition: all 0.3s ease-in-out;
+}
+.list-enter-from,
+.list-leave-to {
+  opacity: 0;
+  transform: translateY(-30px);
+}
+</style>
