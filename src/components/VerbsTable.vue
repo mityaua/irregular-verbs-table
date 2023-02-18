@@ -22,6 +22,24 @@ const onSort = (columnName: string): void => {
     sortDirection.value ? a[columnName].localeCompare(b[columnName]) : b[columnName].localeCompare(a[columnName])
   );
 };
+
+const highlightMatches = (word: string, query: string) => {
+  if (!query) {
+    return word.charAt(0).toUpperCase() + word.slice(1);
+  }
+
+  const regex = new RegExp(query, "gi");
+  const matches = word.match(regex);
+
+  if (!matches) {
+    return word.charAt(0).toUpperCase() + word.slice(1);
+  }
+
+  const upperCasedWord = word.charAt(0).toUpperCase() + word.slice(1);
+  const highlighted = upperCasedWord.replace(regex, "<strong>$&</strong>");
+
+  return highlighted;
+};
 </script>
 
 <template>
@@ -82,20 +100,20 @@ const onSort = (columnName: string): void => {
       <!-- Table body -->
       <tbody>
         <tr v-for="verb in verbsData" :key="verb.infinitive" class="border-b border-gray-200 dark:border-gray-700">
-          <td scope="row" class="capitalize hover:bg-blue-100 dark:hover:bg-gray-600">
+          <td scope="row" class="hover:bg-blue-100 dark:hover:bg-gray-600">
             <a
               :href="`https://context.reverso.net/translation/english-ukrainian/${verb.infinitive}`"
               target="_blank"
               rel="noopener noreferrer"
               class="px-2 py-4"
               style="width: 100%; display: block"
-              :title="`Go to Reverso: ${verb.pastSimple}`"
+              :title="`Go to Reverso: ${verb.infinitive}`"
               data-tooltip-target="tooltip-default"
             >
-              {{ verb.infinitive }}
+              <span v-html="highlightMatches(verb.infinitive, filter)"></span>
             </a>
           </td>
-          <td class="capitalize bg-gray-100 dark:bg-gray-800 hover:bg-blue-100 dark:hover:bg-gray-600">
+          <td class="bg-gray-100 dark:bg-gray-800 hover:bg-blue-100 dark:hover:bg-gray-600">
             <a
               :href="`https://context.reverso.net/translation/english-ukrainian/${verb.pastSimple}`"
               target="_blank"
@@ -104,19 +122,19 @@ const onSort = (columnName: string): void => {
               style="width: 100%; display: block"
               :title="`Go to Reverso: ${verb.pastSimple}`"
             >
-              {{ verb.pastSimple }}
+              <span v-html="highlightMatches(verb.pastSimple, filter)"></span>
             </a>
           </td>
-          <td class="capitalize hover:bg-blue-100 dark:hover:bg-gray-600">
+          <td class="hover:bg-blue-100 dark:hover:bg-gray-600">
             <a
               :href="`https://context.reverso.net/translation/english-ukrainian/${verb.pastParticiple}`"
               target="_blank"
               rel="noopener noreferrer"
               class="px-2 py-4"
               style="width: 100%; display: block"
-              :title="`Go to Reverso: ${verb.pastSimple}`"
+              :title="`Go to Reverso: ${verb.pastParticiple}`"
             >
-              {{ verb.pastParticiple }}
+              <span v-html="highlightMatches(verb.pastParticiple, filter)"></span>
             </a>
           </td>
         </tr>
