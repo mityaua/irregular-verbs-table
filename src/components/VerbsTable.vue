@@ -77,7 +77,7 @@ onUnmounted(() => {
       <!-- Table head -->
       <thead class="text-xs text-gray-700 uppercase dark:text-gray-400">
         <tr>
-          <th scope="col" class="px-3 py-3 bg-gray-50 dark:bg-gray-700">
+          <th scope="col" class="p-3 bg-gray-50 dark:bg-gray-700">
             <div class="flex justify-center items-center">
               Infinitive
               <a href="#" @click="onSort('infinitive')"
@@ -89,7 +89,7 @@ onUnmounted(() => {
             </div>
           </th>
 
-          <th scope="col" class="px-3 py-3 bg-gray-50 dark:bg-gray-700">
+          <th scope="col" class="p-3 bg-gray-50 dark:bg-gray-700">
             <div class="flex justify-center items-center">
               Past simple
               <a href="#" @click="onSort('pastSimple')"
@@ -101,7 +101,7 @@ onUnmounted(() => {
             </div>
           </th>
 
-          <th scope="col" class="px-3 py-3 bg-gray-50 dark:bg-gray-700">
+          <th scope="col" class="p-3 bg-gray-50 dark:bg-gray-700">
             <div class="flex justify-center items-center">
               Past participle
               <a href="#" @click="onSort('pastParticiple')"
@@ -119,44 +119,71 @@ onUnmounted(() => {
       <tbody>
         <transition-group name="list">
           <tr v-for="verb in verbsData" :key="verb.infinitive" class="border-b border-gray-200 dark:border-gray-700">
-            <td scope="row" class="hover:bg-blue-100 dark:hover:bg-gray-600">
-              <a
-                :href="`https://context.reverso.net/translation/english-ukrainian/${verb.infinitive.split('/')[0]}`"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="px-2 py-4"
-                style="width: 100%; display: block"
-                :title="`Go to Reverso: ${verb.infinitive}`"
-                @click="startSpeech(verb.infinitive)"
-              >
-                <span v-html="highlightMatches(verb.infinitive, filter)"></span>
-              </a>
+            <td scope="row" class="p-2 hover:bg-blue-100 dark:hover:bg-gray-600">
+              <div class="flex justify-center flex-wrap">
+                <a
+                  :href="`https://context.reverso.net/translation/english-ukrainian/${verb.infinitive.split('/')[0]}`"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  :title="`Go to Reverso: ${verb.infinitive}`"
+                >
+                  <span v-html="highlightMatches(verb.infinitive, filter)"></span>
+                </a>
+
+                <img
+                  title="Pronunciation"
+                  src="../assets/voice.svg"
+                  alt="Pronunciation"
+                  width="16"
+                  height="16"
+                  class="ml-2 opacity-50 hover:opacity-100 ease-in duration-300 cursor-pointer"
+                  @click.prevent="startSpeech(verb.infinitive)"
+                />
+              </div>
             </td>
-            <td class="bg-gray-100 dark:bg-gray-800 hover:bg-blue-100 dark:hover:bg-gray-600">
-              <a
-                :href="`https://context.reverso.net/translation/english-ukrainian/${verb.pastSimple.split('/')[0]}`"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="px-2 py-4"
-                style="width: 100%; display: block"
-                :title="`Go to Reverso: ${verb.pastSimple}`"
-                @click="startSpeech(verb.pastSimple)"
-              >
-                <span v-html="highlightMatches(verb.pastSimple, filter)"></span>
-              </a>
+            <td class="p-2 bg-gray-100 dark:bg-gray-800 hover:bg-blue-100 dark:hover:bg-gray-600">
+              <div class="flex justify-center flex-wrap">
+                <a
+                  :href="`https://context.reverso.net/translation/english-ukrainian/${verb.pastSimple.split('/')[0]}`"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  :title="`Go to Reverso: ${verb.pastSimple}`"
+                >
+                  <span v-html="highlightMatches(verb.pastSimple, filter)"></span>
+                </a>
+
+                <img
+                  title="Pronunciation"
+                  src="../assets/voice.svg"
+                  alt="Pronunciation"
+                  width="16"
+                  height="16"
+                  class="ml-2 opacity-50 hover:opacity-100 ease-in duration-300 cursor-pointer"
+                  @click.prevent="startSpeech(verb.pastSimple)"
+                />
+              </div>
             </td>
-            <td class="hover:bg-blue-100 dark:hover:bg-gray-600">
-              <a
-                :href="`https://context.reverso.net/translation/english-ukrainian/${verb.pastParticiple.split('/')[0]}`"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="px-2 py-4"
-                style="width: 100%; display: block"
-                :title="`Go to Reverso: ${verb.pastParticiple}`"
-                @click="startSpeech(verb.pastParticiple)"
-              >
-                <span v-html="highlightMatches(verb.pastParticiple, filter)"></span>
-              </a>
+            <td class="p-2 hover:bg-blue-100 dark:hover:bg-gray-600">
+              <div class="flex justify-center flex-wrap">
+                <a
+                  :href="`https://context.reverso.net/translation/english-ukrainian/${verb.pastParticiple.split('/')[0]}`"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  :title="`Go to Reverso: ${verb.pastParticiple}`"
+                >
+                  <span v-html="highlightMatches(verb.pastParticiple, filter)"></span>
+                </a>
+
+                <img
+                  title="Pronunciation"
+                  src="../assets/voice.svg"
+                  alt="Pronunciation"
+                  width="16"
+                  height="16"
+                  class="ml-2 opacity-50 hover:opacity-100 ease-in duration-300 cursor-pointer"
+                  @click.prevent="startSpeech(verb.pastParticiple)"
+                />
+              </div>
             </td>
           </tr>
         </transition-group>
