@@ -14,6 +14,7 @@ const handleSearch = (event: Event): void => {
   const inputValue = (event.target as HTMLInputElement).value.trim();
 
   if (!inputValue) {
+    emit("update-filter", "");
     emit("update-results", data.value);
     return;
   }
