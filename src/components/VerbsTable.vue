@@ -173,6 +173,6 @@ onUnmounted(() => {
 .list-enter-from,
 .list-leave-to {
   opacity: 0;
-  transform: translateY(-30px);
+  transform: translateY(10px);
 }
 </style>
