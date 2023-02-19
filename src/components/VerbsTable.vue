@@ -119,7 +119,7 @@ onUnmounted(() => {
       <tbody>
         <transition-group name="list">
           <tr v-for="verb in verbsData" :key="verb.infinitive" class="border-b border-gray-200 dark:border-gray-700">
-            <td scope="row" class="p-2 hover:bg-blue-100 dark:hover:bg-gray-600">
+            <td scope="row" class="py-3 hover:bg-blue-100 dark:hover:bg-gray-600">
               <div class="flex justify-center flex-wrap">
                 <a
                   :href="`https://context.reverso.net/translation/english-ukrainian/${verb.infinitive.split('/')[0]}`"
@@ -141,7 +141,7 @@ onUnmounted(() => {
                 />
               </div>
             </td>
-            <td class="p-2 bg-gray-100 dark:bg-gray-800 hover:bg-blue-100 dark:hover:bg-gray-600">
+            <td class="py-3 bg-gray-100 dark:bg-gray-800 hover:bg-blue-100 dark:hover:bg-gray-600">
               <div class="flex justify-center flex-wrap">
                 <a
                   :href="`https://context.reverso.net/translation/english-ukrainian/${verb.pastSimple.split('/')[0]}`"
@@ -163,7 +163,7 @@ onUnmounted(() => {
                 />
               </div>
             </td>
-            <td class="p-2 hover:bg-blue-100 dark:hover:bg-gray-600">
+            <td class="py-3 hover:bg-blue-100 dark:hover:bg-gray-600">
               <div class="flex justify-center flex-wrap">
                 <a
                   :href="`https://context.reverso.net/translation/english-ukrainian/${verb.pastParticiple.split('/')[0]}`"
