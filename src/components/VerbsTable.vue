@@ -4,6 +4,8 @@ import IVerb from "../interfaces/Iverbs";
 import { verbs } from "../data/verbs.json";
 import SearchInput from "../components/SearchInput.vue";
 import SearchResults from "../components/SearchResults.vue";
+import unMutedIcon from "../assets/unmuted.svg";
+import mutedIcon from "../assets/muted.svg";
 
 const verbsData: Ref<IVerb[]> = ref(verbs);
 const filter: Ref<string> = ref("");
@@ -53,6 +55,17 @@ const startSpeech = (message: string) => {
   utterance.onend = () => {
     speaking.value = false;
   };
+};
+
+const showingIcon = ref(false);
+const clickedRowIndex = ref(-1);
+const selectedColumn = ref("");
+const showIcon = (verb: IVerb, columnName: string) => {
+  const index = verbsData.value.findIndex((row) => row === verb);
+
+  clickedRowIndex.value = index;
+  selectedColumn.value = columnName;
+  showingIcon.value = true;
 };
 
 onMounted(() => {
@@ -122,8 +135,8 @@ onUnmounted(() => {
       <!-- Table body -->
       <tbody>
         <transition-group name="list">
-          <tr v-for="verb in verbsData" :key="verb.infinitive" class="border-b border-gray-200 dark:border-gray-700">
-            <td scope="row" class="py-3 hover:bg-blue-100 dark:hover:bg-gray-600">
+          <tr v-for="(verb, index) in verbsData" :key="verb.infinitive" class="border-b border-gray-200 dark:border-gray-700">
+            <td scope="row" class="py-3 hover:bg-blue-100 dark:hover:bg-gray-600" @click="showIcon(verb, Object.keys(verb)[0])">
               <div class="flex justify-center flex-wrap">
                 <a
                   :href="`https://context.reverso.net/translation/english-ukrainian/${verb.infinitive.split('/')[0]}`"
@@ -136,16 +149,27 @@ onUnmounted(() => {
 
                 <img
                   title="Pronunciation"
-                  src="../assets/voice.svg"
+                  :src="
+                    showingIcon && selectedColumn === Object.keys(verb)[0] && clickedRowIndex === index && speaking
+                      ? unMutedIcon
+                      : mutedIcon
+                  "
                   alt="Pronunciation"
                   width="16"
                   height="16"
-                  class="ml-2 opacity-50 hover:opacity-100 ease-in duration-300 cursor-pointer"
-                  @click.prevent="startSpeech(verb.infinitive)"
+                  class="ml-2 opacity-50 ease-in duration-300 cursor-pointer"
+                  @click.prevent="
+                    showingIcon && selectedColumn === Object.keys(verb)[0] && clickedRowIndex === index && speaking
+                      ? ''
+                      : startSpeech(verb.infinitive)
+                  "
                 />
               </div>
             </td>
-            <td class="py-3 bg-gray-100 dark:bg-gray-800 hover:bg-blue-100 dark:hover:bg-gray-600">
+            <td
+              class="py-3 bg-gray-100 dark:bg-gray-800 hover:bg-blue-100 dark:hover:bg-gray-600"
+              @click="showIcon(verb, Object.keys(verb)[1])"
+            >
               <div class="flex justify-center flex-wrap">
                 <a
                   :href="`https://context.reverso.net/translation/english-ukrainian/${verb.pastSimple.split('/')[0]}`"
@@ -158,16 +182,24 @@ onUnmounted(() => {
 
                 <img
                   title="Pronunciation"
-                  src="../assets/voice.svg"
+                  :src="
+                    showingIcon && selectedColumn === Object.keys(verb)[1] && clickedRowIndex === index && speaking
+                      ? unMutedIcon
+                      : mutedIcon
+                  "
                   alt="Pronunciation"
                   width="16"
                   height="16"
-                  class="ml-2 opacity-50 hover:opacity-100 ease-in duration-300 cursor-pointer"
-                  @click.prevent="startSpeech(verb.pastSimple)"
+                  class="ml-2 opacity-50 ease-in duration-300 cursor-pointer"
+                  @click.prevent="
+                    showingIcon && selectedColumn === Object.keys(verb)[1] && clickedRowIndex === index && speaking
+                      ? ''
+                      : startSpeech(verb.pastSimple)
+                  "
                 />
               </div>
             </td>
-            <td class="py-3 hover:bg-blue-100 dark:hover:bg-gray-600">
+            <td class="py-3 hover:bg-blue-100 dark:hover:bg-gray-600" @click="showIcon(verb, Object.keys(verb)[2])">
               <div class="flex justify-center flex-wrap">
                 <a
                   :href="`https://context.reverso.net/translation/english-ukrainian/${verb.pastParticiple.split('/')[0]}`"
@@ -180,12 +212,20 @@ onUnmounted(() => {
 
                 <img
                   title="Pronunciation"
-                  src="../assets/voice.svg"
+                  :src="
+                    showingIcon && selectedColumn === Object.keys(verb)[2] && clickedRowIndex === index && speaking
+                      ? unMutedIcon
+                      : mutedIcon
+                  "
                   alt="Pronunciation"
                   width="16"
                   height="16"
-                  class="ml-2 opacity-50 hover:opacity-100 ease-in duration-300 cursor-pointer"
-                  @click.prevent="startSpeech(verb.pastParticiple)"
+                  class="ml-2 opacity-50 ease-in duration-300 cursor-pointer"
+                  @click.prevent="
+                    showingIcon && selectedColumn === Object.keys(verb)[2] && clickedRowIndex === index && speaking
+                      ? ''
+                      : startSpeech(verb.pastParticiple)
+                  "
                 />
               </div>
             </td>
