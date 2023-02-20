@@ -26,8 +26,6 @@ const filterHandler = (query: string) => {
 const onSort = (columnName: string): void => {
   isDescending.value = !isDescending.value;
 
-  console.log(isDescending.value);
-
   verbsData.value = [...verbsData.value].sort((a: IVerb, b: IVerb) =>
     isDescending.value ? b[columnName].localeCompare(a[columnName]) : a[columnName].localeCompare(b[columnName])
   );
@@ -53,8 +51,8 @@ const highlightMatches = (word: string, query: string) => {
 
 const startSpeech = (message: string) => {
   speaking.value = true;
-  const normalizedMessage: string = message.split("/").join();
-  const utterance = new SpeechSynthesisUtterance(normalizedMessage);
+
+  const utterance = new SpeechSynthesisUtterance(message);
   synthesizer.value?.speak(utterance);
 
   utterance.onend = () => {
@@ -160,7 +158,9 @@ onUnmounted(() => {
                   height="16"
                   class="ml-2 opacity-50 hover:opacity-100 ease-in duration-300 cursor-pointer"
                   @click.prevent="
-                    selectedColumn === Object.keys(verb)[0] && clickedRowIndex === index && speaking ? '' : startSpeech(verb.infinitive)
+                    selectedColumn === Object.keys(verb)[0] && clickedRowIndex === index && speaking
+                      ? ''
+                      : startSpeech(verb.infinitive.split('/').join())
                   "
                 />
               </div>
@@ -189,7 +189,9 @@ onUnmounted(() => {
                   height="16"
                   class="ml-2 opacity-50 hover:opacity-100 ease-in duration-300 cursor-pointer"
                   @click.prevent="
-                    selectedColumn === Object.keys(verb)[1] && clickedRowIndex === index && speaking ? '' : startSpeech(verb.pastSimple)
+                    selectedColumn === Object.keys(verb)[1] && clickedRowIndex === index && speaking
+                      ? ''
+                      : startSpeech(verb.pastSimple.split('/').join())
                   "
                 />
               </div>
@@ -215,7 +217,9 @@ onUnmounted(() => {
                   height="16"
                   class="ml-2 opacity-50 hover:opacity-100 ease-in duration-300 cursor-pointer"
                   @click.prevent="
-                    selectedColumn === Object.keys(verb)[2] && clickedRowIndex === index && speaking ? '' : startSpeech(verb.pastParticiple)
+                    selectedColumn === Object.keys(verb)[2] && clickedRowIndex === index && speaking
+                      ? ''
+                      : startSpeech(verb.pastParticiple.split('/').join())
                   "
                 />
               </div>
