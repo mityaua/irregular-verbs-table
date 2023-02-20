@@ -9,10 +9,13 @@ import mutedIcon from "../assets/muted.svg";
 
 const verbsData: Ref<IVerb[]> = ref(verbs);
 const filter: Ref<string> = ref("");
-const sortDirection: Ref<boolean> = ref(false);
+const isDescending: Ref<boolean> = ref(false);
 
 const synthesizer = ref<SpeechSynthesis | null>(null);
 const speaking: Ref<boolean> = ref(false);
+
+const clickedRowIndex: Ref<number> = ref(-1);
+const selectedColumn: Ref<string> = ref("");
 
 const searchResultsHandler = (results: IVerb[]) => {
   verbsData.value = results;
@@ -21,10 +24,12 @@ const filterHandler = (query: string) => {
   filter.value = query;
 };
 const onSort = (columnName: string): void => {
-  sortDirection.value = !sortDirection.value;
+  isDescending.value = !isDescending.value;
+
+  console.log(isDescending.value);
 
   verbsData.value = [...verbsData.value].sort((a: IVerb, b: IVerb) =>
-    sortDirection.value ? a[columnName].localeCompare(b[columnName]) : b[columnName].localeCompare(a[columnName])
+    isDescending.value ? b[columnName].localeCompare(a[columnName]) : a[columnName].localeCompare(b[columnName])
   );
 };
 
@@ -57,8 +62,6 @@ const startSpeech = (message: string) => {
   };
 };
 
-const clickedRowIndex: Ref<number> = ref(-1);
-const selectedColumn: Ref<string> = ref("");
 const handleCellClick = (verb: IVerb, columnName: string) => {
   const index = verbsData.value.indexOf(verb);
 
