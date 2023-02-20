@@ -57,15 +57,13 @@ const startSpeech = (message: string) => {
   };
 };
 
-const showingIcon = ref(false);
-const clickedRowIndex = ref(-1);
-const selectedColumn = ref("");
-const showIcon = (verb: IVerb, columnName: string) => {
-  const index = verbsData.value.findIndex((row) => row === verb);
+const clickedRowIndex: Ref<number> = ref(-1);
+const selectedColumn: Ref<string> = ref("");
+const handleCellClick = (verb: IVerb, columnName: string) => {
+  const index = verbsData.value.indexOf(verb);
 
   clickedRowIndex.value = index;
   selectedColumn.value = columnName;
-  showingIcon.value = true;
 };
 
 onMounted(() => {
@@ -94,6 +92,7 @@ onUnmounted(() => {
       <!-- Table head -->
       <thead class="text-xs text-gray-700 uppercase dark:text-gray-400">
         <tr>
+          <!-- Infinitive column -->
           <th scope="col" class="p-3 bg-gray-50 dark:bg-gray-700">
             <div class="flex justify-center items-center">
               Infinitive
@@ -106,6 +105,7 @@ onUnmounted(() => {
             </div>
           </th>
 
+          <!--  Past simple column -->
           <th scope="col" class="p-3 bg-gray-50 dark:bg-gray-700">
             <div class="flex justify-center items-center">
               Past simple
@@ -118,6 +118,7 @@ onUnmounted(() => {
             </div>
           </th>
 
+          <!--  Past participle column -->
           <th scope="col" class="p-3 bg-gray-50 dark:bg-gray-700">
             <div class="flex justify-center items-center">
               Past participle
@@ -136,7 +137,8 @@ onUnmounted(() => {
       <tbody>
         <transition-group name="list">
           <tr v-for="(verb, index) in verbsData" :key="verb.infinitive" class="border-b border-gray-200 dark:border-gray-700">
-            <td scope="row" class="py-3 hover:bg-blue-100 dark:hover:bg-gray-600" @click="showIcon(verb, Object.keys(verb)[0])">
+            <!-- Infinitive cell -->
+            <td scope="row" class="py-3 hover:bg-blue-100 dark:hover:bg-gray-600" @click="handleCellClick(verb, Object.keys(verb)[0])">
               <div class="flex justify-center flex-wrap">
                 <a
                   :href="`https://context.reverso.net/translation/english-ukrainian/${verb.infinitive.split('/')[0]}`"
@@ -149,26 +151,22 @@ onUnmounted(() => {
 
                 <img
                   title="Pronunciation"
-                  :src="
-                    showingIcon && selectedColumn === Object.keys(verb)[0] && clickedRowIndex === index && speaking
-                      ? unMutedIcon
-                      : mutedIcon
-                  "
+                  :src="selectedColumn === Object.keys(verb)[0] && clickedRowIndex === index && speaking ? unMutedIcon : mutedIcon"
                   alt="Pronunciation"
                   width="16"
                   height="16"
                   class="ml-2 opacity-50 hover:opacity-100 ease-in duration-300 cursor-pointer"
                   @click.prevent="
-                    showingIcon && selectedColumn === Object.keys(verb)[0] && clickedRowIndex === index && speaking
-                      ? ''
-                      : startSpeech(verb.infinitive)
+                    selectedColumn === Object.keys(verb)[0] && clickedRowIndex === index && speaking ? '' : startSpeech(verb.infinitive)
                   "
                 />
               </div>
             </td>
+
+            <!-- Past simple cell -->
             <td
               class="py-3 bg-gray-100 dark:bg-gray-800 hover:bg-blue-100 dark:hover:bg-gray-600"
-              @click="showIcon(verb, Object.keys(verb)[1])"
+              @click="handleCellClick(verb, Object.keys(verb)[1])"
             >
               <div class="flex justify-center flex-wrap">
                 <a
@@ -182,24 +180,20 @@ onUnmounted(() => {
 
                 <img
                   title="Pronunciation"
-                  :src="
-                    showingIcon && selectedColumn === Object.keys(verb)[1] && clickedRowIndex === index && speaking
-                      ? unMutedIcon
-                      : mutedIcon
-                  "
+                  :src="selectedColumn === Object.keys(verb)[1] && clickedRowIndex === index && speaking ? unMutedIcon : mutedIcon"
                   alt="Pronunciation"
                   width="16"
                   height="16"
                   class="ml-2 opacity-50 hover:opacity-100 ease-in duration-300 cursor-pointer"
                   @click.prevent="
-                    showingIcon && selectedColumn === Object.keys(verb)[1] && clickedRowIndex === index && speaking
-                      ? ''
-                      : startSpeech(verb.pastSimple)
+                    selectedColumn === Object.keys(verb)[1] && clickedRowIndex === index && speaking ? '' : startSpeech(verb.pastSimple)
                   "
                 />
               </div>
             </td>
-            <td class="py-3 hover:bg-blue-100 dark:hover:bg-gray-600" @click="showIcon(verb, Object.keys(verb)[2])">
+
+            <!--  Past participle cell -->
+            <td class="py-3 hover:bg-blue-100 dark:hover:bg-gray-600" @click="handleCellClick(verb, Object.keys(verb)[2])">
               <div class="flex justify-center flex-wrap">
                 <a
                   :href="`https://context.reverso.net/translation/english-ukrainian/${verb.pastParticiple.split('/')[0]}`"
@@ -212,19 +206,13 @@ onUnmounted(() => {
 
                 <img
                   title="Pronunciation"
-                  :src="
-                    showingIcon && selectedColumn === Object.keys(verb)[2] && clickedRowIndex === index && speaking
-                      ? unMutedIcon
-                      : mutedIcon
-                  "
+                  :src="selectedColumn === Object.keys(verb)[2] && clickedRowIndex === index && speaking ? unMutedIcon : mutedIcon"
                   alt="Pronunciation"
                   width="16"
                   height="16"
                   class="ml-2 opacity-50 hover:opacity-100 ease-in duration-300 cursor-pointer"
                   @click.prevent="
-                    showingIcon && selectedColumn === Object.keys(verb)[2] && clickedRowIndex === index && speaking
-                      ? ''
-                      : startSpeech(verb.pastParticiple)
+                    selectedColumn === Object.keys(verb)[2] && clickedRowIndex === index && speaking ? '' : startSpeech(verb.pastParticiple)
                   "
                 />
               </div>
