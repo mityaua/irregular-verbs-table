@@ -19,8 +19,8 @@ const handleSearch = (event: Event): void => {
     return;
   }
 
-  const results: IVerb[] = data.value.filter((verb: IVerb) =>
-    Object.keys(verb).some((item: string) => verb[item].toLowerCase().includes(inputValue.toLowerCase()))
+  const results: IVerb[] = data.value.filter((verbsObj: IVerb) =>
+    Object.keys(verbsObj).some((verb: string) => verbsObj[verb].toLowerCase().includes(inputValue.toLowerCase()))
   );
 
   emit("update-filter", inputValue);

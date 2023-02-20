@@ -49,6 +49,10 @@ const startSpeech = (message: string) => {
   const normalizedMessage: string = message.split("/").join();
   const utterance = new SpeechSynthesisUtterance(normalizedMessage);
   synthesizer.value?.speak(utterance);
+
+  utterance.onend = () => {
+    speaking.value = false;
+  };
 };
 
 onMounted(() => {
