@@ -157,7 +157,7 @@ onUnmounted(() => {
                   alt="Pronunciation"
                   width="16"
                   height="16"
-                  class="ml-2 opacity-50 ease-in duration-300 cursor-pointer"
+                  class="ml-2 opacity-50 hover:opacity-100 ease-in duration-300 cursor-pointer"
                   @click.prevent="
                     showingIcon && selectedColumn === Object.keys(verb)[0] && clickedRowIndex === index && speaking
                       ? ''
@@ -190,7 +190,7 @@ onUnmounted(() => {
                   alt="Pronunciation"
                   width="16"
                   height="16"
-                  class="ml-2 opacity-50 ease-in duration-300 cursor-pointer"
+                  class="ml-2 opacity-50 hover:opacity-100 ease-in duration-300 cursor-pointer"
                   @click.prevent="
                     showingIcon && selectedColumn === Object.keys(verb)[1] && clickedRowIndex === index && speaking
                       ? ''
@@ -220,7 +220,7 @@ onUnmounted(() => {
                   alt="Pronunciation"
                   width="16"
                   height="16"
-                  class="ml-2 opacity-50 ease-in duration-300 cursor-pointer"
+                  class="ml-2 opacity-50 hover:opacity-100 ease-in duration-300 cursor-pointer"
                   @click.prevent="
                     showingIcon && selectedColumn === Object.keys(verb)[2] && clickedRowIndex === index && speaking
                       ? ''
