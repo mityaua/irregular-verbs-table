@@ -10,5 +10,3 @@ defineProps<{ results: number }>();
     <p v-else class="my-2 text-sm font-normal text-gray-500 dark:text-gray-400">Nothing found ☹️</p>
   </div>
 </template>
-
-<style scoped></style>

@@ -15,15 +15,21 @@ const synthesizer = ref<SpeechSynthesis | null>(null);
 const speaking: Ref<boolean> = ref(false);
 
 const clickedRowIndex: Ref<number> = ref(-1);
+const sortByColumn: Ref<string> = ref("infinitive");
 const selectedColumn: Ref<string> = ref("");
 
-const searchResultsHandler = (results: IVerb[]) => {
-  verbsData.value = results;
+const searchResultsHandler = (results: IVerb[]): void => {
+  verbsData.value = [...results].sort((a: IVerb, b: IVerb) =>
+    isDescending.value
+      ? b[sortByColumn.value].localeCompare(a[sortByColumn.value])
+      : a[sortByColumn.value].localeCompare(b[sortByColumn.value])
+  );
 };
-const filterHandler = (query: string) => {
+const filterHandler = (query: string): void => {
   filter.value = query;
 };
 const onSort = (columnName: string): void => {
+  sortByColumn.value = columnName;
   isDescending.value = !isDescending.value;
 
   verbsData.value = [...verbsData.value].sort((a: IVerb, b: IVerb) =>
@@ -81,7 +87,7 @@ onUnmounted(() => {
     <table class="w-full text-sm text-center text-gray-500 dark:text-gray-400" style="overflow: hidden">
       <!-- Table caption -->
       <caption class="px-4 py-1 text-lg font-semibold text-left text-gray-900 bg-blue-100 dark:text-white dark:bg-gray-800">
-        List of irregular verbs
+        <p class="uppercase">List of irregular verbs</p>
 
         <!-- Search input -->
         <search-input v-model:filter="filter" :data="verbs" @update-results="searchResultsHandler" @update-filter="filterHandler" />
@@ -98,7 +104,13 @@ onUnmounted(() => {
             <div class="flex justify-center items-center">
               Infinitive
               <a href="#" @click="onSort('infinitive')"
-                ><svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 ml-1" aria-hidden="true" fill="currentColor" viewBox="0 0 320 512">
+                ><svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="w-3 h-3 ml-1"
+                  aria-hidden="true"
+                  :fill="sortByColumn === 'infinitive' ? '#60A5FA' : 'currentColor'"
+                  viewBox="0 0 320 512"
+                >
                   <path
                     d="M27.66 224h264.7c24.6 0 36.89-29.78 19.54-47.12l-132.3-136.8c-5.406-5.406-12.47-8.107-19.53-8.107c-7.055 0-14.09 2.701-19.45 8.107L8.119 176.9C-9.229 194.2 3.055 224 27.66 224zM292.3 288H27.66c-24.6 0-36.89 29.77-19.54 47.12l132.5 136.8C145.9 477.3 152.1 480 160 480c7.053 0 14.12-2.703 19.53-8.109l132.3-136.8C329.2 317.8 316.9 288 292.3 288z"
                   /></svg
@@ -111,7 +123,13 @@ onUnmounted(() => {
             <div class="flex justify-center items-center">
               Past simple
               <a href="#" @click="onSort('pastSimple')"
-                ><svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 ml-1" aria-hidden="true" fill="currentColor" viewBox="0 0 320 512">
+                ><svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="w-3 h-3 ml-1"
+                  aria-hidden="true"
+                  :fill="sortByColumn === 'pastSimple' ? '#60A5FA' : 'currentColor'"
+                  viewBox="0 0 320 512"
+                >
                   <path
                     d="M27.66 224h264.7c24.6 0 36.89-29.78 19.54-47.12l-132.3-136.8c-5.406-5.406-12.47-8.107-19.53-8.107c-7.055 0-14.09 2.701-19.45 8.107L8.119 176.9C-9.229 194.2 3.055 224 27.66 224zM292.3 288H27.66c-24.6 0-36.89 29.77-19.54 47.12l132.5 136.8C145.9 477.3 152.1 480 160 480c7.053 0 14.12-2.703 19.53-8.109l132.3-136.8C329.2 317.8 316.9 288 292.3 288z"
                   /></svg
@@ -124,7 +142,13 @@ onUnmounted(() => {
             <div class="flex justify-center items-center">
               Past participle
               <a href="#" @click="onSort('pastParticiple')"
-                ><svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 ml-1" aria-hidden="true" fill="currentColor" viewBox="0 0 320 512">
+                ><svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="w-3 h-3 ml-1"
+                  aria-hidden="true"
+                  :fill="sortByColumn === 'pastParticiple' ? '#60A5FA' : 'currentColor'"
+                  viewBox="0 0 320 512"
+                >
                   <path
                     d="M27.66 224h264.7c24.6 0 36.89-29.78 19.54-47.12l-132.3-136.8c-5.406-5.406-12.47-8.107-19.53-8.107c-7.055 0-14.09 2.701-19.45 8.107L8.119 176.9C-9.229 194.2 3.055 224 27.66 224zM292.3 288H27.66c-24.6 0-36.89 29.77-19.54 47.12l132.5 136.8C145.9 477.3 152.1 480 160 480c7.053 0 14.12-2.703 19.53-8.109l132.3-136.8C329.2 317.8 316.9 288 292.3 288z"
                   /></svg
