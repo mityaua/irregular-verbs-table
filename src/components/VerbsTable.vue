@@ -36,7 +36,6 @@ const onSort = (columnName: string): void => {
     isDescending.value ? b[columnName].localeCompare(a[columnName]) : a[columnName].localeCompare(b[columnName])
   );
 };
-
 const highlightMatches = (word: string, query: string) => {
   if (!query) {
     return word.charAt(0).toUpperCase() + word.slice(1);
@@ -54,7 +53,6 @@ const highlightMatches = (word: string, query: string) => {
 
   return highlighted;
 };
-
 const startSpeech = (message: string) => {
   speaking.value = true;
 
@@ -65,7 +63,6 @@ const startSpeech = (message: string) => {
     speaking.value = false;
   };
 };
-
 const handleCellClick = (verb: IVerb, columnName: string) => {
   const index = verbsData.value.indexOf(verb);
 
@@ -103,7 +100,7 @@ onUnmounted(() => {
           <th scope="col" class="p-3 bg-gray-50 dark:bg-gray-700">
             <div class="flex justify-center items-center">
               Infinitive
-              <a href="#" @click="onSort('infinitive')"
+              <a href="#" aria-label="Sort by infinitive" @click="onSort('infinitive')"
                 ><svg
                   xmlns="http://www.w3.org/2000/svg"
                   class="w-3 h-3 ml-1"
@@ -122,7 +119,7 @@ onUnmounted(() => {
           <th scope="col" class="p-3 bg-gray-50 dark:bg-gray-700">
             <div class="flex justify-center items-center">
               Past simple
-              <a href="#" @click="onSort('pastSimple')"
+              <a href="#" aria-label="Sort by past simple" @click="onSort('pastSimple')"
                 ><svg
                   xmlns="http://www.w3.org/2000/svg"
                   class="w-3 h-3 ml-1"
@@ -141,7 +138,7 @@ onUnmounted(() => {
           <th scope="col" class="p-3 bg-gray-50 dark:bg-gray-700">
             <div class="flex justify-center items-center">
               Past participle
-              <a href="#" @click="onSort('pastParticiple')"
+              <a href="#" aria-label="Sort by past participle" @click="onSort('pastParticiple')"
                 ><svg
                   xmlns="http://www.w3.org/2000/svg"
                   class="w-3 h-3 ml-1"

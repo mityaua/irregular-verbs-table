@@ -1,11 +1,12 @@
 <template>
-  <p class="mt-4 text-gray-500 dark:text-gray-400">
+  <p class="mt-4 text-center text-gray-500 dark:text-gray-400">
     List of irregular verbs
     <a
       href="https://www.academia.edu/22617451/Appendix_1_Regular_and_irregular_verbs"
       class="inline-flex items-center font-medium text-blue-600 dark:text-blue-500 hover:underline"
       target="_blank"
       rel="noopener noreferrer"
+      aria-label="List source"
     >
       Source
       <svg aria-hidden="true" class="w-5 h-5 ml-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">

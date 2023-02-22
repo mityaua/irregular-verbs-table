@@ -35,7 +35,7 @@ const clearSearchResults = () => {
 
 <template>
   <div class="flex items-baseline mt-2">
-    <div class="mr-2 bg-blue-100 dark:bg-gray-800">
+    <div class="bg-blue-100 dark:bg-gray-800">
       <label for="table-search" class="sr-only">Search</label>
 
       <div class="relative mt-1 dark:bg-gray-800">
@@ -72,7 +72,7 @@ const clearSearchResults = () => {
     <button
       v-show="filter"
       type="button"
-      class="py-1 px-2.5 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+      class="ml-2 py-1 px-2.5 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
       @click="clearSearchResults"
     >
       x
