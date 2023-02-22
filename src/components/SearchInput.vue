@@ -2,7 +2,7 @@
 import { toRefs } from "vue";
 import IVerb from "../interfaces/Iverbs";
 
-const props = defineProps<{ data: Array<IVerb>; filter: String }>();
+const props = defineProps<{ data: Array<IVerb>; filter: string }>();
 const emit = defineEmits<{
   (e: "update-results", data: Array<IVerb>): void;
   (e: "update-filter", filter: string): void;
