@@ -167,6 +167,7 @@ onUnmounted(() => {
                   target="_blank"
                   rel="noopener noreferrer"
                   :title="`Go to Reverso: ${verb.infinitive}`"
+                  aria-label="Open Reverso in new tab"
                 >
                   <span v-html="highlightMatches(verb.infinitive, filter)"></span>
                 </a>
@@ -198,6 +199,7 @@ onUnmounted(() => {
                   target="_blank"
                   rel="noopener noreferrer"
                   :title="`Go to Reverso: ${verb.pastSimple}`"
+                  aria-label="Open Reverso in new tab"
                 >
                   <span v-html="highlightMatches(verb.pastSimple, filter)"></span>
                 </a>
@@ -226,6 +228,7 @@ onUnmounted(() => {
                   target="_blank"
                   rel="noopener noreferrer"
                   :title="`Go to Reverso: ${verb.pastParticiple}`"
+                  aria-label="Open Reverso in new tab"
                 >
                   <span v-html="highlightMatches(verb.pastParticiple, filter)"></span>
                 </a>
