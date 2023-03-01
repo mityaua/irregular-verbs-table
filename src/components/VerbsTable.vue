@@ -9,7 +9,6 @@ import SearchResults from "../components/SearchResults.vue";
 const verbsData: Ref<IVerb[]> = ref(verbs);
 const filter: Ref<string> = ref("");
 const isDescending: Ref<boolean> = ref(false);
-
 const sortByColumn: Ref<string> = ref("infinitive");
 
 const searchResultsHandler = (results: IVerb[]): void => {
@@ -52,7 +51,7 @@ const onSort = (columnName: string): void => {
           <!-- Infinitive column -->
           <th scope="col" class="p-3 bg-gray-50 dark:bg-gray-700">
             <div class="flex justify-center items-center">
-              Infinitive
+              <p>Infinitive</p>
               <a href="#" aria-label="Sort by infinitive" @click="onSort('infinitive')"
                 ><svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -71,7 +70,7 @@ const onSort = (columnName: string): void => {
           <!--  Past simple column -->
           <th scope="col" class="p-3 bg-gray-50 dark:bg-gray-700">
             <div class="flex justify-center items-center">
-              Past simple
+              <p>Past simple</p>
               <a href="#" aria-label="Sort by past simple" @click="onSort('pastSimple')"
                 ><svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -90,7 +89,7 @@ const onSort = (columnName: string): void => {
           <!--  Past participle column -->
           <th scope="col" class="p-3 bg-gray-50 dark:bg-gray-700">
             <div class="flex justify-center items-center">
-              Past participle
+              <p>Past participle</p>
               <a href="#" aria-label="Sort by past participle" @click="onSort('pastParticiple')"
                 ><svg
                   xmlns="http://www.w3.org/2000/svg"
