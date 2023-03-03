@@ -9,6 +9,7 @@
           rel="noopener noreferrer"
           :title="`Go to Reverso: ${rowData.infinitive}`"
           aria-label="Open Reverso in new tab"
+          class="ease-in duration-300"
         >
           <span v-html="highlightMatches(rowData.infinitive, searchQuery)"></span>
         </a>
@@ -41,6 +42,7 @@
           rel="noopener noreferrer"
           :title="`Go to Reverso: ${rowData.pastSimple}`"
           aria-label="Open Reverso in new tab"
+          class="ease-in duration-300"
         >
           <span v-html="highlightMatches(rowData.pastSimple, searchQuery)"></span>
         </a>
@@ -70,6 +72,7 @@
           rel="noopener noreferrer"
           :title="`Go to Reverso: ${rowData.pastParticiple}`"
           aria-label="Open Reverso in new tab"
+          class="ease-in duration-300"
         >
           <span v-html="highlightMatches(rowData.pastParticiple, searchQuery)"></span>
         </a>

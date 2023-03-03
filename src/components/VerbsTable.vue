@@ -52,7 +52,7 @@ const onSort = (columnName: string): void => {
           <th scope="col" class="p-3 bg-gray-50 dark:bg-gray-700">
             <div class="flex justify-center items-center">
               <p>Infinitive</p>
-              <a href="#" aria-label="Sort by infinitive" @click="onSort('infinitive')"
+              <a href="#" aria-label="Sort by infinitive" class="ease-in duration-300" @click="onSort('infinitive')"
                 ><svg
                   xmlns="http://www.w3.org/2000/svg"
                   class="w-3 h-3 ml-1"
@@ -71,7 +71,7 @@ const onSort = (columnName: string): void => {
           <th scope="col" class="p-3 bg-gray-50 dark:bg-gray-700">
             <div class="flex justify-center items-center">
               <p>Past simple</p>
-              <a href="#" aria-label="Sort by past simple" @click="onSort('pastSimple')"
+              <a href="#" aria-label="Sort by past simple" class="ease-in duration-300" @click="onSort('pastSimple')"
                 ><svg
                   xmlns="http://www.w3.org/2000/svg"
                   class="w-3 h-3 ml-1"
@@ -90,7 +90,7 @@ const onSort = (columnName: string): void => {
           <th scope="col" class="p-3 bg-gray-50 dark:bg-gray-700">
             <div class="flex justify-center items-center">
               <p>Past participle</p>
-              <a href="#" aria-label="Sort by past participle" @click="onSort('pastParticiple')"
+              <a href="#" aria-label="Sort by past participle" class="ease-in duration-300" @click="onSort('pastParticiple')"
                 ><svg
                   xmlns="http://www.w3.org/2000/svg"
                   class="w-3 h-3 ml-1"

@@ -7,7 +7,7 @@ import sourceFile from "../data/irregular_verbs.pdf";
     List of irregular verbs
     <a
       :href="sourceFile"
-      class="inline-flex items-center font-medium text-blue-600 dark:text-blue-500 hover:underline"
+      class="inline-flex items-center font-medium text-blue-600 dark:text-blue-500 ease-in duration-300 hover:underline"
       download="Irregular Verbs"
       aria-label="Download source file"
       title="Download source file"

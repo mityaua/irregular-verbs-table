@@ -1,5 +1,11 @@
 <template>
-  <div id="pagetop" class="fixed right-2 bottom-2 cursor-pointer" title="Scroll to top" v-show="scrollY > 300" @click="toTop">
+  <div
+    id="pagetop"
+    class="fixed right-2 bottom-2 cursor-pointer ease-in duration-300 opacity-70 hover:opacity-100"
+    title="Scroll to top"
+    v-show="scrollY > 300"
+    @click="toTop"
+  >
     <img src="../assets/up-arrow.svg" alt="Scroll to top" width="48" height="48" />
   </div>
 </template>
