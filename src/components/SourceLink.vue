@@ -3,7 +3,7 @@ import sourceFile from "../data/irregular_verbs.pdf";
 </script>
 
 <template>
-  <p class="mt-4 text-center text-gray-500 dark:text-gray-400">
+  <p class="my-4 text-center text-gray-500 dark:text-gray-400">
     List of irregular verbs
     <a
       :href="sourceFile"

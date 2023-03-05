@@ -35,7 +35,7 @@ const onSort = (columnName: string): void => {
   <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
     <table class="w-full text-sm text-center text-gray-500 dark:text-gray-400" style="overflow: hidden">
       <!-- Table caption -->
-      <caption class="px-4 py-1 text-lg font-semibold text-left text-gray-900 bg-blue-100 dark:text-white dark:bg-gray-800">
+      <caption class="px-4 py-2 text-lg font-semibold text-left text-gray-900 bg-blue-100 dark:text-white dark:bg-gray-800">
         <p class="uppercase">List of irregular verbs</p>
 
         <!-- Search input -->
