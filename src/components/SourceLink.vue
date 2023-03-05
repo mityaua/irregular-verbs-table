@@ -8,9 +8,9 @@ import sourceFile from "../data/irregular_verbs.pdf";
     <a
       :href="sourceFile"
       class="inline-flex items-center font-medium text-blue-600 dark:text-blue-500 ease-in duration-300 hover:underline"
-      download="Irregular Verbs"
-      aria-label="Download source file"
-      title="Download source file"
+      target="_blank"
+      aria-label="Open source file"
+      title="Open source file"
     >
       Source
       <svg aria-hidden="true" class="w-5 h-5 ml-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
