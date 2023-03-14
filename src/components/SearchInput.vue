@@ -1,38 +1,3 @@
-<script setup lang="ts">
-import { toRefs } from "vue";
-import IVerb from "../interfaces/Iverbs";
-
-const props = defineProps<{ data: Array<IVerb>; filter: String }>();
-const emit = defineEmits<{
-  (e: "update-results", data: Array<IVerb>): void;
-  (e: "update-filter", filter: string): void;
-}>();
-
-const { data, filter } = toRefs(props);
-
-const handleSearch = (event: Event): void => {
-  const inputValue = (event.target as HTMLInputElement).value.trim();
-
-  if (!inputValue) {
-    emit("update-filter", "");
-    emit("update-results", data.value);
-    return;
-  }
-
-  const results: IVerb[] = data.value.filter((verbsObj: IVerb) =>
-    Object.keys(verbsObj).some((verb: string) => verbsObj[verb].toLowerCase().includes(inputValue.toLowerCase()))
-  );
-
-  emit("update-filter", inputValue);
-  emit("update-results", results);
-};
-
-const clearSearchResults = () => {
-  emit("update-filter", "");
-  emit("update-results", data.value);
-};
-</script>
-
 <template>
   <div class="flex items-baseline mt-2">
     <div class="bg-blue-100 dark:bg-gray-800">
@@ -68,7 +33,7 @@ const clearSearchResults = () => {
       </div>
     </div>
 
-    <!-- Сlear results button -->
+    <!-- Clears results button -->
     <button
       v-show="filter"
       type="button"
@@ -79,3 +44,38 @@ const clearSearchResults = () => {
     </button>
   </div>
 </template>
+
+<script setup lang="ts">
+import { toRefs } from "vue";
+import IVerb from "../interfaces/IVerb";
+
+const props = defineProps<{ data: Array<IVerb>; filter: String }>();
+const emit = defineEmits<{
+  (e: "update-results", data: Array<IVerb>): void;
+  (e: "update-filter", filter: string): void;
+}>();
+
+const { data, filter } = toRefs(props);
+
+const handleSearch = (event: Event): void => {
+  const inputValue = (event.target as HTMLInputElement).value.trim();
+
+  if (!inputValue) {
+    emit("update-filter", "");
+    emit("update-results", data.value);
+    return;
+  }
+
+  const results: IVerb[] = data.value.filter((verbsObj: IVerb) =>
+    Object.keys(verbsObj).some((verb: string) => verbsObj[verb].toLowerCase().includes(inputValue.toLowerCase()))
+  );
+
+  emit("update-filter", inputValue);
+  emit("update-results", results);
+};
+
+const clearSearchResults = () => {
+  emit("update-filter", "");
+  emit("update-results", data.value);
+};
+</script>

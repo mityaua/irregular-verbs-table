@@ -1,7 +1,3 @@
-<script setup lang="ts">
-defineProps<{ results: number }>();
-</script>
-
 <template>
   <div>
     <p v-if="results" class="my-2 text-sm font-normal text-gray-500 dark:text-gray-400">
@@ -11,3 +7,7 @@ defineProps<{ results: number }>();
     <p v-else class="my-2 text-sm font-normal text-gray-500 dark:text-gray-400">Nothing found ☹️</p>
   </div>
 </template>
+
+<script setup lang="ts">
+defineProps<{ results: number }>();
+</script>

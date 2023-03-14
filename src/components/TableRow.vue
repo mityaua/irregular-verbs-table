@@ -97,7 +97,7 @@
 
 <script setup lang="ts">
 import { ref, Ref, toRefs, onMounted, onUnmounted } from "vue";
-import IVerb from "../interfaces/Iverbs";
+import IVerb from "../interfaces/IVerb";
 import unMutedIcon from "../assets/unmuted.svg";
 import mutedIcon from "../assets/muted.svg";
 

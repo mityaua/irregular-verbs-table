@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, Ref } from "vue";
-import IVerb from "../interfaces/Iverbs";
+import IVerb from "../interfaces/IVerb";
 import { verbs } from "../data/verbs.json";
 import TableRow from "./TableRow.vue";
 import SearchInput from "../components/SearchInput.vue";
@@ -49,7 +49,7 @@ const onSort = (columnName: string): void => {
       <thead class="text-xs text-gray-700 uppercase dark:text-gray-400">
         <tr>
           <!-- Infinitive column -->
-          <th scope="col" class="p-3 bg-gray-50 dark:bg-gray-700">
+          <th width="33%" scope="col" class="p-3 bg-gray-50 dark:bg-gray-700">
             <div class="flex justify-center items-center">
               <p>Infinitive</p>
               <a href="#" aria-label="Sort by infinitive" class="ease-in duration-300" @click="onSort('infinitive')"
@@ -68,7 +68,7 @@ const onSort = (columnName: string): void => {
           </th>
 
           <!--  Past simple column -->
-          <th scope="col" class="p-3 bg-gray-50 dark:bg-gray-700">
+          <th width="33%" scope="col" class="p-3 bg-gray-50 dark:bg-gray-700">
             <div class="flex justify-center items-center">
               <p>Past simple</p>
               <a href="#" aria-label="Sort by past simple" class="ease-in duration-300" @click="onSort('pastSimple')"
@@ -87,7 +87,7 @@ const onSort = (columnName: string): void => {
           </th>
 
           <!--  Past participle column -->
-          <th scope="col" class="p-3 bg-gray-50 dark:bg-gray-700">
+          <th width="33%" scope="col" class="p-3 bg-gray-50 dark:bg-gray-700">
             <div class="flex justify-center items-center">
               <p>Past participle</p>
               <a href="#" aria-label="Sort by past participle" class="ease-in duration-300" @click="onSort('pastParticiple')"
