@@ -33,12 +33,12 @@
       </div>
     </div>
 
-    <!-- Clears results button -->
+    <!-- Clears search button -->
     <button
       v-show="filter"
       type="button"
       class="ml-2 py-1 px-2.5 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
-      @click="clearSearchResults"
+      @click="handleClearSearch"
     >
       x
     </button>
@@ -46,36 +46,18 @@
 </template>
 
 <script setup lang="ts">
-import { toRefs } from "vue";
-import IVerb from "../interfaces/IVerb";
-
-const props = defineProps<{ data: Array<IVerb>; filter: String }>();
+defineProps<{ filter: String }>();
 const emit = defineEmits<{
-  (e: "update-results", data: Array<IVerb>): void;
-  (e: "update-filter", filter: string): void;
+  (e: "update:filter", filter: string): void;
+  (e: "clear:filter"): void;
 }>();
-
-const { data, filter } = toRefs(props);
 
 const handleSearch = (event: Event): void => {
   const inputValue = (event.target as HTMLInputElement).value.trim();
-
-  if (!inputValue) {
-    emit("update-filter", "");
-    emit("update-results", data.value);
-    return;
-  }
-
-  const results: IVerb[] = data.value.filter((verbsObj: IVerb) =>
-    Object.keys(verbsObj).some((verb: string) => verbsObj[verb].toLowerCase().includes(inputValue.toLowerCase()))
-  );
-
-  emit("update-filter", inputValue);
-  emit("update-results", results);
+  emit("update:filter", inputValue);
 };
 
-const clearSearchResults = () => {
-  emit("update-filter", "");
-  emit("update-results", data.value);
+const handleClearSearch = () => {
+  emit("clear:filter");
 };
 </script>

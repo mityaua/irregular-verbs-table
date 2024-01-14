@@ -1,33 +1,40 @@
 <script setup lang="ts">
-import { ref, Ref } from "vue";
+import { computed, ref, Ref, ComputedRef } from "vue";
 import IVerb from "../interfaces/IVerb";
 import { verbs } from "../data/verbs.json";
 import TableRow from "./TableRow.vue";
 import SearchInput from "../components/SearchInput.vue";
 import SearchResults from "../components/SearchResults.vue";
 
+const defaultSortColumn = "infinitive";
+
 const verbsData: Ref<IVerb[]> = ref(verbs);
 const filter: Ref<string> = ref("");
 const isDescending: Ref<boolean> = ref(false);
-const sortByColumn: Ref<string> = ref("infinitive");
+const sortByColumn: Ref<string> = ref(defaultSortColumn);
 
-const searchResultsHandler = (results: IVerb[]): void => {
-  verbsData.value = [...results].sort((a: IVerb, b: IVerb) =>
-    isDescending.value
-      ? b[sortByColumn.value].localeCompare(a[sortByColumn.value])
-      : a[sortByColumn.value].localeCompare(b[sortByColumn.value])
-  );
+const searchResults: ComputedRef<IVerb[]> = computed(() => {
+  const result: IVerb[] = [...verbsData.value]
+    .filter((verbsObj: IVerb) =>
+      Object.keys(verbsObj).some((verb: string) => verbsObj[verb].toLowerCase().includes(filter.value.toLowerCase()))
+    )
+    .sort((a: IVerb, b: IVerb) =>
+      isDescending.value
+        ? b[sortByColumn.value].localeCompare(a[sortByColumn.value])
+        : a[sortByColumn.value].localeCompare(b[sortByColumn.value])
+    );
+
+  return result;
+});
+
+const clearSearchResults = () => {
+  filter.value = "";
+  verbsData.value = verbs;
 };
-const filterHandler = (query: string): void => {
-  filter.value = query;
-};
+
 const onSort = (columnName: string): void => {
   sortByColumn.value = columnName;
   isDescending.value = !isDescending.value;
-
-  verbsData.value = [...verbsData.value].sort((a: IVerb, b: IVerb) =>
-    isDescending.value ? b[columnName].localeCompare(a[columnName]) : a[columnName].localeCompare(b[columnName])
-  );
 };
 </script>
 
@@ -39,10 +46,10 @@ const onSort = (columnName: string): void => {
         <p class="uppercase">List of irregular verbs</p>
 
         <!-- Search input -->
-        <search-input v-model:filter="filter" :data="verbs" @update-results="searchResultsHandler" @update-filter="filterHandler" />
+        <search-input v-model:filter="filter" @clear:filter="clearSearchResults" />
 
         <!-- Search results -->
-        <search-results :results="verbsData.length" />
+        <search-results :results="searchResults.length" />
       </caption>
 
       <!-- Table head -->
@@ -112,9 +119,9 @@ const onSort = (columnName: string): void => {
         <transition-group name="list">
           <!-- Table row -->
           <table-row
-            v-for="(verb, index) in verbsData"
+            v-for="(verb, index) in searchResults"
             :key="verb.infinitive"
-            :verbsData="verbsData"
+            :verbsData="searchResults"
             :rowData="verb"
             :rowIndex="index"
             :searchQuery="filter"
