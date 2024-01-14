@@ -26,6 +26,7 @@ const searchResults: ComputedRef<IVerb[]> = computed(() => {
 
   return result;
 });
+const sortIconColor = computed(() => (isDescending.value ? "#8a2be2" : "#00CC99"));
 
 const onSort = (columnName: string): void => {
   sortByColumn.value = columnName;
@@ -59,7 +60,7 @@ const onSort = (columnName: string): void => {
                   xmlns="http://www.w3.org/2000/svg"
                   class="w-3 h-3 ml-1"
                   aria-hidden="true"
-                  :fill="sortByColumn === 'infinitive' ? '#60A5FA' : 'currentColor'"
+                  :fill="sortByColumn === 'infinitive' ? sortIconColor : 'currentColor'"
                   viewBox="0 0 320 512"
                 >
                   <path
@@ -78,7 +79,7 @@ const onSort = (columnName: string): void => {
                   xmlns="http://www.w3.org/2000/svg"
                   class="w-3 h-3 ml-1"
                   aria-hidden="true"
-                  :fill="sortByColumn === 'pastSimple' ? '#60A5FA' : 'currentColor'"
+                  :fill="sortByColumn === 'pastSimple' ? sortIconColor : 'currentColor'"
                   viewBox="0 0 320 512"
                 >
                   <path
@@ -97,7 +98,7 @@ const onSort = (columnName: string): void => {
                   xmlns="http://www.w3.org/2000/svg"
                   class="w-3 h-3 ml-1"
                   aria-hidden="true"
-                  :fill="sortByColumn === 'pastParticiple' ? '#60A5FA' : 'currentColor'"
+                  :fill="sortByColumn === 'pastParticiple' ? sortIconColor : 'currentColor'"
                   viewBox="0 0 320 512"
                 >
                   <path
