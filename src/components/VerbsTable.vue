@@ -26,7 +26,7 @@ const searchResults: ComputedRef<IVerb[]> = computed(() => {
 
   return result;
 });
-const sortIconColor = computed(() => (isDescending.value ? "#8a2be2" : "#00CC99"));
+const sortIconColor: ComputedRef<string> = computed(() => (isDescending.value ? "#8a2be2" : "#00CC99"));
 
 const onSort = (columnName: string): void => {
   sortByColumn.value = columnName;
