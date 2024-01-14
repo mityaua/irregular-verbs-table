@@ -27,11 +27,6 @@ const searchResults: ComputedRef<IVerb[]> = computed(() => {
   return result;
 });
 
-const clearSearchResults = () => {
-  filter.value = "";
-  verbsData.value = verbs;
-};
-
 const onSort = (columnName: string): void => {
   sortByColumn.value = columnName;
   isDescending.value = !isDescending.value;
@@ -46,7 +41,7 @@ const onSort = (columnName: string): void => {
         <p class="uppercase">List of irregular verbs</p>
 
         <!-- Search input -->
-        <search-input v-model:filter="filter" @clear:filter="clearSearchResults" />
+        <search-input v-model:filter="filter" @clear:filter="filter = ''" />
 
         <!-- Search results -->
         <search-results :results="searchResults.length" />
