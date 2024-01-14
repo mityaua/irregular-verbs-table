@@ -14,7 +14,7 @@ const isDescending: Ref<boolean> = ref(false);
 const sortByColumn: Ref<string> = ref(defaultSortColumn);
 
 const searchResults: ComputedRef<IVerb[]> = computed(() => {
-  const result: IVerb[] = [...verbsData.value]
+  const result: IVerb[] = verbsData.value
     .filter((verbsObj: IVerb) =>
       Object.keys(verbsObj).some((verb: string) => verbsObj[verb].toLowerCase().includes(filter.value.toLowerCase()))
     )
