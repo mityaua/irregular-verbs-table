@@ -5,12 +5,13 @@
     v-show="scrollY > 300"
     @click="toTop"
   >
-    <img src="../assets/up-arrow.svg" alt="Scroll to top" width="48" height="48" />
+    <ArrowIcon alt="Scroll to top" width="48" height="48" />
   </div>
 </template>
 
 <script setup lang="ts">
 import { onMounted, onUnmounted, ref, Ref } from "vue";
+import ArrowIcon from "../assets/up-arrow.svg";
 
 const timer: Ref<number> = ref(0);
 const scrollY: Ref<number> = ref(0);
