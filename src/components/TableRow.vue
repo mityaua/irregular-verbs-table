@@ -98,8 +98,8 @@
 <script setup lang="ts">
 import { ref, Ref, toRefs, onMounted, onUnmounted } from "vue";
 import IVerb from "../interfaces/IVerb";
-import unMutedIcon from "../assets/unmuted.svg";
-import mutedIcon from "../assets/muted.svg";
+import unMutedIcon from "../assets/unmuted.svg?url";
+import mutedIcon from "../assets/muted.svg?url";
 
 const props = defineProps<{ verbsData: IVerb[]; rowData: IVerb; rowIndex: Number; searchQuery: string }>();
 const { verbsData, rowData, rowIndex, searchQuery } = toRefs(props);
