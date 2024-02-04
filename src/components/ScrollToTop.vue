@@ -2,7 +2,7 @@
   <div
     class="fixed right-2 bottom-2 cursor-pointer ease-in duration-300 opacity-70 hover:opacity-100 dark:opacity-50 dark:hover:opacity-50"
     title="Scroll to top"
-    v-show="scrollY > 300"
+    v-show="scrollY > maxHeight"
     @click="toTop"
   >
     <ArrowIcon alt="Scroll to top" width="48" height="48" />
@@ -13,6 +13,7 @@
 import { onMounted, onUnmounted, ref, Ref } from "vue";
 import ArrowIcon from "../assets/up-arrow.svg";
 
+const maxHeight = 300;
 const timer: Ref<number> = ref(0);
 const scrollY: Ref<number> = ref(0);
 
