@@ -1,10 +1,5 @@
 <template>
-  <div
-    class="fixed right-2 bottom-2 cursor-pointer ease-in duration-300 opacity-70 hover:opacity-100 dark:opacity-50 dark:hover:opacity-50"
-    title="Scroll to top"
-    v-show="scrollY > maxHeight"
-    @click="toTop"
-  >
+  <div class="icon-wrapper" title="Scroll to top" v-show="scrollY > maxHeight" @click="toTop">
     <ArrowIcon alt="Scroll to top" width="48" height="48" />
   </div>
 </template>
@@ -43,3 +38,9 @@ onUnmounted(() => {
   window.addEventListener("scroll", handleScroll);
 });
 </script>
+
+<style lang="postcss" scoped>
+.icon-wrapper {
+  @apply fixed right-2 bottom-2 cursor-pointer ease-in duration-300 opacity-70 hover:opacity-100 dark:opacity-50 dark:hover:opacity-50;
+}
+</style>

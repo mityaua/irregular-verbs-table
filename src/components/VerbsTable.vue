@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref, Ref, ComputedRef } from "vue";
+import { computed, ref } from "vue";
 import IVerb from "../interfaces/IVerb";
 import Columns from "../enums/Columns";
 import { verbs } from "../data/verbs.json";
@@ -8,14 +8,13 @@ import SearchInput from "../components/SearchInput.vue";
 import SearchResults from "../components/SearchResults.vue";
 import SortIcon from "../assets/sort-icon.svg";
 
+const verbsData = ref<IVerb[]>(verbs);
+const filter = ref<string>("");
+const isDescending = ref<boolean>(false);
 const defaultSortColumn = Columns.Infinitive;
+const sortByColumn = ref<string>(defaultSortColumn);
 
-const verbsData: Ref<IVerb[]> = ref(verbs);
-const filter: Ref<string> = ref("");
-const isDescending: Ref<boolean> = ref(false);
-const sortByColumn: Ref<string> = ref(defaultSortColumn);
-
-const searchResults: ComputedRef<IVerb[]> = computed(() => {
+const searchResults = computed<IVerb[]>(() => {
   const result: IVerb[] = verbsData.value
     .filter((verbsObj: IVerb) =>
       Object.keys(verbsObj).some((verb: string) => verbsObj[verb].toLowerCase().includes(filter.value.toLowerCase()))
@@ -28,7 +27,7 @@ const searchResults: ComputedRef<IVerb[]> = computed(() => {
 
   return result;
 });
-const sortIconColor: ComputedRef<string> = computed(() => (isDescending.value ? "#8a2be2" : "#00CC99"));
+const sortIconColor = computed<string>(() => (isDescending.value ? "#8a2be2" : "#00CC99"));
 
 const onSort = (columnName: string): void => {
   sortByColumn.value = columnName;
@@ -38,7 +37,7 @@ const onSort = (columnName: string): void => {
 
 <template>
   <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-    <table class="w-full text-sm text-center text-gray-500 dark:text-gray-400">
+    <table class="w-full text-sm text-center text-gray-500 dark:text-gray-400 overflow-hidden">
       <!-- Table caption -->
       <caption class="px-4 py-2 text-lg font-semibold text-left text-gray-900 bg-blue-100 dark:text-white dark:bg-gray-800">
         <p class="uppercase">List of irregular verbs</p>
@@ -88,15 +87,7 @@ const onSort = (columnName: string): void => {
       <!-- Table body -->
       <tbody>
         <transition-group name="list">
-          <!-- Table row -->
-          <table-row
-            v-for="(verb, index) in searchResults"
-            :key="verb.infinitive"
-            :verbsData="searchResults"
-            :rowData="verb"
-            :rowIndex="index"
-            :searchQuery="filter"
-          />
+          <TableRow v-for="result in searchResults" :key="result.infinitive" :rowData="result" :searchQuery="filter" />
         </transition-group>
       </tbody>
     </table>
