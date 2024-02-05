@@ -3,10 +3,10 @@ import { computed, ref } from "vue";
 import IVerb from "../interfaces/IVerb";
 import Columns from "../enums/Columns";
 import { verbs } from "../data/verbs.json";
-import TableRow from "./TableRow.vue";
 import SearchInput from "../components/SearchInput.vue";
 import SearchResults from "../components/SearchResults.vue";
-import SortIcon from "../assets/sort-icon.svg";
+import TableHead from "../components/TableHead.vue";
+import TableRow from "./TableRow.vue";
 
 const verbsData = ref<IVerb[]>(verbs);
 const filter = ref<string>("");
@@ -27,7 +27,6 @@ const searchResults = computed<IVerb[]>(() => {
 
   return result;
 });
-const sortIconColor = computed<string>(() => (isDescending.value ? "#8a2be2" : "#00CC99"));
 
 const onSort = (columnName: string): void => {
   sortByColumn.value = columnName;
@@ -52,35 +51,14 @@ const onSort = (columnName: string): void => {
       <!-- Table head -->
       <thead class="text-xs text-gray-700 uppercase dark:text-gray-400">
         <tr>
-          <!-- Infinitive column -->
-          <th width="33%" scope="col" class="p-3 bg-gray-50 dark:bg-gray-700">
-            <div class="flex justify-center items-center">
-              <p>Infinitive</p>
-              <a href="#" aria-label="Sort by infinitive" class="ease-in duration-300" @click="onSort(Columns.Infinitive)">
-                <SortIcon class="w-3 h-3 ml-1" :fill="sortByColumn === Columns.Infinitive ? sortIconColor : 'currentColor'" />
-              </a>
-            </div>
-          </th>
-
-          <!--  Past simple column -->
-          <th width="33%" scope="col" class="p-3 bg-gray-50 dark:bg-gray-700">
-            <div class="flex justify-center items-center">
-              <p>Past simple</p>
-              <a href="#" aria-label="Sort by past simple" class="ease-in duration-300" @click="onSort(Columns.PastSimple)">
-                <SortIcon class="w-3 h-3 ml-1" :fill="sortByColumn === Columns.PastSimple ? sortIconColor : 'currentColor'" />
-              </a>
-            </div>
-          </th>
-
-          <!--  Past participle column -->
-          <th width="33%" scope="col" class="p-3 bg-gray-50 dark:bg-gray-700">
-            <div class="flex justify-center items-center">
-              <p>Past participle</p>
-              <a href="#" aria-label="Sort by past participle" class="ease-in duration-300" @click="onSort(Columns.PastParticiple)">
-                <SortIcon class="w-3 h-3 ml-1" :fill="sortByColumn === Columns.PastParticiple ? sortIconColor : 'currentColor'" />
-              </a>
-            </div>
-          </th>
+          <TableHead
+            v-for="(value, result) in searchResults[0]"
+            :key="result"
+            :isDescending="isDescending"
+            :activeColumnName="sortByColumn"
+            :columnName="result"
+            @click:column="onSort"
+          />
         </tr>
       </thead>
 
