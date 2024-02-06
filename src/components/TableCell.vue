@@ -1,5 +1,5 @@
 <template>
-  <td :class="['table-cell', { 'bg-gray-100 dark:bg-gray-800': columnName === Columns.PastSimple }]">
+  <td class="table-cell">
     <div class="flex justify-center flex-wrap">
       <a
         target="_blank"
@@ -27,7 +27,6 @@
 
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted, computed } from "vue";
-import Columns from "../enums/Columns";
 import unMutedIcon from "../assets/unmuted.svg?url";
 import mutedIcon from "../assets/muted.svg?url";
 
@@ -35,10 +34,6 @@ const props = defineProps<{
   verb: string;
   columnName: string;
   searchQuery: string;
-}>();
-
-const emit = defineEmits<{
-  (e: "cell-click", columnName: string): void;
 }>();
 
 const defaultReversoUrl = "https://context.reverso.net/translation/english-ukrainian/";
@@ -93,6 +88,10 @@ onUnmounted(() => {
 <style lang="postcss" scoped>
 .table-cell {
   @apply py-3 hover:bg-blue-100 dark:hover:bg-gray-600;
+}
+
+.table-cell:nth-child(even) {
+  @apply bg-gray-100 dark:bg-gray-800;
 }
 
 .sound-icon {
