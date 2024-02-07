@@ -91,10 +91,10 @@ onUnmounted(() => {
 }
 
 .table-cell:nth-child(even) {
-  @apply bg-gray-100 dark:bg-gray-800;
+  @apply bg-gray-100 dark:bg-gray-800 hover:bg-blue-100 dark:hover:bg-gray-600;
 }
 
 .sound-icon {
-  @apply ml-2 hover:opacity-100 ease-in duration-300 cursor-pointer;
+  @apply ml-2 ease-in duration-300 cursor-pointer;
 }
 </style>
