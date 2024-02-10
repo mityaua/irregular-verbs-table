@@ -6,7 +6,7 @@
         rel="noopener noreferrer"
         aria-label="Open Reverso in new tab"
         class="ease-in duration-300"
-        :title="`Go to Reverso: ${verb}`"
+        :title="linkTitle"
         :href="reversoLink"
       >
         <span v-html="highlightMatches()"></span>
@@ -42,24 +42,25 @@ const synthesizer = ref<SpeechSynthesis | null>(null);
 const isSpeaking = ref<boolean>(false);
 
 const reversoLink = computed<string>(() => `${defaultReversoUrl}${props.verb.split("/")[0]}`);
+const linkTitle = computed<string>(() => `Go to Reverso: ${props.verb}`);
 
 const highlightMatches = (): string => {
-  const word = props.verb;
   const query = props.searchQuery;
+  const verb = props.verb;
+  const upperCasedVerb = verb.charAt(0).toUpperCase() + verb.slice(1);
 
   if (!query) {
-    return word.charAt(0).toUpperCase() + word.slice(1);
+    return upperCasedVerb;
   }
 
   const regex = new RegExp(query, "gi");
-  const matches = word.match(regex);
+  const matches = verb.match(regex);
 
   if (!matches) {
-    return word.charAt(0).toUpperCase() + word.slice(1);
+    return upperCasedVerb;
   }
 
-  const upperCasedWord = word.charAt(0).toUpperCase() + word.slice(1);
-  const highlighted = upperCasedWord.replace(regex, "<strong>$&</strong>");
+  const highlighted = upperCasedVerb.replace(regex, "<strong>$&</strong>");
 
   return highlighted;
 };
