@@ -41,6 +41,6 @@ onUnmounted(() => {
 
 <style lang="postcss" scoped>
 .icon-wrapper {
-  @apply fixed right-2 bottom-2 cursor-pointer ease-in duration-300 opacity-70 hover:opacity-100 dark:opacity-50 dark:hover:opacity-50;
+  @apply fixed right-5 bottom-5 cursor-pointer ease-in duration-300 opacity-70 hover:opacity-100 dark:opacity-50 dark:hover:opacity-50;
 }
 </style>
