@@ -1,5 +1,5 @@
 <template>
-  <div class="flex items-baseline mt-2">
+  <div class="flex items-baseline">
     <div class="bg-blue-100 dark:bg-gray-800">
       <label for="table-search" class="sr-only">Search</label>
 
@@ -11,12 +11,12 @@
 
         <!-- Search input -->
         <input
-          :value="filter"
-          @input="handleSearch"
           type="text"
+          placeholder="Search for verbs"
           id="table-search"
           class="block p-2 pl-10 text-base text-gray-900 border border-gray-300 rounded-lg w-50 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-500 placeholder-gray-400 placeholder-opacity-75 dark:placeholder-gray-400 dark:placeholder-opacity-50 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-          placeholder="Search for items"
+          :value="filter"
+          @input="handleSearch"
         />
       </div>
     </div>

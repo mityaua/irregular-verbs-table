@@ -1,5 +1,5 @@
 <template>
-  <th width="33%" scope="col" class="p-3 bg-gray-50 dark:bg-gray-700">
+  <th width="33%" scope="col" class="p-2 bg-gray-50 dark:bg-gray-700">
     <div class="flex justify-center items-center">
       <p>{{ visibleColumnName }}</p>
 

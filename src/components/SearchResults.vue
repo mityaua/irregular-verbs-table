@@ -1,10 +1,8 @@
 <template>
-  <div>
-    <p v-if="results" class="my-2 text-sm font-normal text-gray-500 dark:text-gray-400">
-      {{ results }} {{ results > 1 ? "results" : "result" }}
-    </p>
+  <div class="text-sm font-normal text-gray-500 dark:text-gray-400">
+    <span v-if="results"> {{ results }} {{ results > 1 ? "results" : "result" }} </span>
 
-    <p v-else class="my-2 text-sm font-normal text-gray-500 dark:text-gray-400">Nothing found ☹️</p>
+    <span v-else>Nothing found ☹️</span>
   </div>
 </template>
 

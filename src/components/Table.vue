@@ -38,14 +38,14 @@ const onSort = (columnName: string): void => {
   <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
     <table class="w-full text-sm text-center text-gray-500 dark:text-gray-400 overflow-hidden">
       <!-- Table caption -->
-      <caption class="px-4 py-2 text-lg font-semibold text-left text-gray-900 bg-blue-100 dark:text-white dark:bg-gray-800">
-        <p class="uppercase">List of irregular verbs</p>
+      <caption class="p-2 text-lg font-semibold text-left text-gray-900 bg-blue-100 dark:text-white dark:bg-gray-800">
+        <p class="text-sm uppercase">List of irregular verbs</p>
 
         <!-- Search input -->
-        <search-input v-model:filter="filter" @clear:filter="filter = ''" />
+        <search-input class="mt-1" v-model:filter="filter" @clear:filter="filter = ''" />
 
         <!-- Search results -->
-        <search-results :results="searchResults.length" />
+        <search-results class="mt-2" :results="searchResults.length" />
       </caption>
 
       <!-- Table head -->
