@@ -5,7 +5,7 @@
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Open Reverso in new tab"
-        class="ease-in duration-300"
+        class="text-base ease-in duration-300"
         :title="linkTitle"
         :href="reversoLink"
       >

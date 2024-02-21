@@ -15,7 +15,7 @@
           @input="handleSearch"
           type="text"
           id="table-search"
-          class="block p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-50 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-500 placeholder-gray-400 placeholder-opacity-75 dark:placeholder-gray-400 dark:placeholder-opacity-50 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          class="block p-2 pl-10 text-base text-gray-900 border border-gray-300 rounded-lg w-50 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-500 placeholder-gray-400 placeholder-opacity-75 dark:placeholder-gray-400 dark:placeholder-opacity-50 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           placeholder="Search for items"
         />
       </div>
