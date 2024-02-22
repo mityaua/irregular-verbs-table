@@ -39,7 +39,7 @@ const onSort = (columnName: string): void => {
     <table class="w-full text-sm text-center text-gray-500 dark:text-gray-400 overflow-hidden">
       <!-- Table caption -->
       <caption
-        class="p-2 rounded-t-lg text-lg font-semibold text-left text-gray-900 bg-blue-100 dark:text-white dark:bg-gray-800 dark:border dark:border-gray-700"
+        class="p-2 md:rounded-t-lg text-lg font-semibold text-left text-gray-900 dark:text-white bg-blue-100 dark:bg-gray-800 dark:border dark:border-gray-700"
       >
         <div class="flex items-center">
           <p class="text-sm uppercase mr-2">List of irregular verbs</p>
