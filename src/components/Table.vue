@@ -35,10 +35,12 @@ const onSort = (columnName: string): void => {
 </script>
 
 <template>
-  <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+  <div class="relative overflow-x-auto shadow-md dark:shadow-xl sm:rounded-lg">
     <table class="w-full text-sm text-center text-gray-500 dark:text-gray-400 overflow-hidden">
       <!-- Table caption -->
-      <caption class="p-2 text-lg font-semibold text-left text-gray-900 bg-blue-100 dark:text-white dark:bg-gray-800">
+      <caption
+        class="p-2 rounded-t-lg text-lg font-semibold text-left text-gray-900 bg-blue-100 dark:text-white dark:bg-gray-800 dark:border dark:border-gray-700"
+      >
         <div class="flex items-center">
           <p class="text-sm uppercase mr-2">List of irregular verbs</p>
           <!-- Search results -->
