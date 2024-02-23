@@ -7,6 +7,7 @@ import SearchInput from "../components/SearchInput.vue";
 import SearchResults from "../components/SearchResults.vue";
 import TableHead from "../components/TableHead.vue";
 import TableRow from "./TableRow.vue";
+import EmptyTableData from "./EmptyTableData.vue";
 
 const verbsData = ref<IVerb[]>(verbs);
 const filter = ref<string>("");
@@ -66,11 +67,13 @@ const onSort = (columnName: string): void => {
       </thead>
 
       <!-- Table body -->
-      <tbody>
+      <tbody v-if="searchResults.length">
         <transition-group name="list">
           <TableRow v-for="result in searchResults" :key="result.infinitive" :rowData="result" :searchQuery="filter" />
         </transition-group>
       </tbody>
+
+      <EmptyTableData v-else />
     </table>
   </div>
 </template>
