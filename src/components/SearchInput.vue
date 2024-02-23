@@ -6,7 +6,7 @@
       <div class="relative mt-1 dark:bg-gray-800">
         <!-- Search icon -->
         <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-          <SearchIcon class="w-5 h-5 text-gray-500 dark:text-gray-400" />
+          <SearchIcon class="size-5 text-gray-500 dark:text-gray-400" />
         </div>
 
         <!-- Search input -->

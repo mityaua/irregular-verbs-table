@@ -4,7 +4,7 @@
       <p>{{ visibleColumnName }}</p>
 
       <a href="#" :aria-label="`Sort by ${visibleColumnName}`" class="ease-in duration-300" @click="onColumnClick">
-        <SortIcon class="w-3 h-3 ml-1" :fill="activeColumnName === columnName ? sortIconColor : 'currentColor'" />
+        <SortIcon class="size-3 ml-1" :fill="activeColumnName === columnName ? sortIconColor : 'currentColor'" />
       </a>
     </div>
   </th>

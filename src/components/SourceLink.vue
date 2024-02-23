@@ -3,7 +3,7 @@
     List of irregular verbs
     <a class="source-link" target="_blank" aria-label="Open source file" title="Open source file" :href="sourceFile">
       Source
-      <SourceIcon class="w-5 h-5 ml-1" />
+      <SourceIcon class="size-5 ml-1" />
     </a>
   </p>
 </template>
