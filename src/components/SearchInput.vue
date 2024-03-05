@@ -11,25 +11,17 @@
 
         <!-- Search input -->
         <input
-          type="text"
+          type="search"
           placeholder="Search for verbs"
-          id="table-search"
+          id="search-input"
+          role="searchbox"
+          aria-description="Search results"
           class="block p-2 pl-10 text-base text-gray-900 border border-gray-300 rounded-lg w-50 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-500 placeholder-gray-400 placeholder-opacity-75 dark:placeholder-gray-400 dark:placeholder-opacity-50 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           :value="filter"
           @input="handleSearch"
         />
       </div>
     </div>
-
-    <!-- Clears search button -->
-    <button
-      v-show="filter"
-      type="button"
-      class="ml-2 py-1 px-2.5 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
-      @click="handleClearSearch"
-    >
-      x
-    </button>
   </div>
 </template>
 
@@ -45,9 +37,5 @@ const emit = defineEmits<{
 const handleSearch = (event: Event): void => {
   const inputValue = (event.target as HTMLInputElement).value.trim();
   emit("update:filter", inputValue);
-};
-
-const handleClearSearch = () => {
-  emit("clear:filter");
 };
 </script>
