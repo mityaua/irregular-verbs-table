@@ -53,6 +53,10 @@ const handleSearch = (event: Event): void => {
   const inputValue = (event.target as HTMLInputElement).value.trim();
   emit("update:filter", inputValue);
 
+  if (!inputValue) {
+    setPrevKeyPressTime(null);
+  }
+
   updateUrlOnSearch(inputValue);
 };
 
@@ -60,6 +64,7 @@ const handleClearSearch = () => {
   emit("clear:filter");
 
   updateUrlOnSearch("");
+  setPrevKeyPressTime(null);
 };
 
 const handleKeyUp = (event: KeyboardEvent) => {
@@ -75,7 +80,11 @@ const handleKeyUp = (event: KeyboardEvent) => {
     });
   }
 
-  prevKeyPressTime.value = event.timeStamp;
+  setPrevKeyPressTime(event.timeStamp);
+};
+
+const setPrevKeyPressTime = (value: number | null) => {
+  prevKeyPressTime.value = value;
 };
 
 const updateUrlOnSearch = (query: string) => {
