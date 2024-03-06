@@ -36,6 +36,7 @@
 </template>
 
 <script setup lang="ts">
+import { event as gEvent } from "vue-gtag";
 import SearchIcon from "../assets/search-icon.svg";
 
 defineProps<{ filter: String }>();
@@ -48,25 +49,28 @@ const handleSearch = (event: Event): void => {
   const inputValue = (event.target as HTMLInputElement).value.trim();
   emit("update:filter", inputValue);
 
-  updateUrlOnSearch(inputValue);
+  // updateUrlOnSearch(inputValue);
+
+  // TODO: temp event
+  gEvent("input-search", { event_category: "general", event_label: "event_label", value: inputValue });
 };
 
 const handleClearSearch = () => {
   emit("clear:filter");
 
-  updateUrlOnSearch("");
+  // updateUrlOnSearch("");
 };
 
-const updateUrlOnSearch = (query: string) => {
-  const params: URLSearchParams = new URLSearchParams(window.location.search);
+// const updateUrlOnSearch = (query: string) => {
+//   const params: URLSearchParams = new URLSearchParams(window.location.search);
 
-  query ? params.set("search", query) : params.delete("search");
+//   query ? params.set("search", query) : params.delete("search");
 
-  const paramString = params.toString();
-  const newUrl = `${window.location.pathname}${paramString && `?${paramString}`}`;
+//   const paramString = params.toString();
+//   const newUrl = `${window.location.pathname}${paramString && `?${paramString}`}`;
 
-  window.history.replaceState({}, "", newUrl);
-};
+//   window.history.replaceState({}, "", newUrl);
+// };
 </script>
 
 <style scoped>
