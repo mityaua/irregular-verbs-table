@@ -11,8 +11,8 @@ import EmptyTableData from "./EmptyTableData.vue";
 
 const verbsData = ref<IVerb[]>(verbs);
 
-// const searchValue = new URLSearchParams(window.location.search).get("search");
-const filter = ref<string>("");
+const searchValue = new URLSearchParams(window.location.search).get("search");
+const filter = ref<string>(searchValue || "");
 const isDescending = ref<boolean>(false);
 const defaultSortColumn = Columns.Infinitive;
 const sortByColumn = ref<string>(defaultSortColumn);

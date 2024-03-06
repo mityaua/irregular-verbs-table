@@ -19,6 +19,7 @@
           class="block p-2 pl-10 text-base text-gray-900 border border-gray-300 rounded-lg w-50 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-500 placeholder-gray-400 placeholder-opacity-75 dark:placeholder-gray-400 dark:placeholder-opacity-50 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           :value="filter"
           @input="handleSearch"
+          @keyup="handleKeyUp"
         />
       </div>
     </div>
@@ -36,10 +37,13 @@
 </template>
 
 <script setup lang="ts">
+import { ref } from "vue";
 import { event as gEvent } from "vue-gtag";
 import SearchIcon from "../assets/search-icon.svg";
 
-defineProps<{ filter: String }>();
+const prevKeyPressTime = ref<number | null>(null);
+
+const props = defineProps<{ filter: String }>();
 const emit = defineEmits<{
   (e: "update:filter", filter: string): void;
   (e: "clear:filter"): void;
@@ -49,28 +53,41 @@ const handleSearch = (event: Event): void => {
   const inputValue = (event.target as HTMLInputElement).value.trim();
   emit("update:filter", inputValue);
 
-  // updateUrlOnSearch(inputValue);
-
-  // TODO: temp event
-  gEvent("input-search", { event_category: "general", event_label: "event_label", value: inputValue });
+  updateUrlOnSearch(inputValue);
 };
 
 const handleClearSearch = () => {
   emit("clear:filter");
 
-  // updateUrlOnSearch("");
+  updateUrlOnSearch("");
 };
 
-// const updateUrlOnSearch = (query: string) => {
-//   const params: URLSearchParams = new URLSearchParams(window.location.search);
+const handleKeyUp = (event: KeyboardEvent) => {
+  if (prevKeyPressTime.value) {
+    const currentTime = event.timeStamp;
 
-//   query ? params.set("search", query) : params.delete("search");
+    const timeElapsed = currentTime - prevKeyPressTime.value;
 
-//   const paramString = params.toString();
-//   const newUrl = `${window.location.pathname}${paramString && `?${paramString}`}`;
+    gEvent("input-search", {
+      event_category: "verbs-search",
+      event_label: props.filter,
+      value: timeElapsed.toFixed(),
+    });
+  }
 
-//   window.history.replaceState({}, "", newUrl);
-// };
+  prevKeyPressTime.value = event.timeStamp;
+};
+
+const updateUrlOnSearch = (query: string) => {
+  const params: URLSearchParams = new URLSearchParams(window.location.search);
+
+  query ? params.set("search", query) : params.delete("search");
+
+  const paramString = params.toString();
+  const newUrl = `${window.location.pathname}${paramString && `?${paramString}`}`;
+
+  window.history.replaceState({}, "", newUrl);
+};
 </script>
 
 <style scoped>
