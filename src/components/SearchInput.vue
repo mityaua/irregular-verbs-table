@@ -41,7 +41,7 @@ import { ref } from "vue";
 import { event as gEvent } from "vue-gtag";
 import SearchIcon from "../assets/search-icon.svg";
 
-const props = defineProps<{ filter: String }>();
+defineProps<{ filter: String }>();
 const emit = defineEmits<{
   (e: "update:filter", filter: string): void;
   (e: "clear:filter"): void;
@@ -79,10 +79,10 @@ const handleKeyUp = (event: KeyboardEvent) => {
   if (searchPrevKeyUpTime.value) {
     const timeElapsed = currentTime - searchPrevKeyUpTime.value;
 
-    gEvent("input-search", {
+    gEvent("search", {
       event_category: "verbs-search",
-      event_label: props.filter,
-      event_time: timeElapsed.toFixed(),
+      search_term: inputValue,
+      search_time: timeElapsed.toFixed(),
     });
   }
 
