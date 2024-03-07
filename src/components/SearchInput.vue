@@ -41,8 +41,6 @@ import { ref } from "vue";
 import { event as gEvent } from "vue-gtag";
 import SearchIcon from "../assets/search-icon.svg";
 
-const prevKeyPressTime = ref<number | null>(null);
-
 const props = defineProps<{ filter: String }>();
 const emit = defineEmits<{
   (e: "update:filter", filter: string): void;
@@ -53,10 +51,6 @@ const handleSearch = (event: Event): void => {
   const inputValue = (event.target as HTMLInputElement).value.trim();
   emit("update:filter", inputValue);
 
-  if (!inputValue) {
-    setPrevKeyPressTime(null);
-  }
-
   updateUrlOnSearch(inputValue);
 };
 
@@ -64,14 +58,26 @@ const handleClearSearch = () => {
   emit("clear:filter");
 
   updateUrlOnSearch("");
-  setPrevKeyPressTime(null);
+  setSearchPrevKeyUpTime(null);
 };
 
-const handleKeyUp = (event: KeyboardEvent) => {
-  if (prevKeyPressTime.value) {
-    const currentTime = event.timeStamp;
+const searchPrevKeyUpTime = ref<number | null>(null);
+const searchTimeoutId = ref<number | undefined>(undefined);
 
-    const timeElapsed = currentTime - prevKeyPressTime.value;
+const handleKeyUp = (event: KeyboardEvent) => {
+  const maxTimeoutTime = 5000;
+  const inputValue = (event.target as HTMLInputElement).value.trim();
+  const currentTime = event.timeStamp;
+
+  clearTimeout(searchTimeoutId.value);
+
+  if (!inputValue) {
+    setSearchPrevKeyUpTime(null);
+    return;
+  }
+
+  if (searchPrevKeyUpTime.value) {
+    const timeElapsed = currentTime - searchPrevKeyUpTime.value;
 
     gEvent("input-search", {
       event_category: "verbs-search",
@@ -80,11 +86,16 @@ const handleKeyUp = (event: KeyboardEvent) => {
     });
   }
 
-  setPrevKeyPressTime(event.timeStamp);
+  setSearchPrevKeyUpTime(event.timeStamp);
+
+  // Wait 5 second and reset timer (if user doesn't type again)
+  searchTimeoutId.value = setTimeout(() => {
+    setSearchPrevKeyUpTime(null);
+  }, maxTimeoutTime);
 };
 
-const setPrevKeyPressTime = (value: number | null) => {
-  prevKeyPressTime.value = value;
+const setSearchPrevKeyUpTime = (value: number | null) => {
+  searchPrevKeyUpTime.value = value;
 };
 
 const updateUrlOnSearch = (query: string) => {
