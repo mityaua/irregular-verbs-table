@@ -82,7 +82,7 @@ const handleKeyUp = (event: KeyboardEvent) => {
     gEvent("input-search", {
       event_category: "verbs-search",
       event_label: props.filter,
-      value: timeElapsed.toFixed(),
+      event_time: timeElapsed.toFixed(),
     });
   }
 
