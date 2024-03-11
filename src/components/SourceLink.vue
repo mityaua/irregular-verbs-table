@@ -9,8 +9,8 @@
 </template>
 
 <script setup lang="ts">
-import sourceFile from "../data/irregular_verbs.pdf";
-import SourceIcon from "../assets/to-right-arrow.svg";
+import sourceFile from "@/data/irregular_verbs.pdf";
+import SourceIcon from "@assets/to-right-arrow.svg";
 </script>
 
 <style lang="postcss" scoped>

@@ -39,7 +39,7 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { event as gEvent } from "vue-gtag";
-import SearchIcon from "../assets/search-icon.svg";
+import SearchIcon from "@assets/search-icon.svg";
 
 defineProps<{ filter: String }>();
 const emit = defineEmits<{
@@ -62,7 +62,7 @@ const handleClearSearch = () => {
 };
 
 const searchPrevKeyUpTime = ref<number | null>(null);
-const searchTimeoutId = ref<number | undefined>(undefined);
+const searchTimeoutId = ref<undefined | ReturnType<typeof setTimeout>>(undefined);
 
 const handleKeyUp = (event: KeyboardEvent) => {
   const maxTimeoutTime = 5000;

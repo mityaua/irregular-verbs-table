@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import { computed, ref } from "vue";
-import IVerb from "../interfaces/IVerb";
-import Columns from "../enums/Columns";
-import { verbs } from "../data/verbs.json";
-import SearchInput from "../components/SearchInput.vue";
-import SearchResults from "../components/SearchResults.vue";
-import TableHead from "../components/TableHead.vue";
-import TableRow from "./TableRow.vue";
-import EmptyTableData from "./EmptyTableData.vue";
+import IVerb from "@/interfaces/IVerb";
+import Columns from "@/enums/Columns";
+import { verbs } from "@/data/verbs.json";
+import SearchInput from "@components/SearchInput.vue";
+import SearchResults from "@components/SearchResults.vue";
+import TableHead from "@components/TableHead.vue";
+import TableRow from "@/components/TableRow.vue";
+import EmptyTableData from "@components/EmptyTableData.vue";
 
 const verbsData = ref<IVerb[]>(verbs);
 

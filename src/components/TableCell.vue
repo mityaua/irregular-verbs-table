@@ -27,8 +27,8 @@
 
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted, computed } from "vue";
-import unMutedIcon from "../assets/unmuted.svg?url";
-import mutedIcon from "../assets/muted.svg?url";
+import unMutedIcon from "@assets/unmuted.svg?url";
+import mutedIcon from "@assets/muted.svg?url";
 
 const props = defineProps<{
   verb: string;

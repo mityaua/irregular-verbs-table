@@ -12,8 +12,8 @@
 
 <script setup lang="ts">
 import { computed } from "vue";
-import Columns from "../enums/Columns";
-import SortIcon from "../assets/sort-icon.svg";
+import Columns from "@/enums/Columns";
+import SortIcon from "@assets/sort-icon.svg";
 
 const props = defineProps<{ isDescending: boolean; activeColumnName: string; columnName: string }>();
 

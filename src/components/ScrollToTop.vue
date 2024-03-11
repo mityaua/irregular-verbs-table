@@ -6,20 +6,20 @@
 
 <script setup lang="ts">
 import { onMounted, onUnmounted, ref, Ref } from "vue";
-import ArrowIcon from "../assets/up-arrow.svg";
+import ArrowIcon from "@assets/up-arrow.svg";
 
 const maxHeight = 300;
-const timer: Ref<number> = ref(0);
+const timerId: Ref<undefined | ReturnType<typeof setTimeout>> = ref(undefined);
 const scrollY: Ref<number> = ref(0);
 
 const handleScroll = (): void => {
-  if (timer.value) return;
+  if (timerId.value) return;
 
-  timer.value = setTimeout(() => {
+  timerId.value = setTimeout(() => {
     scrollY.value = window.scrollY;
 
-    clearTimeout(timer.value);
-    timer.value = 0;
+    clearTimeout(timerId.value);
+    timerId.value = undefined;
   }, 100);
 };
 
