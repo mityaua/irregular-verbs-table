@@ -11,8 +11,8 @@ import EmptyTableData from "@components/EmptyTableData.vue";
 
 const verbsData = ref<IVerb[]>(verbs);
 
-const searchValue = new URLSearchParams(window.location.search).get("search");
-const filter = ref<string>(searchValue || "");
+const searchParam: string | null = new URLSearchParams(window.location.search).get("search");
+const searchQuery = ref<string>(searchParam || "");
 const isDescending = ref<boolean>(false);
 const defaultSortColumn = Columns.Infinitive;
 const sortByColumn = ref<string>(defaultSortColumn);
@@ -20,7 +20,7 @@ const sortByColumn = ref<string>(defaultSortColumn);
 const searchResults = computed<IVerb[]>(() => {
   const result: IVerb[] = verbsData.value
     .filter((verbsObj: IVerb) =>
-      Object.keys(verbsObj).some((verb: string) => verbsObj[verb].toLowerCase().includes(filter.value.toLowerCase()))
+      Object.keys(verbsObj).some((verb: string) => verbsObj[verb].toLowerCase().includes(searchQuery.value.toLowerCase()))
     )
     .sort((a: IVerb, b: IVerb) =>
       isDescending.value
@@ -51,7 +51,7 @@ const onSort = (columnName: string): void => {
         </div>
 
         <!-- Search input -->
-        <search-input class="mt-1" v-model:filter="filter" @clear:filter="filter = ''" />
+        <search-input class="mt-1" v-model:query="searchQuery" @clear:query="searchQuery = ''" />
       </caption>
 
       <!-- Table head -->
@@ -71,7 +71,7 @@ const onSort = (columnName: string): void => {
       <!-- Table body -->
       <tbody v-if="searchResults.length">
         <transition-group name="list">
-          <TableRow v-for="result in searchResults" :key="result.infinitive" :rowData="result" :searchQuery="filter" />
+          <TableRow v-for="result in searchResults" :key="result.infinitive" :rowData="result" :searchQuery="searchQuery" />
         </transition-group>
       </tbody>
 
