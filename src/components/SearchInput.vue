@@ -75,8 +75,6 @@ const updateUrlOnSearch = (query: string) => {
 <template>
 	<div class="flex items-baseline">
 		<div class="bg-blue-100 dark:bg-gray-800">
-			<label for="table-search" class="sr-only">Search</label>
-
 			<div class="relative mt-1 dark:bg-gray-800">
 				<!-- Search icon -->
 				<div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
