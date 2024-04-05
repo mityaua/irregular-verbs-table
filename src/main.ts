@@ -6,6 +6,6 @@ import App from "./App.vue";
 
 const app = createApp(App);
 app.use(VueGtag, {
-  config: { id: "G-0JXW9ZJB5B" },
+	config: { id: "G-0JXW9ZJB5B" },
 });
 app.mount("#app");

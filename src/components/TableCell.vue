@@ -1,39 +1,12 @@
-<template>
-  <td class="table-cell">
-    <div class="flex justify-center flex-wrap">
-      <a
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="Open Reverso in new tab"
-        class="text-base ease-in duration-300"
-        :title="linkTitle"
-        :href="reversoLink"
-      >
-        <span v-html="highlightMatches()"></span>
-      </a>
-
-      <img
-        title="Pronunciation"
-        alt="Pronunciation"
-        width="16"
-        height="16"
-        :class="['sound-icon', isSpeaking ? 'opacity-100' : 'opacity-50']"
-        :src="isSpeaking ? unMutedIcon : mutedIcon"
-        @click.prevent="!isSpeaking && startSpeech()"
-      />
-    </div>
-  </td>
-</template>
-
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted, computed } from "vue";
 import unMutedIcon from "@assets/unmuted.svg?url";
 import mutedIcon from "@assets/muted.svg?url";
 
 const props = defineProps<{
-  verb: string;
-  columnName: string;
-  searchQuery: string;
+	verb: string;
+	columnName: string;
+	searchQuery: string;
 }>();
 
 const defaultReversoUrl = "https://context.reverso.net/translation/english-ukrainian/";
@@ -45,57 +18,84 @@ const reversoLink = computed<string>(() => `${defaultReversoUrl}${props.verb.spl
 const linkTitle = computed<string>(() => `Go to Reverso: ${props.verb}`);
 
 const highlightMatches = (): string => {
-  const query = props.searchQuery;
-  const verb = props.verb;
-  const upperCasedVerb = verb.charAt(0).toUpperCase() + verb.slice(1);
+	const query = props.searchQuery;
+	const verb = props.verb;
+	const upperCasedVerb = verb.charAt(0).toUpperCase() + verb.slice(1);
 
-  if (!query) {
-    return upperCasedVerb;
-  }
+	if (!query) {
+		return upperCasedVerb;
+	}
 
-  const regex = new RegExp(query, "gi");
-  const matches = verb.match(regex);
+	const regex = new RegExp(query, "gi");
+	const matches = verb.match(regex);
 
-  if (!matches) {
-    return upperCasedVerb;
-  }
+	if (!matches) {
+		return upperCasedVerb;
+	}
 
-  const highlighted = upperCasedVerb.replace(regex, "<strong>$&</strong>");
+	const highlighted = upperCasedVerb.replace(regex, "<strong>$&</strong>");
 
-  return highlighted;
+	return highlighted;
 };
 
 const startSpeech = (): void => {
-  isSpeaking.value = true;
-  const message: string = props.verb.split("/").join();
+	isSpeaking.value = true;
+	const message: string = props.verb.split("/").join();
 
-  const utterance = new SpeechSynthesisUtterance(message);
-  synthesizer.value?.speak(utterance);
+	const utterance = new SpeechSynthesisUtterance(message);
+	synthesizer.value?.speak(utterance);
 
-  utterance.onend = () => {
-    isSpeaking.value = false;
-  };
+	utterance.onend = () => {
+		isSpeaking.value = false;
+	};
 };
 
 onMounted(() => {
-  synthesizer.value = window.speechSynthesis;
+	synthesizer.value = window.speechSynthesis;
 });
 
 onUnmounted(() => {
-  synthesizer.value = null;
+	synthesizer.value = null;
 });
 </script>
 
+<template>
+	<td class="table-cell">
+		<div class="flex flex-wrap justify-center">
+			<a
+				target="_blank"
+				rel="noopener noreferrer"
+				aria-label="Open Reverso in new tab"
+				class="text-base duration-300 ease-in"
+				:title="linkTitle"
+				:href="reversoLink"
+			>
+				<span v-html="highlightMatches()"></span>
+			</a>
+
+			<img
+				title="Pronunciation"
+				alt="Pronunciation"
+				width="16"
+				height="16"
+				:class="['sound-icon', isSpeaking ? 'opacity-100' : 'opacity-50']"
+				:src="isSpeaking ? unMutedIcon : mutedIcon"
+				@click.prevent="!isSpeaking && startSpeech()"
+			/>
+		</div>
+	</td>
+</template>
+
 <style lang="postcss" scoped>
 .table-cell {
-  @apply py-3 hover:bg-blue-100 dark:hover:bg-gray-600;
+	@apply py-3 hover:bg-blue-100 dark:hover:bg-gray-600;
 }
 
 .table-cell:nth-child(even) {
-  @apply bg-gray-100 dark:bg-gray-800 hover:bg-blue-100 dark:hover:bg-gray-600;
+	@apply bg-gray-100 hover:bg-blue-100 dark:bg-gray-800 dark:hover:bg-gray-600;
 }
 
 .sound-icon {
-  @apply ml-2 ease-in duration-300 cursor-pointer;
+	@apply ml-2 cursor-pointer duration-300 ease-in;
 }
 </style>

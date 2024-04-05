@@ -1,5 +1,5 @@
 export default interface IVerb {
-  infinitive: string;
-  pastSimple: string;
-  pastParticiple: string;
+	infinitive: string;
+	pastSimple: string;
+	pastParticiple: string;
 }
