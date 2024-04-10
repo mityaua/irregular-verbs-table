@@ -4,8 +4,10 @@ import "./index.css";
 import "./style.css";
 import App from "./App.vue";
 
+const analyticsConfig = {
+  config: { id: import.meta.env.VITE_GA_ID },
+};
+
 const app = createApp(App);
-app.use(VueGtag, {
-  config: { id: "G-0JXW9ZJB5B" },
-});
+app.use(VueGtag, analyticsConfig);
 app.mount("#app");
