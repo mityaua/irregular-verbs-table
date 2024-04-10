@@ -1,30 +1,33 @@
 {
-  "name": "irregular-verbs-table",
-  "private": true,
-  "version": "1.2.0",
-  "type": "module",
-  "scripts": {
-    "dev": "vite --open",
-    "build": "vue-tsc && vite build",
-    "preview": "vite preview",
-    "host": "vite --host",
-    "deploy": "npm run build && gh-pages -d dist"
-  },
-  "dependencies": {
-    "flowbite": "^2.3.0",
-    "vue": "^3.4.21",
-    "vue-gtag": "^2.0.1"
-  },
-  "devDependencies": {
-    "@types/node": "^20.11.25",
-    "@vitejs/plugin-vue": "^5.0.4",
-    "autoprefixer": "^10.4.18",
-    "gh-pages": "^6.1.1",
-    "postcss": "^8.4.35",
-    "tailwindcss": "^3.4.1",
-    "typescript": "^5.3.3",
-    "vite": "^5.1.5",
-    "vite-svg-loader": "^5.1.0",
-    "vue-tsc": "^2.0.4"
-  }
+	"name": "irregular-verbs-table",
+	"private": true,
+	"version": "1.2.0",
+	"type": "module",
+	"scripts": {
+		"dev": "vite --open",
+		"build": "vue-tsc && vite build",
+		"preview": "vite preview",
+		"host": "vite --host",
+		"format": "prettier --write src/",
+		"type-check": "vue-tsc --noEmit -p tsconfig.json --composite false",
+		"deploy": "npm run build && gh-pages -d dist"
+	},
+	"dependencies": {
+		"flowbite": "^2.3.0",
+		"vue": "^3.4.21",
+		"vue-gtag": "^2.0.1"
+	},
+	"devDependencies": {
+		"@types/node": "^20.12.4",
+		"@vitejs/plugin-vue": "^5.0.4",
+		"autoprefixer": "^10.4.19",
+		"gh-pages": "^6.1.1",
+		"postcss": "^8.4.38",
+		"prettier-plugin-tailwindcss": "^0.5.13",
+		"tailwindcss": "^3.4.3",
+		"typescript": "^5.4.4",
+		"vite": "^5.2.8",
+		"vite-svg-loader": "^5.1.0",
+		"vue-tsc": "^2.0.10"
+	}
 }

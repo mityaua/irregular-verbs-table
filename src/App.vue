@@ -5,7 +5,7 @@ import ScrollToTop from "@components/ScrollToTop.vue";
 </script>
 
 <template>
-  <Table />
-  <SourceLink />
-  <ScrollToTop />
+	<Table />
+	<SourceLink />
+	<ScrollToTop />
 </template>

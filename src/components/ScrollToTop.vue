@@ -1,9 +1,3 @@
-<template>
-  <div class="icon-wrapper" title="Scroll to top" v-show="scrollY > maxHeight" @click="toTop">
-    <ArrowIcon alt="Scroll to top" width="48" height="48" />
-  </div>
-</template>
-
 <script setup lang="ts">
 import { onMounted, onUnmounted, ref, Ref } from "vue";
 import ArrowIcon from "@assets/up-arrow.svg";
@@ -13,14 +7,14 @@ const timerId: Ref<undefined | ReturnType<typeof setTimeout>> = ref(undefined);
 const scrollY: Ref<number> = ref(0);
 
 const handleScroll = (): void => {
-  if (timerId.value) return;
+	if (timerId.value) return;
 
-  timerId.value = setTimeout(() => {
-    scrollY.value = window.scrollY;
+	timerId.value = setTimeout(() => {
+		scrollY.value = window.scrollY;
 
-    clearTimeout(timerId.value);
-    timerId.value = undefined;
-  }, 100);
+		clearTimeout(timerId.value);
+		timerId.value = undefined;
+	}, 100);
 };
 
 const toTop = (): void => {
@@ -30,16 +24,22 @@ const toTop = (): void => {
 };
 
 onMounted(() => {
-  window.addEventListener("scroll", handleScroll);
+	window.addEventListener("scroll", handleScroll);
 });
 
 onUnmounted(() => {
-  window.addEventListener("scroll", handleScroll);
+	window.addEventListener("scroll", handleScroll);
 });
 </script>
 
+<template>
+	<div class="icon-wrapper" title="Scroll to top" v-show="scrollY > maxHeight" @click="toTop">
+		<ArrowIcon alt="Scroll to top" width="48" height="48" />
+	</div>
+</template>
+
 <style lang="postcss" scoped>
 .icon-wrapper {
-  @apply fixed right-5 bottom-3 cursor-pointer ease-in duration-300 opacity-70 hover:opacity-100 dark:opacity-50 dark:hover:opacity-50;
+	@apply fixed bottom-3 right-5 cursor-pointer opacity-70 duration-300 ease-in hover:opacity-100 dark:opacity-50 dark:hover:opacity-50;
 }
 </style>
