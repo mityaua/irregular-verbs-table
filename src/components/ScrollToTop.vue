@@ -18,9 +18,9 @@ const handleScroll = (): void => {
 };
 
 const toTop = (): void => {
-  window.scrollTo({
-    top: 0,
-  });
+	window.scrollTo({
+		top: 0,
+	});
 };
 
 onMounted(() => {
