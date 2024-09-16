@@ -6,7 +6,7 @@ import SortIcon from "@assets/sort-icon.svg";
 const props = defineProps<{ isDescending: boolean; activeColumnName: string; columnName: string }>();
 
 const emit = defineEmits<{
-	(e: "click:column", columnName: string): void;
+	"click:column": [columnName: string];
 }>();
 
 const sortIconColor = computed<string>(() => (props.isDescending ? "#8a2be2" : "#00CC99"));
@@ -28,7 +28,7 @@ const visibleColumnName = computed<string>(() => {
 	return name;
 });
 
-const onColumnClick = () => {
+const onColumnClick = (): void => {
 	emit("click:column", props.columnName);
 };
 </script>

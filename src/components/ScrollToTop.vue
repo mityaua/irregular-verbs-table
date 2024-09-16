@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { onMounted, onUnmounted, ref, Ref } from "vue";
+import { onMounted, onUnmounted, ref } from "vue";
 import ArrowIcon from "@assets/up-arrow.svg";
 
 const maxHeight = 300;
-const timerId: Ref<undefined | ReturnType<typeof setTimeout>> = ref(undefined);
-const scrollY: Ref<number> = ref(0);
+const timerId = ref<undefined | ReturnType<typeof setTimeout>>(undefined);
+const scrollY = ref<number>(0);
 
 const handleScroll = (): void => {
 	if (timerId.value) return;

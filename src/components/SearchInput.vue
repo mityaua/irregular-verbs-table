@@ -3,10 +3,11 @@ import { ref } from "vue";
 import { event as gEvent } from "vue-gtag";
 import SearchIcon from "@assets/search-icon.svg";
 
-defineProps<{ query: String }>();
+defineProps<{ query: string }>();
+
 const emit = defineEmits<{
-	(e: "update:query", query: string): void;
-	(e: "clear:query"): void;
+	"update:query": [query: string];
+	"clear:query": [];
 }>();
 
 const handleSearch = (event: Event): void => {
@@ -16,7 +17,7 @@ const handleSearch = (event: Event): void => {
 	updateUrlOnSearch(inputValue);
 };
 
-const handleClearSearch = () => {
+const handleClearSearch = (): void => {
 	emit("clear:query");
 
 	updateUrlOnSearch("");
