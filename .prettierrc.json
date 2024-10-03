@@ -17,5 +17,6 @@
 	"vueIndentScriptAndStyle": false,
 	"singleAttributePerLine": false,
 	"embeddedLanguageFormatting": "auto",
-	"plugins": ["prettier-plugin-tailwindcss"]
+	"plugins": ["prettier-plugin-tailwindcss", "prettier-plugin-organize-attributes"],
+	"attributeGroups": ["^v-", "$DEFAULT", "^id$", "^class$", "^aria-", "^[:]", "^@"]
 }

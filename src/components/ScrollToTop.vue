@@ -33,7 +33,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-	<div class="icon-wrapper" title="Scroll to top" v-show="scrollY > maxHeight" @click="toTop">
+	<div v-show="scrollY > maxHeight" title="Scroll to top" class="icon-wrapper" @click="toTop">
 		<ArrowIcon alt="Scroll to top" width="48" height="48" />
 	</div>
 </template>

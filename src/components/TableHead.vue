@@ -38,7 +38,7 @@ const onColumnClick = (): void => {
 		<div class="flex items-center justify-center">
 			<p>{{ visibleColumnName }}</p>
 
-			<a href="#" :aria-label="`Sort by ${visibleColumnName}`" class="duration-300 ease-in" @click="onColumnClick">
+			<a href="#" class="duration-300 ease-in" :aria-label="`Sort by ${visibleColumnName}`" @click="onColumnClick">
 				<SortIcon class="ml-1 size-3" :fill="activeColumnName === columnName ? sortIconColor : 'currentColor'" />
 			</a>
 		</div>

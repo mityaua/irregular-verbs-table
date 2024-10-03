@@ -65,8 +65,8 @@ onUnmounted(() => {
 			<a
 				target="_blank"
 				rel="noopener noreferrer"
-				aria-label="Open Reverso in new tab"
 				class="text-base duration-300 ease-in"
+				aria-label="Open Reverso in new tab"
 				:title="linkTitle"
 				:href="reversoLink"
 			>

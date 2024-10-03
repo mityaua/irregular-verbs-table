@@ -86,10 +86,10 @@ const updateUrlOnSearch = (query: string) => {
 				<input
 					type="search"
 					placeholder="Search for verbs"
-					id="search-input"
 					role="searchbox"
-					aria-description="Search results"
+					id="search-input"
 					class="w-50 block rounded-lg border border-gray-300 bg-gray-50 p-2 pl-10 text-base text-gray-900 placeholder-gray-400 placeholder-opacity-75 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-500 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:placeholder-opacity-50 dark:focus:border-blue-500 dark:focus:ring-blue-500"
+					aria-description="Search results"
 					:value="query"
 					@input="handleSearch"
 					@keyup="handleKeyUp"
