@@ -1,45 +1,60 @@
 <script setup lang="ts">
-import { onMounted, onUnmounted, ref } from "vue";
-import ArrowIcon from "@assets/up-arrow.svg";
+import { computed, onMounted, onUnmounted, ref } from "vue";
 
-const maxHeight = 300;
-const timerId = ref<undefined | ReturnType<typeof setTimeout>>(undefined);
-const scrollY = ref<number>(0);
+const maxHeight = 100;
 
-const handleScroll = (): void => {
-	if (timerId.value) return;
+const progressWrapper = ref<HTMLDivElement | null>(null);
+const progressContent = ref<HTMLSpanElement | null>(null);
 
-	timerId.value = setTimeout(() => {
-		scrollY.value = window.scrollY;
+const progressTextContent = ref<string>("");
 
-		clearTimeout(timerId.value);
-		timerId.value = undefined;
-	}, 100);
+const scrollPosition = ref<number>(0);
+const progressWrapperStyle = computed((): string => (scrollPosition.value > maxHeight ? "grid" : "none"));
+const progressWrapperBackground = ref<string>("");
+
+const onScroll = (): void => {
+	scrollPosition.value = document.documentElement.scrollTop;
+	const calcHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+
+	const scrollValue = Math.round(Math.floor(scrollPosition.value * maxHeight) / calcHeight);
+
+	progressWrapperBackground.value = `conic-gradient(#00cc99 ${scrollValue}%, #d7d7d7 ${scrollValue}%)`;
+	progressTextContent.value = `${scrollValue}%`;
 };
 
-const toTop = (): void => {
-	window.scrollTo({
-		top: 0,
-	});
+const scrollToTop = (): void => {
+	window.scrollTo(0, 0);
 };
 
 onMounted(() => {
-	window.addEventListener("scroll", handleScroll);
+	window.addEventListener("scroll", onScroll);
 });
 
 onUnmounted(() => {
-	window.addEventListener("scroll", handleScroll);
+	window.addEventListener("scroll", onScroll);
 });
 </script>
 
 <template>
-	<div v-show="scrollY > maxHeight" title="Scroll to top" class="icon-wrapper" @click="toTop">
-		<ArrowIcon alt="Scroll to top" width="48" height="48" />
+	<div
+		class="fixed bottom-3 right-5 hidden h-12 w-12 cursor-pointer place-items-center rounded-full opacity-70 duration-300 ease-in hover:opacity-100 dark:opacity-50 dark:hover:opacity-50"
+		ref="progressWrapper"
+		:style="{ display: progressWrapperStyle, background: progressWrapperBackground }"
+		@click="scrollToTop"
+	>
+		<span
+			class="progress-content grid place-items-center rounded-full bg-white text-xs text-slate-950"
+			id="progress-content"
+			title="Scroll To Top"
+			ref="progressContent"
+			>{{ progressTextContent }}</span
+		>
 	</div>
 </template>
 
-<style lang="postcss" scoped>
-.icon-wrapper {
-	@apply fixed bottom-3 right-5 cursor-pointer opacity-70 duration-300 ease-in hover:opacity-100 dark:opacity-50 dark:hover:opacity-50;
+<style lang="css" scoped>
+.progress-content {
+	height: calc(100% - 15px);
+	width: calc(100% - 15px);
 }
 </style>
