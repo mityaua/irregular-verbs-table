@@ -21,7 +21,6 @@
 		"@types/node": "^22.8.4",
 		"@vitejs/plugin-vue": "^5.1.4",
 		"autoprefixer": "^10.4.20",
-		"gh-pages": "^6.2.0",
 		"postcss": "^8.4.47",
 		"prettier": "^3.3.3",
 		"prettier-plugin-organize-attributes": "^1.0.0",
