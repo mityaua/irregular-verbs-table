@@ -9,8 +9,7 @@
 		"preview": "vite preview",
 		"host": "vite --host",
 		"format": "prettier --write src/",
-		"type-check": "vue-tsc --noEmit -p tsconfig.json --composite false",
-		"deploy": "npm run build && gh-pages -d dist"
+		"type-check": "vue-tsc --noEmit -p tsconfig.json --composite false"
 	},
 	"dependencies": {
 		"flowbite": "^2.5.2",
