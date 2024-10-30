@@ -43,7 +43,7 @@ onUnmounted(() => {
 		@click="scrollToTop"
 	>
 		<span
-			class="progress-content grid place-items-center rounded-full bg-white text-xs text-slate-950"
+			class="progress-content grid select-none place-items-center rounded-full bg-white text-xs text-slate-950"
 			id="progress-content"
 			title="Scroll To Top"
 			ref="progressContent"
