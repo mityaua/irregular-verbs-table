@@ -63,9 +63,9 @@ onUnmounted(() => {
 	<td class="table-cell">
 		<div class="flex flex-wrap justify-center">
 			<a
+				class="text-base text-gray-600 duration-300 ease-in dark:text-gray-400"
 				target="_blank"
 				rel="noopener noreferrer"
-				class="text-base duration-300 ease-in"
 				aria-label="Open Reverso in new tab"
 				:title="linkTitle"
 				:href="reversoLink"
