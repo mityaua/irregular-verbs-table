@@ -34,11 +34,11 @@ const onColumnClick = (): void => {
 </script>
 
 <template>
-	<th width="33%" scope="col" class="bg-gray-50 p-2 dark:bg-gray-700">
+	<th class="bg-gray-50 p-2 dark:bg-gray-700" width="33%" scope="col">
 		<div class="flex items-center justify-center">
 			<p>{{ visibleColumnName }}</p>
 
-			<a href="#" class="duration-300 ease-in" :aria-label="`Sort by ${visibleColumnName}`" @click="onColumnClick">
+			<a class="duration-300 ease-in" href="#" :aria-label="`Sort by ${visibleColumnName}`" @click="onColumnClick">
 				<SortIcon class="ml-1 size-3" :fill="activeColumnName === columnName ? sortIconColor : 'currentColor'" />
 			</a>
 		</div>

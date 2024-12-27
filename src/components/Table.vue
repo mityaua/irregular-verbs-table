@@ -53,7 +53,7 @@ const onSort = (columnName: string): void => {
 				</div>
 
 				<!-- Search input -->
-				<search-input v-model:query="searchQuery" class="mt-1" @clear:query="searchQuery = ''" />
+				<search-input class="mt-1" v-model:query="searchQuery" @clear:query="searchQuery = ''" />
 			</caption>
 
 			<!-- Table head -->

@@ -6,7 +6,7 @@ import SourceIcon from "@assets/to-right-arrow.svg";
 <template>
 	<p class="my-4 text-center text-gray-500 dark:text-gray-400">
 		List of irregular verbs
-		<a target="_blank" title="Open source file" class="source-link" aria-label="Open source file" :href="sourceFile">
+		<a class="source-link" target="_blank" title="Open source file" aria-label="Open source file" :href="sourceFile">
 			Source
 			<SourceIcon class="ml-1 size-5" />
 		</a>
