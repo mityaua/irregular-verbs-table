@@ -40,8 +40,8 @@ const onSort = (columnName: string): void => {
 </script>
 
 <template>
-	<div class="relative overflow-x-auto shadow-md sm:rounded-lg dark:shadow-xl">
-		<table class="w-full overflow-hidden text-center text-sm text-gray-500 dark:text-gray-400">
+	<div class="relative shadow-md sm:rounded-lg dark:shadow-xl">
+		<table class="w-full text-center text-sm text-gray-500 dark:text-gray-400">
 			<!-- Table caption -->
 			<caption
 				class="bg-blue-100 p-2 text-left text-lg font-semibold text-gray-900 md:rounded-t-lg dark:border dark:border-gray-700 dark:bg-gray-800 dark:text-white"

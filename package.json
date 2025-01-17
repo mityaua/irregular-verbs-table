@@ -17,16 +17,16 @@
 		"vue-gtag": "^2.0.1"
 	},
 	"devDependencies": {
-		"@types/node": "^22.10.2",
+		"@types/node": "^22.10.7",
 		"@vitejs/plugin-vue": "^5.2.1",
 		"autoprefixer": "^10.4.20",
-		"postcss": "^8.4.49",
+		"postcss": "^8.5.1",
 		"prettier": "^3.4.2",
 		"prettier-plugin-organize-attributes": "^1.0.0",
-		"prettier-plugin-tailwindcss": "^0.6.9",
+		"prettier-plugin-tailwindcss": "^0.6.10",
 		"tailwindcss": "^3.4.17",
-		"typescript": "^5.7.2",
-		"vite": "^6.0.6",
+		"typescript": "^5.7.3",
+		"vite": "^6.0.7",
 		"vite-plugin-mkcert": "^1.17.6",
 		"vite-svg-loader": "^5.1.0",
 		"vue-tsc": "^2.2.0"
