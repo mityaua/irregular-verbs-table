@@ -47,6 +47,6 @@ const onColumnClick = (): void => {
 
 <style scoped>
 th {
-	top: 86px;
+	top: 85px;
 }
 </style>

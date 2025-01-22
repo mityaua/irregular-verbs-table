@@ -45,7 +45,10 @@ const onSort = (columnName: string): void => {
 			<!-- Table caption -->
 
 			<caption
-				class="sticky top-0 z-20 bg-blue-100 p-2 text-left text-lg font-semibold text-gray-900 md:rounded-t-lg dark:border dark:border-gray-700 dark:bg-gray-800 dark:text-white"
+				:class="[
+					{ 'sticky top-0 z-20': searchResults.length },
+					'bg-blue-100 p-2 text-left text-lg font-semibold text-gray-900 md:rounded-t-lg dark:border dark:border-gray-700 dark:bg-gray-800 dark:text-white',
+				]"
 			>
 				<div class="flex flex-nowrap items-center">
 					<p class="mr-2 whitespace-nowrap text-sm uppercase">List of irregular verbs</p>
