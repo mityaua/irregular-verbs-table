@@ -2,6 +2,8 @@
 import { computed } from "vue";
 import Columns from "@/enums/Columns";
 import SortIcon from "@assets/sort-icon.svg";
+import DownArrow from "@assets/down-arrow.svg";
+import UpArrow from "@assets/up-arrow.svg";
 
 const props = defineProps<{ isDescending: boolean; activeColumnName: string; columnName: string }>();
 
@@ -9,7 +11,6 @@ const emit = defineEmits<{
 	"click:column": [columnName: string];
 }>();
 
-const sortIconColor = computed<string>(() => (props.isDescending ? "#8a2be2" : "#00CC99"));
 const visibleColumnName = computed<string>(() => {
 	let name = "";
 
@@ -28,6 +29,15 @@ const visibleColumnName = computed<string>(() => {
 	return name;
 });
 
+const isActiveColumn = computed<boolean>(() => props.activeColumnName === props.columnName);
+
+const sortIconColor = computed<string>(() => {
+	if (isActiveColumn.value) {
+		return props.isDescending ? "#8a2be2" : "#00CC99";
+	}
+	return "#a4b0be";
+});
+
 const onColumnClick = (): void => {
 	emit("click:column", props.columnName);
 };
@@ -38,9 +48,18 @@ const onColumnClick = (): void => {
 		<div class="flex items-center justify-center">
 			<p>{{ visibleColumnName }}</p>
 
-			<a class="duration-300 ease-in" href="#" :aria-label="`Sort by ${visibleColumnName}`" @click="onColumnClick">
-				<SortIcon class="ml-1 size-3" :fill="activeColumnName === columnName ? sortIconColor : 'currentColor'" />
-			</a>
+			<button
+				class="duration-300 ease-in"
+				:title="isActiveColumn ? (isDescending ? 'Descending' : 'Ascending') : ''"
+				:aria-label="`Sort by ${visibleColumnName}`"
+				@click="onColumnClick"
+			>
+				<component
+					class="ml-1 size-3"
+					:is="isActiveColumn ? (isDescending ? DownArrow : UpArrow) : SortIcon"
+					:fill="sortIconColor"
+				/>
+			</button>
 		</div>
 	</th>
 </template>
