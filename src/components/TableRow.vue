@@ -6,7 +6,9 @@ defineProps<{ rowData: IVerb; searchQuery: string }>();
 </script>
 
 <template>
-	<tr class="border border-gray-200 hover:bg-blue-100 dark:border-gray-700 dark:hover:bg-gray-600">
+	<tr
+		class="border border-gray-200 even:bg-gray-100 hover:bg-blue-100 dark:border-gray-700 even:dark:bg-gray-800 dark:hover:bg-gray-900"
+	>
 		<TableCell
 			v-for="(value, time) in rowData"
 			:key="time"
@@ -16,9 +18,3 @@ defineProps<{ rowData: IVerb; searchQuery: string }>();
 		/>
 	</tr>
 </template>
-
-<style lang="postcss" scoped>
-tr:nth-child(even) {
-	@apply bg-gray-100 hover:bg-blue-100 dark:bg-gray-800 dark:hover:bg-gray-600;
-}
-</style>

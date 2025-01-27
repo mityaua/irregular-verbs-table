@@ -40,15 +40,12 @@ const onSort = (columnName: string): void => {
 </script>
 
 <template>
-	<div class="shadow-md sm:rounded-lg dark:shadow-xl">
+	<div class="shadow-md dark:shadow-xl">
 		<table class="w-full text-center text-sm text-gray-500 dark:text-gray-400">
 			<!-- Table caption -->
 
 			<caption
-				:class="[
-					{ 'sticky top-0 z-20': searchResults.length },
-					'bg-blue-100 p-2 text-left text-lg font-semibold text-gray-900 md:rounded-t-lg dark:border dark:border-gray-700 dark:bg-gray-800 dark:text-white',
-				]"
+				class="sticky top-0 z-20 bg-blue-100 p-2 text-left text-lg font-semibold text-gray-900 md:rounded-t-md dark:border dark:border-gray-700 dark:bg-gray-800 dark:text-white"
 			>
 				<div class="flex flex-nowrap items-center">
 					<p class="mr-2 whitespace-nowrap text-sm uppercase">List of irregular verbs</p>
@@ -61,7 +58,7 @@ const onSort = (columnName: string): void => {
 			</caption>
 
 			<!-- Table head -->
-			<thead class="w-full text-xs uppercase text-gray-700 dark:text-gray-400">
+			<thead class="text-xs uppercase text-gray-700 dark:text-gray-400">
 				<tr>
 					<TableHead
 						v-for="(value, result) in searchResults[0]"
