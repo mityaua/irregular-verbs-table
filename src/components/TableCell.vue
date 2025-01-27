@@ -60,7 +60,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-	<td class="table-cell">
+	<td class="border border-gray-200 py-3 dark:border-gray-700">
 		<div class="flex flex-wrap justify-center">
 			<a
 				class="text-base text-gray-600 duration-300 ease-in dark:text-gray-400"
@@ -78,24 +78,10 @@ onUnmounted(() => {
 				alt="Pronunciation"
 				width="16"
 				height="16"
-				:class="['sound-icon', isSpeaking ? 'opacity-100' : 'opacity-50']"
+				:class="['ml-2 cursor-pointer duration-300 ease-in', isSpeaking ? 'opacity-100' : 'opacity-50']"
 				:src="isSpeaking ? unMutedIcon : mutedIcon"
 				@click.prevent="!isSpeaking && startSpeech()"
 			/>
 		</div>
 	</td>
 </template>
-
-<style lang="postcss" scoped>
-.table-cell {
-	@apply py-3 hover:bg-blue-100 dark:hover:bg-gray-600;
-}
-
-.table-cell:nth-child(even) {
-	@apply bg-gray-100 hover:bg-blue-100 dark:bg-gray-800 dark:hover:bg-gray-600;
-}
-
-.sound-icon {
-	@apply ml-2 cursor-pointer duration-300 ease-in;
-}
-</style>

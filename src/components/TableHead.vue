@@ -44,7 +44,11 @@ const onColumnClick = (): void => {
 </script>
 
 <template>
-	<th class="sticky z-10 bg-gray-50 p-2 dark:bg-gray-700" width="33%" scope="col">
+	<th
+		class="sticky z-10 border border-gray-200 bg-gray-50 p-2 dark:border-gray-700 dark:bg-gray-600"
+		width="33.3333%"
+		scope="col"
+	>
 		<div class="flex items-center justify-center">
 			<p>{{ visibleColumnName }}</p>
 
