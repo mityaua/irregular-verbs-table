@@ -71,12 +71,30 @@ const sendGoogleEvent = (searchValue: string): void => {
 
 		<!-- Clears search button -->
 		<button
-			class="ml-2 rounded-lg border border-gray-200 bg-white px-2.5 py-1 text-sm font-medium text-gray-900 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:ring-gray-700"
+			class="me-2 ml-2 inline-flex items-center rounded-lg border border-gray-300 p-2.5 text-center text-sm font-medium text-blue-700 hover:bg-gray-300 hover:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-blue-500 dark:text-blue-500 dark:hover:bg-blue-500 dark:hover:text-white dark:focus:ring-blue-800"
 			v-show="query"
-			type="button"
 			@click="handleClearSearch"
+			type="button"
 		>
-			x
+			<svg
+				class="h-[12px] w-[12px] text-gray-900 dark:text-white"
+				aria-hidden="true"
+				xmlns="http://www.w3.org/2000/svg"
+				width="24"
+				height="24"
+				fill="none"
+				viewBox="0 0 24 24"
+			>
+				<path
+					stroke="currentColor"
+					stroke-linecap="round"
+					stroke-linejoin="round"
+					stroke-width="3"
+					d="M6 18 17.94 6M18 18 6.06 6"
+				/>
+			</svg>
+
+			<span class="sr-only">Icon description</span>
 		</button>
 	</div>
 </template>
