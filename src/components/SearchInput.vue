@@ -71,7 +71,7 @@ const sendGoogleEvent = (searchValue: string): void => {
 
 		<!-- Clears search button -->
 		<button
-			class="me-2 ml-2 inline-flex items-center rounded-lg border border-gray-300 p-2.5 text-center text-sm font-medium text-blue-700 hover:bg-gray-300 hover:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-blue-500 dark:text-blue-500 dark:hover:bg-blue-500 dark:hover:text-white dark:focus:ring-blue-800"
+			class="ml-2 inline-flex items-center rounded-lg border border-gray-300 p-2.5 text-center text-sm font-medium text-blue-700 hover:bg-gray-300 hover:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-blue-500 dark:text-blue-500 dark:hover:bg-blue-500 dark:hover:text-white dark:focus:ring-blue-800"
 			v-show="query"
 			@click="handleClearSearch"
 			type="button"

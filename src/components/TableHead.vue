@@ -45,9 +45,10 @@ const onColumnClick = (): void => {
 
 <template>
 	<th
-		class="sticky z-10 border border-gray-200 bg-gray-50 p-2 dark:border-gray-700 dark:bg-gray-600"
+		class="sticky z-10 cursor-pointer border border-gray-200 bg-gray-50 p-2 dark:border-gray-700 dark:bg-gray-600"
 		width="33.3333%"
 		scope="col"
+		@click="onColumnClick"
 	>
 		<div class="flex items-center justify-center">
 			<p>{{ visibleColumnName }}</p>
@@ -56,7 +57,6 @@ const onColumnClick = (): void => {
 				class="duration-300 ease-in"
 				:title="isActiveColumn ? (isDescending ? 'Descending' : 'Ascending') : ''"
 				:aria-label="`Sort by ${visibleColumnName}`"
-				@click="onColumnClick"
 			>
 				<component
 					class="ml-1 size-3"

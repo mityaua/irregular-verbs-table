@@ -48,7 +48,7 @@ const onSort = (columnName: string): void => {
 				class="sticky top-0 z-20 bg-blue-100 p-2 text-left text-lg font-semibold text-gray-900 md:rounded-t-md dark:border dark:border-gray-700 dark:bg-gray-800 dark:text-white"
 			>
 				<div class="flex flex-nowrap items-center">
-					<p class="mr-2 whitespace-nowrap text-sm uppercase">List of irregular verbs</p>
+					<p class="mr-2 whitespace-nowrap text-sm uppercase dark:text-gray-400">List of irregular verbs</p>
 					<!-- Search results -->
 					<search-results :results="searchResults.length" />
 				</div>
