@@ -54,7 +54,7 @@ const onColumnClick = (): void => {
 			<p>{{ visibleColumnName }}</p>
 
 			<button
-				class="duration-300 ease-in"
+				class="cursor-pointer duration-300 ease-in"
 				:title="isActiveColumn ? (isDescending ? 'Descending' : 'Ascending') : ''"
 				:aria-label="`Sort by ${visibleColumnName}`"
 			>

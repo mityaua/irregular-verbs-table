@@ -7,7 +7,7 @@ defineProps<{ rowData: IVerb; searchQuery: string }>();
 
 <template>
 	<tr
-		class="border border-gray-200 even:bg-gray-100 hover:bg-blue-50 dark:border-gray-700 even:dark:bg-gray-800 dark:hover:bg-gray-900"
+		class="border border-gray-200 even:bg-gray-100 hover:bg-blue-50 dark:border-gray-700 dark:even:bg-gray-800 dark:hover:bg-gray-900"
 	>
 		<TableCell
 			v-for="(value, time) in rowData"
