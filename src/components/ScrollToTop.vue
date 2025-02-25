@@ -37,13 +37,13 @@ onUnmounted(() => {
 
 <template>
 	<div
-		class="fixed right-5 bottom-3 hidden h-12 w-12 cursor-pointer place-items-center rounded-full opacity-70 duration-300 ease-in hover:opacity-100 dark:opacity-50 dark:hover:opacity-50"
+		class="fixed bottom-3 right-5 hidden h-12 w-12 cursor-pointer place-items-center rounded-full opacity-70 duration-300 ease-in hover:opacity-100 dark:opacity-50 dark:hover:opacity-50"
 		ref="progressWrapper"
 		:style="{ display: progressWrapperStyle, background: progressWrapperBackground }"
 		@click="scrollToTop"
 	>
 		<span
-			class="progress-content grid place-items-center rounded-full bg-white text-sm text-slate-950 select-none"
+			class="progress-content grid select-none place-items-center rounded-full bg-white text-sm text-slate-950"
 			id="progress-content"
 			title="Scroll To Top"
 			ref="progressContent"

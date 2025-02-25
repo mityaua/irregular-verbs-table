@@ -1,6 +1,6 @@
 import { createApp } from "vue";
 import VueGtag from "vue-gtag";
-import "./index.css";
+import "./assets/css/index.css";
 import "./style.css";
 import App from "./App.vue";
 

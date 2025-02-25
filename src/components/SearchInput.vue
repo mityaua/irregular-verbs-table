@@ -57,7 +57,7 @@ const sendGoogleEvent = (searchValue: string): void => {
 
 				<!-- Search input -->
 				<input
-					class="placeholder-opacity-75 dark:placeholder-opacity-50 block w-60 rounded-lg border border-gray-300 bg-gray-50 p-2 pl-10 text-base text-gray-700 placeholder-gray-400 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-500 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:focus:border-blue-500 dark:focus:ring-blue-500"
+					class="block w-60 rounded-lg border border-gray-300 bg-gray-50 p-2 pl-10 text-base text-gray-700 placeholder-gray-400 placeholder-opacity-75 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-500 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:placeholder-opacity-50 dark:focus:border-blue-500 dark:focus:ring-blue-500"
 					id="search-input"
 					type="search"
 					placeholder="Search for verbs"
@@ -71,7 +71,7 @@ const sendGoogleEvent = (searchValue: string): void => {
 
 		<!-- Clears search button -->
 		<button
-			class="ml-2 inline-flex cursor-pointer items-center rounded-lg border border-gray-300 p-2.5 hover:!bg-gray-300 focus:ring-2 focus:ring-blue-500 focus:outline-hidden dark:border-blue-500 dark:hover:bg-blue-500 dark:focus:ring-blue-800"
+			class="focus:outline-hidden ml-2 inline-flex cursor-pointer items-center rounded-lg border border-gray-300 p-2.5 hover:!bg-gray-300 focus:ring-2 focus:ring-blue-500 dark:border-blue-500 dark:hover:bg-blue-500 dark:focus:ring-blue-800"
 			v-show="query"
 			@click="handleClearSearch"
 			type="button"
