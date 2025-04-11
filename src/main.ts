@@ -1,13 +1,13 @@
 import { createApp } from "vue";
-import VueGtag from "vue-gtag";
+import { createGtag } from "vue-gtag";
 import "./assets/css/index.css";
 import "./style.css";
 import App from "./App.vue";
 
-const analyticsConfig = {
-	config: { id: import.meta.env.VITE_GA_ID },
-};
+const gtag = createGtag({
+	tagId: import.meta.env.VITE_GA_ID,
+});
 
 const app = createApp(App);
-app.use(VueGtag, analyticsConfig);
+app.use(gtag);
 app.mount("#app");
