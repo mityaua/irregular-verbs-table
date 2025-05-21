@@ -2,6 +2,7 @@
 import { ref, onMounted, onUnmounted, computed } from "vue";
 import unMutedIcon from "@assets/unmuted.svg?url";
 import mutedIcon from "@assets/muted.svg?url";
+import { langToReversoMap } from "@/data/lang-map";
 
 const props = defineProps<{
 	verb: string;
@@ -9,13 +10,23 @@ const props = defineProps<{
 	searchQuery: string;
 }>();
 
-const defaultReversoUrl = "https://context.reverso.net/translation/english-ukrainian/";
+const reversoBaseUrl = "https://context.reverso.net/translation/";
+const defaultLangPair = langToReversoMap["uk"];
 
 const synthesizer = ref<SpeechSynthesis | null>(null);
 const isSpeaking = ref<boolean>(false);
 
-const reversoLink = computed<string>(() => `${defaultReversoUrl}${props.verb.split("/")[0]}`);
+const defaultReversoLangPair = ref<string>(defaultLangPair);
+const reversoUrl = computed<string>(
+	() => `${reversoBaseUrl}${defaultReversoLangPair.value}/${props.verb.split("/")[0]}`
+);
 const linkTitle = computed<string>(() => `Go to Reverso: ${props.verb}`);
+
+const detectReversoLanguagePair = (): void => {
+	const langCode: string = navigator.language?.split("-")[0].toLowerCase();
+	const detectedPair: string = langCode && langToReversoMap[langCode];
+	defaultReversoLangPair.value = detectedPair ?? defaultLangPair;
+};
 
 const highlightMatches = (): string => {
 	const query = props.searchQuery;
@@ -52,6 +63,8 @@ const startSpeech = (): void => {
 
 onMounted(() => {
 	synthesizer.value = window.speechSynthesis;
+
+	detectReversoLanguagePair();
 });
 
 onUnmounted(() => {
@@ -68,7 +81,7 @@ onUnmounted(() => {
 				rel="noopener noreferrer"
 				aria-label="Open Reverso in new tab"
 				:title="linkTitle"
-				:href="reversoLink"
+				:href="reversoUrl"
 			>
 				<span v-html="highlightMatches()"></span>
 			</a>
