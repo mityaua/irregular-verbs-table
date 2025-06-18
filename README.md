@@ -13,12 +13,13 @@
 
 ## 🛠 Tech Stack
 
-| Technology                                    | Description                 |
-| --------------------------------------------- | --------------------------- |
-| [Vue 3](https://vuejs.org/)                   | Reactive frontend framework |
-| [TypeScript](https://www.typescriptlang.org/) | Type safety                 |
-| [Vite](https://vite.dev/)                     | Fast build tool             |
-| [Tailwind CSS](https://tailwindcss.com/)      | Utility-first CSS           |
+| Technology                                    | Description                       |
+| --------------------------------------------- | --------------------------------- |
+| [Vue 3](https://vuejs.org/)                   | Reactive frontend framework       |
+| [TypeScript](https://www.typescriptlang.org/) | Type safety                       |
+| [Vite](https://vite.dev/)                     | Fast build tool                   |
+| [Tailwind CSS](https://tailwindcss.com/)      | Utility-first CSS                 |
+| [Oxlint](https://oxc.rs/)                     | The JavaScript Oxidation Compiler |
 
 ## 📆 Installation
 
