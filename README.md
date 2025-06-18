@@ -6,20 +6,19 @@
 
 ## ✨ Features
 
-* 📚 Clean and searchable table of English irregular verbs (Infinitive, Past Simple, Past Participle)
-* 🌙 Toggleable light/dark theme
-* ⚡ Built with modern frontend technologies (Vue 3 + Vite + Tailwind)
-* 📱 Mobile responsive design
+- 📚 Clean and searchable table of English irregular verbs (Infinitive, Past Simple, Past Participle)
+- 🌙 Toggleable light/dark theme
+- ⚡ Built with modern frontend technologies (Vue 3 + Vite + Tailwind)
+- 📱 Mobile responsive design
 
 ## 🛠 Tech Stack
 
-| Technology                                             | Description                     |
-| ------------------------------------------------------ | ------------------------------- |
-| [Vue 3](https://vuejs.org/)                            | Reactive frontend framework     |
-| [TypeScript](https://www.typescriptlang.org/)          | Type safety                     |
-| [Vite](https://vite.dev/)                            | Fast build tool                 |
-| [Tailwind CSS](https://tailwindcss.com/)               | Utility-first CSS               |
-| [Flowbite](https://flowbite.com/)                      | UI components based on Tailwind |
+| Technology                                    | Description                 |
+| --------------------------------------------- | --------------------------- |
+| [Vue 3](https://vuejs.org/)                   | Reactive frontend framework |
+| [TypeScript](https://www.typescriptlang.org/) | Type safety                 |
+| [Vite](https://vite.dev/)                     | Fast build tool             |
+| [Tailwind CSS](https://tailwindcss.com/)      | Utility-first CSS           |
 
 ## 📆 Installation
 
@@ -60,7 +59,7 @@ npm run deploy
 > **Note:** Ensure the `base` option in `vite.config.ts` is set correctly for GitHub Pages:
 >
 > ```ts
-> base: '/irregular-verbs-table/'
+> base: "/irregular-verbs-table/";
 > ```
 
 ## 📁 Project Structure
