@@ -15,12 +15,12 @@ const searchParam: string | null = new URLSearchParams(window.location.search).g
 const searchQuery = ref<string>(searchParam || "");
 const isDescending = ref<boolean>(false);
 const defaultSortColumn = Columns.Infinitive;
-const sortByColumn = ref<string>(defaultSortColumn);
+const sortByColumn = ref<keyof IVerb>(defaultSortColumn);
 
 const searchResults = computed<IVerb[]>(() => {
 	const result: IVerb[] = verbsData.value
 		.filter((verbsObj: IVerb) =>
-			Object.keys(verbsObj).some((verb: string) =>
+			(Object.keys(verbsObj) as Array<keyof IVerb>).some(verb =>
 				verbsObj[verb].toLowerCase().includes(searchQuery.value.toLowerCase())
 			)
 		)
@@ -34,7 +34,7 @@ const searchResults = computed<IVerb[]>(() => {
 });
 
 const onSort = (columnName: string): void => {
-	sortByColumn.value = columnName;
+	sortByColumn.value = columnName as keyof IVerb;
 	isDescending.value = !isDescending.value;
 };
 </script>
