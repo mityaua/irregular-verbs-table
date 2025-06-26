@@ -14,5 +14,15 @@ export default defineConfig({
 			"@components": path.resolve(__dirname, "./src/components"),
 		},
 	},
-	plugins: [vue(), mkcert(), svgLoader()],
+	plugins: [
+		vue({
+			template: {
+				compilerOptions: {
+					isCustomElement: tag => tag === "search",
+				},
+			},
+		}),
+		mkcert(),
+		svgLoader(),
+	],
 });

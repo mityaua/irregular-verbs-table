@@ -56,16 +56,21 @@ const sendGoogleEvent = (searchValue: string): void => {
 				</div>
 
 				<!-- Search input -->
-				<input
-					class="block w-60 rounded-lg border border-gray-300 bg-gray-50 p-2 pl-10 text-base text-gray-700 placeholder-gray-400 placeholder-opacity-75 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-500 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:placeholder-opacity-50 dark:focus:border-blue-500 dark:focus:ring-blue-500"
-					id="search-input"
-					type="search"
-					placeholder="Search for verbs"
-					role="searchbox"
-					aria-description="Search results"
-					:value="query"
-					@input="handleSearch"
-				/>
+
+				<search>
+					<form>
+						<input
+							class="block w-60 rounded-lg border border-gray-300 bg-gray-50 p-2 pl-10 text-base text-gray-700 placeholder-gray-400 placeholder-opacity-75 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-500 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:placeholder-opacity-50 dark:focus:border-blue-500 dark:focus:ring-blue-500"
+							id="search-input"
+							type="search"
+							placeholder="Search for verbs"
+							role="searchbox"
+							aria-description="Search results"
+							:value="query"
+							@input="handleSearch"
+						/>
+					</form>
+				</search>
 			</div>
 		</div>
 
