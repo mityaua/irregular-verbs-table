@@ -20,10 +20,13 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
 
+      - name: Clean node_modules and package-lock.json
+        run: rm -rf node_modules package-lock.json
+
       - name: Install dependencies
         uses: bahmutov/npm-install@v1
         with:
-          install-command: npm ci --legacy-peer-deps
+          install-command: npm install
 
       - name: Build project
         run: npm run build
