@@ -6,5 +6,5 @@
 	"trailingComma": "es5",
 	"useTabs": true,
 	"plugins": ["prettier-plugin-organize-attributes", "prettier-plugin-tailwindcss"],
-	"tailwindStylesheet": "./assets/css/index.css"
+	"tailwindStylesheet": "./src/assets/css/index.css"
 }
