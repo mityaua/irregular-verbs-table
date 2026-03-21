@@ -54,14 +54,14 @@ const onSort = (columnName: string): void => {
 				</div>
 
 				<!-- Search input -->
-				<search-input class="mt-1" v-model:query="searchQuery" @clear:query="searchQuery = ''" />
+				<search-input class="mt-1" v-model="searchQuery" />
 			</caption>
 
 			<!-- Table head -->
 			<thead class="text-xs text-gray-700 uppercase dark:text-gray-400">
 				<tr>
 					<TableHead
-						v-for="(value, result) in searchResults[0]"
+						v-for="(_, result) in searchResults[0]"
 						:key="result"
 						:isDescending="isDescending"
 						:activeColumnName="sortByColumn"

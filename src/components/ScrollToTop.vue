@@ -3,9 +3,6 @@ import { computed, onMounted, onUnmounted, ref } from "vue";
 
 const maxHeight = 100;
 
-const progressWrapper = ref<HTMLDivElement | null>(null);
-const progressContent = ref<HTMLSpanElement | null>(null);
-
 const progressTextContent = ref<string>("");
 
 const scrollPosition = ref<number>(0);
@@ -38,7 +35,6 @@ onUnmounted(() => {
 <template>
 	<div
 		class="fixed right-5 bottom-3 hidden h-12 w-12 cursor-pointer place-items-center rounded-full opacity-70 duration-300 ease-in hover:opacity-100 dark:opacity-50 dark:hover:opacity-50"
-		ref="progressWrapper"
 		:style="{ display: progressWrapperStyle, background: progressWrapperBackground }"
 		@click="scrollToTop"
 	>
@@ -46,7 +42,6 @@ onUnmounted(() => {
 			class="progress-content grid place-items-center rounded-full bg-white text-sm text-slate-950 select-none"
 			id="progress-content"
 			title="Scroll To Top"
-			ref="progressContent"
 			>{{ progressTextContent }}</span
 		>
 	</div>

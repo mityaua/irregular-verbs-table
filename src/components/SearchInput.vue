@@ -2,24 +2,19 @@
 import { event as gEvent } from "vue-gtag";
 import SearchIcon from "@assets/search-icon.svg";
 
-defineProps<{ query: string }>();
-
-const emit = defineEmits<{
-	"update:query": [query: string];
-	"clear:query": [];
-}>();
+const model = defineModel<string>({ required: true });
 
 const handleSearch = (event: Event): void => {
 	const inputValue = (event.target as HTMLInputElement).value.trim();
-	emit("update:query", inputValue);
+
+	model.value = inputValue;
 
 	sendGoogleEvent(inputValue);
 	updateUrlOnSearch(inputValue);
 };
 
 const handleClearSearch = (): void => {
-	emit("clear:query");
-
+	model.value = "";
 	updateUrlOnSearch("");
 };
 
@@ -70,7 +65,7 @@ const sendGoogleEvent = (searchValue: string): void => {
 							placeholder="Search for verbs"
 							role="searchbox"
 							aria-description="Search results"
-							:value="query"
+							:value="model"
 							@input="handleSearch"
 						/>
 					</form>
@@ -81,7 +76,7 @@ const sendGoogleEvent = (searchValue: string): void => {
 		<!-- Clears search button -->
 		<button
 			class="ml-2 inline-flex cursor-pointer items-center rounded-lg border border-gray-300 p-2.5 hover:!bg-gray-300 focus:ring-2 focus:ring-blue-500 focus:outline-hidden dark:border-blue-500 dark:hover:bg-blue-500 dark:focus:ring-blue-800"
-			v-show="query"
+			v-show="model"
 			@click="handleClearSearch"
 			type="button"
 		>
