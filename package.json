@@ -13,22 +13,22 @@
 		"type-check": "vue-tsc --noEmit -p tsconfig.json --composite false"
 	},
 	"dependencies": {
-		"vue": "3.5.29",
+		"vue": "3.5.30",
 		"vue-gtag": "3.7.0"
 	},
 	"devDependencies": {
-		"@tailwindcss/postcss": "4.2.1",
-		"@types/node": "25.3.3",
-		"@vitejs/plugin-vue": "6.0.4",
-		"oxlint": "1.51.0",
+		"@tailwindcss/postcss": "4.2.2",
+		"@types/node": "25.5.0",
+		"@vitejs/plugin-vue": "6.0.5",
+		"oxlint": "1.56.0",
 		"prettier": "3.8.1",
 		"prettier-plugin-organize-attributes": "1.0.0",
 		"prettier-plugin-tailwindcss": "0.7.2",
-		"tailwindcss": "4.2.1",
+		"tailwindcss": "4.2.2",
 		"typescript": "5.9.3",
-		"vite": "7.3.1",
+		"vite": "8.0.1",
 		"vite-plugin-mkcert": "1.17.10",
 		"vite-svg-loader": "5.1.1",
-		"vue-tsc": "3.2.5"
+		"vue-tsc": "3.2.6"
 	}
 }
