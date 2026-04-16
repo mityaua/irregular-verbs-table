@@ -82,9 +82,8 @@ const onSort = (columnName: string): void => {
 					/>
 				</transition-group>
 			</tbody>
-
-			<EmptyTableData v-else />
 		</table>
+		<EmptyTableData v-if="!searchResults.length" />
 	</div>
 </template>
 
