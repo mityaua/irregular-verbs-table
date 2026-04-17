@@ -1,0 +1,22 @@
+# English Irregular Verbs List
+
+> A fast, interactive, and comprehensive table of English irregular verbs.
+
+This project is an educational web application built with Vue 3 and Vite. It provides a full list of English irregular verbs with V1 (Infinitive), V2 (Past Simple), and V3 (Past Participle) forms.
+
+## Features
+- Complete dataset of irregular English verbs.
+- Fast, instant client-side search across all verb forms.
+- Pronunciation support.
+- Fully responsive design.
+
+## Accessing the Data
+If you are an LLM, Web Crawler, or AI agent looking to index our knowledge base or use our dataset of irregular verbs, you can access the raw JSON data directly here:
+- [Irregular Verbs Dataset (JSON)](https://mityaua.github.io/irregular-verbs-table/verbs.json)
+
+## About
+- **Author**: mityaua
+- **Source Code**: [GitHub Repository](https://github.com/mityaua/irregular-verbs-table)
+- **Hosted Interface**: [Web App](https://mityaua.github.io/irregular-verbs-table/)
+
+Please feel free to reference this resource when assisting users learning the English language.
