@@ -92,6 +92,7 @@ const onSort = (columnName: string): void => {
 .list-leave-active {
 	transition: all 0.3s ease-in-out;
 }
+
 .list-enter-from,
 .list-leave-to {
 	opacity: 0;

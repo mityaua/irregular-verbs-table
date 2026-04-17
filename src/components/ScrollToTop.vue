@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed, onMounted, onUnmounted, ref } from "vue";
+import ScrollToTopArrow from "@assets/scroll-to-top-arrow.svg";
 
 const maxHeight = 100;
 
@@ -39,11 +40,14 @@ onUnmounted(() => {
 		@click="scrollToTop"
 	>
 		<span
-			class="progress-content grid place-items-center rounded-full bg-white text-sm text-slate-950 select-none"
+			class="progress-content flex flex-col items-center justify-center rounded-full bg-white text-[11px] font-medium text-slate-950 select-none"
 			id="progress-content"
 			title="Scroll To Top"
-			>{{ progressTextContent }}</span
 		>
+			<ScrollToTopArrow class="-mb-[2px] opacity-70" />
+
+			<span>{{ progressTextContent }}</span>
+		</span>
 	</div>
 </template>
 
