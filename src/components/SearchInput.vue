@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { event as gEvent } from "vue-gtag";
 import SearchIcon from "@assets/search-icon.svg";
+import CloseIcon from "@assets/close-icon.svg";
 
 const model = defineModel<string>({ required: true });
 
@@ -28,14 +29,19 @@ const updateUrlOnSearch = (query: string): void => {
 	}
 
 	const paramString = params.toString();
-	const newUrl = `${window.location.pathname}${paramString && `?${paramString}`}`;
+	const newUrl = `${window.location.pathname}${paramString ? `?${paramString}` : ""}`;
 
 	window.history.replaceState({}, "", newUrl);
 };
 
 const sendGoogleEvent = (searchValue: string): void => {
-	const currentDate = new Date().toLocaleDateString("uk-UA");
-	const currentTime = new Date().toLocaleTimeString("uk-UA");
+	if (!searchValue) {
+		return;
+	}
+
+	const date = new Date();
+	const currentDate = date.toLocaleDateString("uk-UA");
+	const currentTime = date.toLocaleTimeString("uk-UA");
 
 	gEvent("search", {
 		event_category: "verbs-search",
@@ -55,15 +61,15 @@ const sendGoogleEvent = (searchValue: string): void => {
 				</div>
 
 				<!-- Search input -->
-
 				<search>
-					<form>
+					<form @submit.prevent>
 						<input
 							class="placeholder-opacity-75 dark:placeholder-opacity-50 block w-60 rounded-lg border border-gray-300 bg-gray-50 p-2 pl-10 text-base text-gray-700 placeholder-gray-400 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-500 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:focus:border-blue-500 dark:focus:ring-blue-500"
 							id="search-input"
 							type="search"
 							placeholder="Search for verbs"
 							role="searchbox"
+							aria-label="Search for verbs"
 							aria-description="Search results"
 							:value="model"
 							@input="handleSearch"
@@ -79,26 +85,12 @@ const sendGoogleEvent = (searchValue: string): void => {
 			v-show="model"
 			@click="handleClearSearch"
 			type="button"
+			aria-label="Clear search query"
+			title="Clear search"
 		>
-			<svg
-				class="h-[12px] w-[12px] text-gray-900 dark:text-white"
-				aria-hidden="true"
-				xmlns="http://www.w3.org/2000/svg"
-				width="24"
-				height="24"
-				fill="none"
-				viewBox="0 0 24 24"
-			>
-				<path
-					stroke="currentColor"
-					stroke-linecap="round"
-					stroke-linejoin="round"
-					stroke-width="3"
-					d="M6 18 17.94 6M18 18 6.06 6"
-				/>
-			</svg>
+			<CloseIcon class="h-[12px] w-[12px] text-gray-900 dark:text-white" />
 
-			<span class="sr-only">Icon description</span>
+			<span class="sr-only">Clear search</span>
 		</button>
 	</div>
 </template>
