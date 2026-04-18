@@ -45,7 +45,7 @@ const onColumnClick = (): void => {
 
 <template>
 	<th
-		class="sticky z-10 cursor-pointer border border-gray-200 bg-gray-50 p-2 dark:border-gray-700 dark:bg-gray-600"
+		class="sticky z-10 cursor-pointer border-x border-t border-gray-200 bg-gray-50 p-2 shadow-[inset_0_-1px_0_0_var(--color-gray-200)] dark:border-gray-700 dark:bg-gray-600 dark:shadow-[inset_0_-1px_0_0_var(--color-gray-700)]"
 		width="33.3333%"
 		scope="col"
 		@click="onColumnClick"
