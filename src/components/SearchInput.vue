@@ -89,8 +89,6 @@ const sendGoogleEvent = (searchValue: string): void => {
 			title="Clear search"
 		>
 			<CloseIcon class="h-[12px] w-[12px] text-gray-900 dark:text-white" />
-
-			<span class="sr-only">Clear search</span>
 		</button>
 	</div>
 </template>

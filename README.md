@@ -1,15 +1,21 @@
-# 📘 Irregular Verbs Table
+# 📘 English Irregular Verbs Table
 
-**An interactive web app for learning English irregular verbs.**
+[![Vue.js](https://img.shields.io/badge/Vue%203-4FC08D?style=flat-square&logo=vue.js&logoColor=white)](https://vuejs.org/)
+[![Vite](https://img.shields.io/badge/Vite-646CFF?style=flat-square&logo=vite&logoColor=white)](https://vitejs.dev/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=flat-square&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](https://opensource.org/licenses/MIT)
+
+**An interactive, fast, and user-friendly web app for learning English irregular verbs (V1, V2, V3 forms).** Perfect tool for English learners, ESL teachers, and anyone looking to improve their grammar and vocabulary.
 
 🌐 **Live Demo**: [mityaua.github.io/irregular-verbs-table](https://mityaua.github.io/irregular-verbs-table)
 
 ## ✨ Features
 
-- 📚 Clean and searchable table of English irregular verbs (Infinitive, Past Simple, Past Participle)
-- 🌙 Toggleable light/dark theme
-- ⚡ Built with modern frontend technologies (Vue 3 + Vite + Tailwind)
-- 📱 Mobile responsive design
+- 📚 **Comprehensive Table**: Clean, instantly searchable list of English irregular verbs (Infinitive, Past Simple, Past Participle).
+- 🎓 **Smart "Not Found" State**: Shows a random irregular verb to learn when a search query yields no results.
+- 🌙 **Modern UI/UX**: Seamless light/dark theme toggle, sticky header, and smooth scroll-to-top feature.
+- ⚡ **Performance Optimized**: Built with Vue 3, Vite, and Tailwind CSS for rapid loading.
+- 📱 **Mobile Responsive**: Perfectly adapts to any screen size.
 
 ## 🛠 Tech Stack
 
