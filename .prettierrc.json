@@ -1,10 +1,12 @@
 {
-	"arrowParens": "avoid",
-	"endOfLine": "auto",
-	"printWidth": 120,
-	"proseWrap": "never",
-	"trailingComma": "es5",
+	"semi": true,
+	"singleQuote": false,
 	"useTabs": true,
+	"printWidth": 120,
+	"trailingComma": "es5",
+	"arrowParens": "avoid",
+	"endOfLine": "lf",
+	"proseWrap": "never",
 	"plugins": ["prettier-plugin-organize-attributes", "prettier-plugin-tailwindcss"],
 	"tailwindStylesheet": "./src/assets/css/index.css"
 }

@@ -18,19 +18,19 @@ const defaultSortColumn = Columns.Infinitive;
 const sortByColumn = ref<keyof IVerb>(defaultSortColumn);
 
 const searchResults = computed<IVerb[]>(() => {
-	const result: IVerb[] = verbsData.value
+	const query = searchQuery.value.toLowerCase();
+
+	return verbsData.value
 		.filter((verbsObj: IVerb) =>
 			(Object.keys(verbsObj) as Array<keyof IVerb>).some(verb =>
-				verbsObj[verb].toLowerCase().includes(searchQuery.value.toLowerCase())
+				verbsObj[verb].toLowerCase().includes(query)
 			)
 		)
-		.sort((a: IVerb, b: IVerb) =>
+		.toSorted((a: IVerb, b: IVerb) =>
 			isDescending.value
 				? b[sortByColumn.value].localeCompare(a[sortByColumn.value])
 				: a[sortByColumn.value].localeCompare(b[sortByColumn.value])
 		);
-
-	return result;
 });
 
 const onSort = (columnName: string): void => {
@@ -45,8 +45,7 @@ const onSort = (columnName: string): void => {
 			<!-- Table caption -->
 
 			<caption
-				class="sticky top-0 z-20 bg-blue-100 p-2 text-left text-lg font-semibold text-gray-900 md:rounded-t-md dark:border dark:border-gray-700 dark:bg-gray-800 dark:text-white"
-			>
+				class="sticky top-0 z-20 bg-blue-100 p-2 text-left text-lg font-semibold text-gray-900 md:rounded-t-md dark:border dark:border-gray-700 dark:bg-gray-800 dark:text-white">
 				<div class="flex flex-nowrap items-center">
 					<p class="mr-2 text-sm whitespace-nowrap uppercase dark:text-gray-400">List of irregular verbs</p>
 					<!-- Search results -->
@@ -60,26 +59,15 @@ const onSort = (columnName: string): void => {
 			<!-- Table head -->
 			<thead class="text-xs text-gray-700 uppercase dark:text-gray-400">
 				<tr>
-					<TableHead
-						v-for="(_, result) in searchResults[0]"
-						:key="result"
-						:isDescending="isDescending"
-						:activeColumnName="sortByColumn"
-						:columnName="result"
-						@click:column="onSort"
-					/>
+					<TableHead v-for="(_, result) in searchResults[0]" :key="result" :isDescending="isDescending" :activeColumnName="sortByColumn"
+						:columnName="result" @click:column="onSort" />
 				</tr>
 			</thead>
 
 			<!-- Table body -->
 			<tbody v-if="searchResults.length">
 				<transition-group name="list">
-					<TableRow
-						v-for="result in searchResults"
-						:key="result.infinitive"
-						:rowData="result"
-						:searchQuery="searchQuery"
-					/>
+					<TableRow v-for="result in searchResults" :key="result.infinitive" :rowData="result" :searchQuery="searchQuery" />
 				</transition-group>
 			</tbody>
 		</table>

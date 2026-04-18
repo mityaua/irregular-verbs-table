@@ -12,9 +12,11 @@
 		"lib": ["ESNext", "DOM", "dom.iterable"],
 		"skipLibCheck": true,
 		"noEmit": true,
-		"noImplicitAny": true,
 		"noUnusedLocals": true,
 		"noUnusedParameters": true,
+		"noImplicitReturns": true,
+		"noFallthroughCasesInSwitch": true,
+		"forceConsistentCasingInFileNames": true,
 		"paths": {
 			"@/*": ["./src/*"],
 			"@assets/*": ["./src/assets/*"],
