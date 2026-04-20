@@ -22,6 +22,9 @@ const reversoUrl = computed<string>(
 );
 const linkTitle = computed<string>(() => `Go to Reverso: ${props.verb}`);
 
+const ariaLabel = computed<string>(() => `Translate '${props.verb}' on Reverso Context`);
+
+
 const detectReversoLanguagePair = (): void => {
 	const langCode: string = navigator.language?.split("-")[0].toLowerCase();
 	const detectedPair: string = langCode && langToReversoMap[langCode];
@@ -75,26 +78,16 @@ onUnmounted(() => {
 <template>
 	<td class="border border-gray-200 py-3 dark:border-gray-700">
 		<div class="flex flex-wrap justify-center">
-			<a
-				class="text-base text-gray-600 duration-300 ease-in dark:text-gray-400"
-				target="_blank"
-				rel="noopener noreferrer"
-				aria-label="Open Reverso in new tab"
-				:title="linkTitle"
-				:href="reversoUrl"
-			>
+			<a class="text-base text-gray-600 duration-300 ease-in dark:text-gray-400" target="_blank" rel="noopener noreferrer"
+				:aria-label="ariaLabel" :title="linkTitle" :href="reversoUrl">
 				<span v-html="highlightMatches()"></span>
+
+				<span class="sr-only"> - translation of the verb '{{ props.verb }}' on Reverso Context</span>
 			</a>
 
-			<img
-				title="Pronunciation"
-				alt="Pronunciation"
-				width="16"
-				height="16"
+			<img title="Pronunciation" alt="Pronunciation" width="16" height="16"
 				:class="['ml-2 cursor-pointer duration-300 ease-in', isSpeaking ? 'opacity-100' : 'opacity-50']"
-				:src="isSpeaking ? unMutedIcon : mutedIcon"
-				@click.prevent="!isSpeaking && startSpeech()"
-			/>
+				:src="isSpeaking ? unMutedIcon : mutedIcon" @click.prevent="!isSpeaking && startSpeech()" />
 		</div>
 	</td>
 </template>
