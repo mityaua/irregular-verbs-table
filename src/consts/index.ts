@@ -11,3 +11,16 @@ export const COLUMN_DISPLAY_NAMES: Record<string, string> = {
 	[Columns.PastSimple]: "Past Simple",
 	[Columns.PastParticiple]: "Past Participle",
 };
+
+export const SEARCH_DEBOUNCE_DELAY = 500;
+export const SEARCH_URL_PARAM = "search";
+export const APP_LOCALE = "uk-UA";
+
+export const ANALYTICS = {
+	EVENTS: {
+		SEARCH: "search",
+	},
+	CATEGORIES: {
+		VERBS_SEARCH: "verbs-search",
+	},
+};

@@ -1,31 +1,26 @@
 <script setup lang="ts">
+import { watch } from "vue";
 import { event as gEvent } from "vue-gtag";
+import {
+	SEARCH_DEBOUNCE_DELAY,
+	SEARCH_URL_PARAM,
+	APP_LOCALE,
+	ANALYTICS,
+} from "@/consts";
 import SearchIcon from "@assets/search-icon.svg";
 import CloseIcon from "@assets/close-icon.svg";
 
 const model = defineModel<string>({ required: true });
 
-const handleSearch = (event: Event): void => {
-	const inputValue = (event.target as HTMLInputElement).value.trim();
+let debounceTimer: ReturnType<typeof setTimeout> | null = null;
 
-	model.value = inputValue;
-
-	sendGoogleEvent(inputValue);
-	updateUrlOnSearch(inputValue);
-};
-
-const handleClearSearch = (): void => {
-	model.value = "";
-	updateUrlOnSearch("");
-};
-
-const updateUrlOnSearch = (query: string): void => {
-	const params: URLSearchParams = new URLSearchParams(window.location.search);
+const updateUrl = (query: string): void => {
+	const params = new URLSearchParams(window.location.search);
 
 	if (query) {
-		params.set("search", query);
+		params.set(SEARCH_URL_PARAM, query);
 	} else {
-		params.delete("search");
+		params.delete(SEARCH_URL_PARAM);
 	}
 
 	const paramString = params.toString();
@@ -34,61 +29,60 @@ const updateUrlOnSearch = (query: string): void => {
 	window.history.replaceState({}, "", newUrl);
 };
 
-const sendGoogleEvent = (searchValue: string): void => {
+const sendAnalyticsEvent = (searchValue: string): void => {
 	if (!searchValue) {
-		return;
+		return
+	};
+
+	gEvent(ANALYTICS.EVENTS.SEARCH, {
+		event_category: ANALYTICS.CATEGORIES.VERBS_SEARCH,
+		search_term: searchValue,
+		search_time: new Date().toLocaleString(APP_LOCALE),
+	});
+};
+
+const syncSearchState = (searchValue: string): void => {
+	if (debounceTimer) {
+		clearTimeout(debounceTimer);
 	}
 
-	const date = new Date();
-	const currentDate = date.toLocaleDateString("uk-UA");
-	const currentTime = date.toLocaleTimeString("uk-UA");
+	const delay = searchValue ? SEARCH_DEBOUNCE_DELAY : 0;
 
-	gEvent("search", {
-		event_category: "verbs-search",
-		search_term: searchValue,
-		search_time: `${currentDate}, ${currentTime}`,
-	});
+	debounceTimer = setTimeout(() => {
+		updateUrl(searchValue);
+		sendAnalyticsEvent(searchValue);
+	}, delay);
+};
+
+watch(model, syncSearchState);
+
+const handleClearSearch = (): void => {
+	model.value = "";
 };
 </script>
 
 <template>
 	<div class="flex items-baseline">
-		<div class="bg-blue-100 dark:bg-gray-800">
-			<div class="relative mt-1 dark:bg-gray-800">
+		<!-- Search container -->
+		<search class="relative mt-1">
+			<form @submit.prevent>
 				<!-- Search icon -->
 				<div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-					<SearchIcon class="size-5 text-gray-500 dark:text-gray-400" />
+					<SearchIcon class="size-5 text-gray-500 dark:text-gray-400" aria-hidden="true" />
 				</div>
 
 				<!-- Search input -->
-				<search>
-					<form @submit.prevent>
-						<input
-							class="placeholder-opacity-75 dark:placeholder-opacity-50 block w-60 rounded-lg border border-gray-300 bg-gray-50 p-2 pl-10 text-base text-gray-700 placeholder-gray-400 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-500 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:focus:border-blue-500 dark:focus:ring-blue-500"
-							id="search-input"
-							type="search"
-							placeholder="Search for verbs"
-							role="searchbox"
-							aria-label="Search for verbs"
-							aria-description="Search results"
-							:value="model"
-							@input="handleSearch"
-						/>
-					</form>
-				</search>
-			</div>
-		</div>
+				<input id="search-input" v-model.trim="model" type="search"
+					class="placeholder-opacity-75 dark:placeholder-opacity-50 block w-60 rounded-lg border border-gray-300 bg-gray-50 p-2 pl-10 text-base text-gray-700 placeholder-gray-400 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-500 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:focus:border-blue-500 dark:focus:ring-blue-500"
+					placeholder="Search for verbs" role="searchbox" aria-label="Search for verbs" />
+			</form>
+		</search>
 
-		<!-- Clears search button -->
-		<button
-			class="ml-2 inline-flex cursor-pointer items-center rounded-lg border border-gray-300 p-2.5 hover:!bg-gray-300 focus:ring-2 focus:ring-blue-500 focus:outline-hidden dark:border-blue-500 dark:hover:bg-blue-500 dark:focus:ring-blue-800"
-			v-show="model"
-			@click="handleClearSearch"
-			type="button"
-			aria-label="Clear search query"
-			title="Clear search"
-		>
-			<CloseIcon class="h-[12px] w-[12px] text-gray-900 dark:text-white" />
+		<!-- Clear search button -->
+		<button v-show="model" type="button"
+			class="ml-2 inline-flex cursor-pointer items-center rounded-lg border border-gray-300 p-2.5 hover:!bg-gray-300 focus:outline-hidden focus:ring-2 focus:ring-blue-500 dark:border-blue-500 dark:hover:bg-blue-500 dark:focus:ring-blue-800"
+			aria-label="Clear search query" title="Clear search" @click="handleClearSearch">
+			<CloseIcon class="size-3 text-gray-900 dark:text-white" aria-hidden="true" />
 		</button>
 	</div>
 </template>
