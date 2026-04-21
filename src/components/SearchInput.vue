@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { watch } from "vue";
+import { watch, onUnmounted } from "vue";
 import { event as gEvent } from "vue-gtag";
 import {
 	SEARCH_DEBOUNCE_DELAY,
@@ -59,6 +59,12 @@ watch(model, syncSearchState);
 const handleClearSearch = (): void => {
 	model.value = "";
 };
+
+onUnmounted(() => {
+	if (debounceTimer) {
+		clearTimeout(debounceTimer)
+	};
+});
 </script>
 
 <template>
