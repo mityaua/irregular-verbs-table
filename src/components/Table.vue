@@ -66,7 +66,9 @@ const onSort = (columnName: string): void => {
 
 			<!-- Table body -->
 			<tbody v-if="searchResults.length">
-				<transition-group name="list">
+				<transition-group enter-active-class="transition-all duration-300 ease-in-out" enter-from-class="opacity-0 translate-y-[10px]"
+					leave-active-class="transition-all duration-300 ease-in-out" leave-to-class="opacity-0 translate-y-[10px]"
+					move-class="transition-all duration-300 ease-in-out">
 					<TableRow v-for="result in searchResults" :key="result.infinitive" :rowData="result" :searchQuery="searchQuery" />
 				</transition-group>
 			</tbody>
@@ -74,16 +76,3 @@ const onSort = (columnName: string): void => {
 		<EmptyTableData v-if="!searchResults.length" />
 	</div>
 </template>
-
-<style lang="css" scoped>
-.list-enter-active,
-.list-leave-active {
-	transition: all 0.3s ease-in-out;
-}
-
-.list-enter-from,
-.list-leave-to {
-	opacity: 0;
-	transform: translateY(10px);
-}
-</style>
