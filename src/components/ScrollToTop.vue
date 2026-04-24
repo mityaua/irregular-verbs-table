@@ -36,10 +36,14 @@ onUnmounted(() => {
 <template>
 	<div
 		class="fixed right-5 bottom-3 hidden h-12 w-12 cursor-pointer place-items-center rounded-full opacity-70 duration-300 ease-in hover:opacity-100 dark:opacity-50 dark:hover:opacity-50"
-		:style="{ display: progressWrapperStyle, background: progressWrapperBackground }" @click="scrollToTop">
+		:style="{ display: progressWrapperStyle, background: progressWrapperBackground }"
+		@click="scrollToTop"
+	>
 		<span
 			class="progress-content flex flex-col items-center justify-center rounded-full bg-white text-[11px] font-medium text-slate-950 select-none"
-			id="progress-content" title="Scroll To Top">
+			id="progress-content"
+			title="Scroll To Top"
+		>
 			<ScrollToTopArrow class="-mb-[2px] opacity-70" />
 
 			<span>{{ progressTextContent }}</span>

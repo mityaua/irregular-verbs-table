@@ -22,9 +22,7 @@ const searchResults = computed<IVerb[]>(() => {
 
 	return verbsData.value
 		.filter((verbsObj: IVerb) =>
-			(Object.keys(verbsObj) as Array<keyof IVerb>).some(verb =>
-				verbsObj[verb].toLowerCase().includes(query)
-			)
+			(Object.keys(verbsObj) as Array<keyof IVerb>).some(verb => verbsObj[verb].toLowerCase().includes(query))
 		)
 		.toSorted((a: IVerb, b: IVerb) =>
 			isDescending.value
@@ -45,31 +43,53 @@ const onSort = (columnName: string): void => {
 			<!-- Table caption -->
 
 			<caption
-				class="sticky top-0 z-20 bg-blue-100 p-2 text-left text-lg font-semibold text-gray-900 md:rounded-t-md dark:border dark:border-gray-700 dark:bg-gray-800 dark:text-white">
-				<div class="flex flex-nowrap items-center">
-					<p class="mr-2 text-sm whitespace-nowrap uppercase dark:text-gray-400">List of irregular verbs</p>
-					<!-- Search results -->
-					<search-results :results="searchResults.length" />
-				</div>
+				class="sticky top-0 z-20 bg-blue-100 p-2 text-center text-lg font-semibold text-gray-900 transition-all duration-300 md:rounded-t-md dark:border dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400"
+			>
+				<div class="mx-auto flex w-full max-w-7xl flex-col items-center gap-1">
+					<!-- Title and Results -->
+					<div class="flex items-center gap-2">
+						<h1 class="text-sm font-bold tracking-tight text-gray-900 uppercase dark:text-gray-400">
+							List of irregular <span class="text-blue-600 dark:text-blue-400">verbs</span>
+						</h1>
+						<search-results :results="searchResults.length" />
+					</div>
 
-				<!-- Search input -->
-				<search-input class="mt-1" v-model="searchQuery" />
+					<!-- Search input -->
+					<div class="w-full md:w-1/2 lg:max-w-2xl">
+						<search-input v-model="searchQuery" />
+					</div>
+				</div>
 			</caption>
 
 			<!-- Table head -->
 			<thead class="text-xs text-gray-700 uppercase dark:text-gray-400">
 				<tr>
-					<TableHead v-for="(_, result) in searchResults[0]" :key="result" :isDescending="isDescending" :activeColumnName="sortByColumn"
-						:columnName="result" @click:column="onSort" />
+					<TableHead
+						v-for="(_, result) in searchResults[0]"
+						:key="result"
+						:isDescending="isDescending"
+						:activeColumnName="sortByColumn"
+						:columnName="result"
+						@click:column="onSort"
+					/>
 				</tr>
 			</thead>
 
 			<!-- Table body -->
 			<tbody v-if="searchResults.length">
-				<transition-group enter-active-class="transition-all duration-300 ease-in-out" enter-from-class="opacity-0 translate-y-[10px]"
-					leave-active-class="transition-all duration-300 ease-in-out" leave-to-class="opacity-0 translate-y-[10px]"
-					move-class="transition-all duration-300 ease-in-out">
-					<TableRow v-for="result in searchResults" :key="result.infinitive" :rowData="result" :searchQuery="searchQuery" />
+				<transition-group
+					enter-active-class="transition-all duration-300 ease-in-out"
+					enter-from-class="opacity-0 translate-y-[10px]"
+					leave-active-class="transition-all duration-300 ease-in-out"
+					leave-to-class="opacity-0 translate-y-[10px]"
+					move-class="transition-all duration-300 ease-in-out"
+				>
+					<TableRow
+						v-for="result in searchResults"
+						:key="result.infinitive"
+						:rowData="result"
+						:searchQuery="searchQuery"
+					/>
 				</transition-group>
 			</tbody>
 		</table>
