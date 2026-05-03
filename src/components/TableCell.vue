@@ -56,6 +56,8 @@ const startSpeech = (): void => {
 	const message: string = props.verb.split("/").join();
 
 	const utterance = new SpeechSynthesisUtterance(message);
+	utterance.lang = "en-US";
+
 	synthesizer.value?.speak(utterance);
 
 	utterance.onend = () => {
