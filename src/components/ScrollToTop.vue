@@ -4,20 +4,26 @@ import ScrollToTopArrow from "@assets/scroll-to-top-arrow.svg";
 
 const maxHeight = 100;
 
-const progressTextContent = ref<string>("");
-
 const scrollPosition = ref<number>(0);
-const progressWrapperStyle = computed<string>(() => (scrollPosition.value > maxHeight ? "grid" : "none"));
-const progressWrapperBackground = ref<string>("");
+
+const scrollValue = computed<number>(() => {
+	const calcHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+
+	if (calcHeight <= 0) {
+		return 0;
+	}
+
+	return Math.floor((scrollPosition.value * maxHeight) / calcHeight);
+});
+
+const progressWrapperBackground = computed<string>(
+	() => `conic-gradient(#00cc99 ${scrollValue.value}%, #d7d7d7 ${scrollValue.value}%)`
+);
+
+const progressTextContent = computed<string>(() => `${scrollValue.value}%`);
 
 const onScroll = (): void => {
 	scrollPosition.value = document.documentElement.scrollTop;
-	const calcHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-
-	const scrollValue = Math.round(Math.floor(scrollPosition.value * maxHeight) / calcHeight);
-
-	progressWrapperBackground.value = `conic-gradient(#00cc99 ${scrollValue}%, #d7d7d7 ${scrollValue}%)`;
-	progressTextContent.value = `${scrollValue}%`;
 };
 
 const scrollToTop = (): void => {
@@ -29,14 +35,15 @@ onMounted(() => {
 });
 
 onUnmounted(() => {
-	window.addEventListener("scroll", onScroll);
+	window.removeEventListener("scroll", onScroll);
 });
 </script>
 
 <template>
 	<div
-		class="fixed right-5 bottom-3 hidden h-12 w-12 cursor-pointer place-items-center rounded-full opacity-70 duration-300 ease-in hover:opacity-100 dark:opacity-50 dark:hover:opacity-50"
-		:style="{ display: progressWrapperStyle, background: progressWrapperBackground }"
+		class="fixed right-5 bottom-3 grid h-12 w-12 cursor-pointer place-items-center rounded-full opacity-70 duration-300 ease-in hover:opacity-100 dark:opacity-50 dark:hover:opacity-50"
+		v-show="scrollPosition > maxHeight"
+		:style="{ background: progressWrapperBackground }"
 		@click="scrollToTop"
 	>
 		<span
