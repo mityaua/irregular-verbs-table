@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed, onMounted, onUnmounted, ref } from "vue";
+
 import ScrollToTopArrow from "@assets/scroll-to-top-arrow.svg";
 
 const maxHeight = 100;

@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import TableCell from "@/components/TableCell.vue";
 import IVerb from "@/interfaces/IVerb";
+
+import TableCell from "@/components/TableCell.vue";
 
 defineProps<{ rowData: IVerb; searchQuery: string }>();
 </script>

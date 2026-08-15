@@ -1,9 +1,12 @@
 <script setup lang="ts">
 import { watch, onUnmounted } from "vue";
+
 import { event as gEvent } from "vue-gtag";
+
 import { SEARCH_DEBOUNCE_DELAY, SEARCH_URL_PARAM, APP_LOCALE, ANALYTICS } from "@/consts";
-import SearchIcon from "@assets/search-icon.svg";
+
 import CloseIcon from "@assets/close-icon.svg";
+import SearchIcon from "@assets/search-icon.svg";
 
 const model = defineModel<string>({ required: true });
 

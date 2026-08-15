@@ -3,8 +3,8 @@ import { computed } from "vue";
 
 import { SORT_ICON_COLORS, COLUMN_DISPLAY_NAMES } from "@/consts";
 
-import SortIcon from "@assets/sort-icon.svg";
 import DownArrow from "@assets/down-arrow.svg";
+import SortIcon from "@assets/sort-icon.svg";
 import UpArrow from "@assets/up-arrow.svg";
 
 const props = defineProps<{ isDescending: boolean; activeColumnName: string; columnName: string }>();

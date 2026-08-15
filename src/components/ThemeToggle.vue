@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import SunIcon from "@assets/sun.svg";
-import MoonIcon from "@assets/moon.svg";
-import SystemIcon from "@assets/system.svg";
+import { ThemePreference } from "@/enums/Theme";
 
 import { useTheme } from "@/composables/useTheme";
 
-import { ThemePreference } from "@/enums/Theme";
+import MoonIcon from "@assets/moon.svg";
+import SunIcon from "@assets/sun.svg";
+import SystemIcon from "@assets/system.svg";
 
 const { theme, setTheme } = useTheme();
 

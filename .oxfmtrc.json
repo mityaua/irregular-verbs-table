@@ -1,0 +1,46 @@
+{
+	"semi": true,
+	"singleQuote": false,
+	"useTabs": true,
+	"printWidth": 120,
+	"trailingComma": "es5",
+	"arrowParens": "avoid",
+	"proseWrap": "never",
+	"endOfLine": "crlf",
+	"ignorePatterns": [".idea/", "node_modules", "dist", "build", "package-lock.json"],
+	"sortPackageJson": false,
+	"sortTailwindcss": {
+		"stylesheet": "./src/assets/css/index.css"
+	},
+	"sortImports": {
+		"newlinesBetween": true,
+		"ignoreCase": true,
+		"groups": [
+			"vue",
+			["value-builtin", "value-external"],
+			"consts",
+			"enums",
+			"interfaces",
+			"utils",
+			"composables",
+			"data",
+			"components",
+			"assets",
+			"value-internal",
+			["value-parent", "value-sibling", "value-index"],
+			"type-import",
+			["side_effect_style", "style", "side_effect", "unknown"]
+		],
+		"customGroups": [
+			{ "groupName": "vue", "elementNamePattern": ["vue"] },
+			{ "groupName": "consts", "elementNamePattern": ["@/consts", "@/consts/**"] },
+			{ "groupName": "enums", "elementNamePattern": ["@/enums", "@/enums/**"] },
+			{ "groupName": "interfaces", "elementNamePattern": ["@/interfaces", "@/interfaces/**"] },
+			{ "groupName": "utils", "elementNamePattern": ["@/utils", "@/utils/**"] },
+			{ "groupName": "composables", "elementNamePattern": ["@/composables", "@/composables/**"] },
+			{ "groupName": "data", "elementNamePattern": ["@/data", "@/data/**"] },
+			{ "groupName": "components", "elementNamePattern": ["@/components/**", "@components/**"] },
+			{ "groupName": "assets", "elementNamePattern": ["@assets/**"] }
+		]
+	}
+}

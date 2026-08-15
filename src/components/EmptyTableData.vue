@@ -1,8 +1,11 @@
 <script setup lang="ts">
 import { ref, onMounted, computed } from "vue";
-import EmptySearch from "@assets/empty-search.svg";
-import { verbs } from "@/data/verbs.json";
+
 import IVerb from "@/interfaces/IVerb";
+
+import { verbs } from "@/data/verbs.json";
+
+import EmptySearch from "@assets/empty-search.svg";
 
 const randomVerb = ref<IVerb | null>(null);
 

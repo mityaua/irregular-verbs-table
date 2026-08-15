@@ -1,8 +1,11 @@
 import { createApp } from "vue";
+
 import { configure } from "vue-gtag";
+
+import App from "./App.vue";
+
 import "./assets/css/index.css";
 import "./style.css";
-import App from "./App.vue";
 
 configure({
 	appName: "EVT",

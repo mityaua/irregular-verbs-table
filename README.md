@@ -107,7 +107,8 @@ npm run build        # Type-check and build for production
 npm run preview      # Preview the production build
 npm run lint         # Lint files with Oxlint
 npm run type-check   # Run vue-tsc type checking
-npm run format       # Format files using Prettier
+npm run format       # Format files using Oxfmt
+npm run format:check # Check formatting without writing
 ```
 
 ## 🤝 Contributing

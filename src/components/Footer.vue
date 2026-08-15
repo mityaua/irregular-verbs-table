@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import sourceFile from "@/data/irregular_verbs.pdf";
-import PdfIcon from "@assets/pdf-icon.svg";
-import GithubIcon from "@assets/github-icon.svg";
+
 import ThemeToggle from "@components/ThemeToggle.vue";
+
+import GithubIcon from "@assets/github-icon.svg";
+import PdfIcon from "@assets/pdf-icon.svg";
 </script>
 
 <template>

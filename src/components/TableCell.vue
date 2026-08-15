@@ -1,15 +1,15 @@
 <script setup lang="ts">
 import { computed, onMounted, ref } from "vue";
 
-import UnMutedIcon from "@assets/unmuted.svg";
-import MutedIcon from "@assets/muted.svg";
-
-import { useSpeechSynthesis } from "@/composables/useSpeechSynthesis";
-
 import { splitIntoSegments } from "@/utils/search";
 import type { ISearchSegment } from "@/utils/search";
 
+import { useSpeechSynthesis } from "@/composables/useSpeechSynthesis";
+
 import { langToReversoMap } from "@/data/lang-map";
+
+import MutedIcon from "@assets/muted.svg";
+import UnMutedIcon from "@assets/unmuted.svg";
 
 const props = defineProps<{
 	verb: string;

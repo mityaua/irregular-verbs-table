@@ -1,5 +1,6 @@
 import { computed, readonly, ref, watch } from "vue";
 import type { Ref } from "vue";
+
 import { ThemePreference, type ResolvedTheme } from "@/enums/Theme";
 
 const THEME_STORAGE_KEY = "theme";
