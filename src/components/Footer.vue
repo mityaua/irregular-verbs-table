@@ -2,10 +2,14 @@
 import sourceFile from "@/data/irregular_verbs.pdf";
 import PdfIcon from "@assets/pdf-icon.svg";
 import GithubIcon from "@assets/github-icon.svg";
+import ThemeToggle from "@components/ThemeToggle.vue";
 </script>
 
 <template>
 	<div class="my-4 text-center text-gray-500 dark:text-gray-400">
+		<div class="mb-4 flex justify-center">
+			<ThemeToggle />
+		</div>
 		<div class="flex items-center justify-center gap-6">
 			<a
 				aria-label="Open source file"

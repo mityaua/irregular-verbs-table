@@ -9,9 +9,9 @@ export default defineConfig({
 	base: "/irregular-verbs-table/",
 	resolve: {
 		alias: {
-			"@": path.resolve(__dirname, "./src"),
-			"@assets": path.resolve(__dirname, "./src/assets"),
-			"@components": path.resolve(__dirname, "./src/components"),
+			"@": path.resolve(import.meta.dirname, "./src"),
+			"@assets": path.resolve(import.meta.dirname, "./src/assets"),
+			"@components": path.resolve(import.meta.dirname, "./src/components"),
 		},
 	},
 	plugins: [

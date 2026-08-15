@@ -1,7 +1,14 @@
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted, computed } from "vue";
-import unMutedIcon from "@assets/unmuted.svg?url";
-import mutedIcon from "@assets/muted.svg?url";
+import { computed, onMounted, ref } from "vue";
+
+import UnMutedIcon from "@assets/unmuted.svg";
+import MutedIcon from "@assets/muted.svg";
+
+import { useSpeechSynthesis } from "@/composables/useSpeechSynthesis";
+
+import { splitIntoSegments } from "@/utils/search";
+import type { ISearchSegment } from "@/utils/search";
+
 import { langToReversoMap } from "@/data/lang-map";
 
 const props = defineProps<{
@@ -10,19 +17,31 @@ const props = defineProps<{
 	searchQuery: string;
 }>();
 
+const { currentText, speak, cancel } = useSpeechSynthesis();
+
 const reversoBaseUrl = "https://context.reverso.net/translation/";
 const defaultLangPair = langToReversoMap["uk"];
-
-const synthesizer = ref<SpeechSynthesis | null>(null);
-const isSpeaking = ref<boolean>(false);
 
 const defaultReversoLangPair = ref<string>(defaultLangPair);
 const reversoUrl = computed<string>(
 	() => `${reversoBaseUrl}${defaultReversoLangPair.value}/${props.verb.split("/")[0]}`
 );
 const linkTitle = computed<string>(() => `Go to Reverso: ${props.verb}`);
-
 const ariaLabel = computed<string>(() => `Translate '${props.verb}' on Reverso Context`);
+
+const displayText = computed<string>(() => props.verb.charAt(0).toUpperCase() + props.verb.slice(1));
+const segments = computed<ISearchSegment[]>(() => splitIntoSegments(displayText.value, props.searchQuery));
+
+const pronounceText = computed<string>(() => props.verb.split("/").join(", "));
+const isCellSpeaking = computed<boolean>(() => currentText.value === pronounceText.value);
+
+const onPronounceClick = (): void => {
+	if (isCellSpeaking.value) {
+		cancel();
+	} else {
+		speak(pronounceText.value);
+	}
+};
 
 const detectReversoLanguagePair = (): void => {
 	const langCode: string = navigator.language?.split("-")[0].toLowerCase();
@@ -30,50 +49,7 @@ const detectReversoLanguagePair = (): void => {
 	defaultReversoLangPair.value = detectedPair ?? defaultLangPair;
 };
 
-const highlightMatches = (): string => {
-	const query = props.searchQuery;
-	const verb = props.verb;
-	const upperCasedVerb = verb.charAt(0).toUpperCase() + verb.slice(1);
-
-	if (!query) {
-		return upperCasedVerb;
-	}
-
-	const regex = new RegExp(query, "gi");
-	const matches = verb.match(regex);
-
-	if (!matches) {
-		return upperCasedVerb;
-	}
-
-	const highlighted = upperCasedVerb.replace(regex, "<strong>$&</strong>");
-
-	return highlighted;
-};
-
-const startSpeech = (): void => {
-	isSpeaking.value = true;
-	const message: string = props.verb.split("/").join();
-
-	const utterance = new SpeechSynthesisUtterance(message);
-	utterance.lang = "en-US";
-
-	synthesizer.value?.speak(utterance);
-
-	utterance.onend = () => {
-		isSpeaking.value = false;
-	};
-};
-
-onMounted(() => {
-	synthesizer.value = window.speechSynthesis;
-
-	detectReversoLanguagePair();
-});
-
-onUnmounted(() => {
-	synthesizer.value = null;
-});
+onMounted(detectReversoLanguagePair);
 </script>
 
 <template>
@@ -87,20 +63,31 @@ onUnmounted(() => {
 				:href="reversoUrl"
 				class="text-base text-gray-600 duration-300 ease-in dark:text-gray-400"
 			>
-				<span v-html="highlightMatches()"></span>
+				<span>
+					<template v-for="(segment, index) in segments" :key="index">
+						<mark
+							v-if="segment.isMatch"
+							class="rounded bg-yellow-200 px-0.5 text-gray-900 dark:bg-yellow-500/30 dark:text-white"
+						>
+							{{ segment.text }}
+						</mark>
+						<template v-else>{{ segment.text }}</template>
+					</template>
+				</span>
 
 				<span class="sr-only"> - translation of the verb '{{ props.verb }}' on Reverso Context</span>
 			</a>
 
-			<img
-				title="Pronunciation"
-				alt="Pronunciation"
-				width="16"
-				height="16"
-				:class="['ml-2 cursor-pointer duration-300 ease-in', isSpeaking ? 'opacity-100' : 'opacity-50']"
-				:src="isSpeaking ? unMutedIcon : mutedIcon"
-				@click.prevent="!isSpeaking && startSpeech()"
-			/>
+			<button
+				type="button"
+				:aria-pressed="isCellSpeaking"
+				:aria-label="`${isCellSpeaking ? 'Stop' : 'Play'} pronunciation of '${props.verb}'`"
+				:title="isCellSpeaking ? 'Stop pronunciation' : 'Pronunciation'"
+				class="ml-2 inline-flex cursor-pointer items-center justify-center rounded p-1 text-gray-400 transition-all duration-300 hover:bg-gray-100 focus:ring-2 focus:ring-blue-500/40 focus:outline-none dark:text-gray-500 dark:hover:bg-gray-800"
+				@click="onPronounceClick"
+			>
+				<component aria-hidden="true" :is="isCellSpeaking ? UnMutedIcon : MutedIcon" class="size-4" />
+			</button>
 		</div>
 	</td>
 </template>

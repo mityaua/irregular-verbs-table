@@ -3,15 +3,41 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<meta name="theme-color" media="(prefers-color-scheme: light)" content="#e1effd" />
-		<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#1f2937" />
+		<meta name="theme-color" content="#e1effd" />
+
+		<script>
+			(() => {
+				const THEME_STORAGE_KEY = "theme";
+				const THEME_COLORS = { light: "#e1effd", dark: "#1f2937" };
+
+				const readStoredTheme = () => {
+					try {
+						return localStorage.getItem(THEME_STORAGE_KEY);
+					} catch {
+						return null;
+					}
+				};
+
+				const theme = readStoredTheme();
+				const preference = ["light", "dark", "system"].includes(theme) ? theme : "system";
+				const isDark =
+					preference === "dark" || (preference === "system" && matchMedia("(prefers-color-scheme: dark)").matches);
+				const resolved = isDark ? "dark" : "light";
+
+				document.documentElement.dataset.theme = resolved;
+				document.querySelector('meta[name="theme-color"]')?.setAttribute("content", THEME_COLORS[resolved]);
+			})();
+		</script>
 
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
 		<!-- Primary Meta Tags -->
 		<title>English Irregular Verbs - Table with Search & Pronunciation</title>
 		<meta name="title" content="English Irregular Verbs - Table with Search & Pronunciation" />
-		<meta name="description" content="Complete list of English irregular verbs with forms (V1, V2, V3): infinitive, past simple, and past participle. Features fast search and pronunciation." />
+		<meta
+			name="description"
+			content="Complete list of English irregular verbs with forms (V1, V2, V3): infinitive, past simple, and past participle. Features fast search and pronunciation."
+		/>
 		<link rel="canonical" href="https://mityaua.github.io/irregular-verbs-table/" />
 		<meta name="author" content="mityaua" />
 		<meta name="copyright" content="mityaua" />
@@ -46,22 +72,22 @@
 
 		<!-- Schema.org Markup -->
 		<script type="application/ld+json">
-		{
-			"@context": "https://schema.org",
-			"@type": "WebApplication",
-			"name": "English Irregular Verbs List",
-			"url": "https://mityaua.github.io/irregular-verbs-table/",
-			"description": "Complete interactive list of English irregular verbs allowing quick search across infinitive, past simple, and past participle forms.",
-			"applicationCategory": "EducationalApplication",
-			"author": {
-				"@type": "Person",
-				"name": "mityaua"
-			},
-			"offers": {
-				"@type": "Offer",
-				"price": "0"
+			{
+				"@context": "https://schema.org",
+				"@type": "WebApplication",
+				"name": "English Irregular Verbs List",
+				"url": "https://mityaua.github.io/irregular-verbs-table/",
+				"description": "Complete interactive list of English irregular verbs allowing quick search across infinitive, past simple, and past participle forms.",
+				"applicationCategory": "EducationalApplication",
+				"author": {
+					"@type": "Person",
+					"name": "mityaua"
+				},
+				"offers": {
+					"@type": "Offer",
+					"price": "0"
+				}
 			}
-		}
 		</script>
 	</head>
 	<body>
