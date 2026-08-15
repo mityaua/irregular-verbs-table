@@ -22,9 +22,9 @@ const resultsLabel = computed<string>(() => {
 			mode="out-in"
 		>
 			<output
-				class="rounded-full border border-blue-100 bg-blue-50 px-3 py-1 text-xs font-bold tracking-wider whitespace-nowrap text-blue-600 uppercase dark:border-blue-800/50 dark:bg-blue-900/30 dark:text-blue-400"
 				v-if="results"
 				:key="results"
+				class="rounded-full border border-blue-100 bg-blue-50 px-3 py-1 text-xs font-bold tracking-wider whitespace-nowrap text-blue-600 uppercase dark:border-blue-800/50 dark:bg-blue-900/30 dark:text-blue-400"
 			>
 				{{ resultsLabel }}
 			</output>

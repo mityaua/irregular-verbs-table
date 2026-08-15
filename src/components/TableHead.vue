@@ -40,22 +40,22 @@ const onColumnClick = (): void => {
 
 <template>
 	<th
-		class="sticky top-[85px] z-10 w-1/3 cursor-pointer border-x border-t border-gray-200 bg-gray-50 p-2 shadow-[inset_0_-1px_0_0_var(--color-gray-200)] dark:border-gray-700 dark:bg-gray-600 dark:shadow-[inset_0_-1px_0_0_var(--color-gray-700)]"
 		scope="col"
 		:aria-sort="ariaSort"
+		class="sticky top-[85px] z-10 w-1/3 cursor-pointer border-x border-t border-gray-200 bg-gray-50 p-2 shadow-[inset_0_-1px_0_0_var(--color-gray-200)] dark:border-gray-700 dark:bg-gray-600 dark:shadow-[inset_0_-1px_0_0_var(--color-gray-700)]"
 		@click="onColumnClick"
 	>
 		<div class="flex items-center justify-center gap-1 select-none">
 			<p>{{ visibleColumnName }}</p>
 
 			<div
-				class="flex items-center transition-transform duration-300"
 				:title="isActiveColumn ? (isDescending ? 'Descending' : 'Ascending') : `Sort by ${visibleColumnName}`"
+				class="flex items-center transition-transform duration-300"
 			>
 				<component
-					class="size-3"
 					:is="isActiveColumn ? (isDescending ? DownArrow : UpArrow) : SortIcon"
 					:fill="sortIconColor"
+					class="size-3"
 				/>
 			</div>
 		</div>

@@ -80,12 +80,12 @@ onUnmounted(() => {
 	<td class="border border-gray-200 py-3 dark:border-gray-700">
 		<div class="flex flex-wrap justify-center">
 			<a
-				class="text-base text-gray-600 duration-300 ease-in dark:text-gray-400"
 				target="_blank"
 				rel="noopener noreferrer"
 				:aria-label="ariaLabel"
 				:title="linkTitle"
 				:href="reversoUrl"
+				class="text-base text-gray-600 duration-300 ease-in dark:text-gray-400"
 			>
 				<span v-html="highlightMatches()"></span>
 

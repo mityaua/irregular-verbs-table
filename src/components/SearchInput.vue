@@ -70,34 +70,34 @@ onUnmounted(() => {
 				<!-- Search icon -->
 				<div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
 					<SearchIcon
-						class="size-5 text-gray-400 transition-colors duration-200 group-focus-within:text-blue-500"
 						aria-hidden="true"
+						class="size-5 text-gray-400 transition-colors duration-200 group-focus-within:text-blue-500"
 					/>
 				</div>
 
 				<!-- Search input -->
 				<input
-					class="block w-full rounded-lg border border-gray-300 bg-white p-2 pl-10 text-base text-gray-800 placeholder-gray-400 transition-all duration-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:focus:border-blue-400 dark:focus:ring-blue-400/20"
 					id="search-input"
-					v-model.trim="model"
+					aria-label="Search for verbs"
 					type="search"
 					placeholder="Search for verbs"
 					role="searchbox"
-					aria-label="Search for verbs"
+					v-model.trim="model"
+					class="block w-full rounded-lg border border-gray-300 bg-white p-2 pl-10 text-base text-gray-800 placeholder-gray-400 transition-all duration-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:focus:border-blue-400 dark:focus:ring-blue-400/20"
 				/>
 			</form>
 		</search>
 
 		<!-- Clear search button -->
 		<button
-			class="inline-flex cursor-pointer items-center justify-center rounded-lg border border-gray-300 bg-white p-2 transition-all duration-200 hover:bg-gray-50 focus:ring-4 focus:ring-blue-500/10 focus:outline-none dark:border-gray-600 dark:bg-gray-700 dark:hover:bg-gray-700"
 			v-show="model"
-			type="button"
 			aria-label="Clear search query"
+			type="button"
 			title="Clear search"
+			class="inline-flex cursor-pointer items-center justify-center rounded-lg border border-gray-300 bg-white p-2 transition-all duration-200 hover:bg-gray-50 focus:ring-4 focus:ring-blue-500/10 focus:outline-none dark:border-gray-600 dark:bg-gray-700 dark:hover:bg-gray-700"
 			@click="handleClearSearch"
 		>
-			<CloseIcon class="size-3 text-gray-500 dark:text-gray-400" aria-hidden="true" />
+			<CloseIcon aria-hidden="true" class="size-3 text-gray-500 dark:text-gray-400" />
 		</button>
 	</div>
 </template>

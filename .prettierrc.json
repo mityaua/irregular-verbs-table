@@ -8,5 +8,20 @@
 	"endOfLine": "auto",
 	"proseWrap": "never",
 	"plugins": ["prettier-plugin-organize-attributes", "prettier-plugin-tailwindcss"],
+	"attributeGroups": [
+		"^v-(if|else-if|else|show|cloak|for)$",
+		"^id$",
+		"^ref$",
+		"^key$",
+		"^aria-",
+		"$DEFAULT",
+		"^v-model",
+		"^v-bind",
+		"^:",
+		"^class$",
+		"^style$",
+		"^@",
+		"^v-on"
+	],
 	"tailwindStylesheet": "./src/assets/css/index.css"
 }
