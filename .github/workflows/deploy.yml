@@ -23,9 +23,6 @@ jobs:
           node-version: 24.x
           cache: "npm"
 
-      - name: Force public npm registry
-        run: echo "registry=https://registry.npmjs.org/" > .npmrc
-
       - name: Install dependencies
         run: npm install
 
