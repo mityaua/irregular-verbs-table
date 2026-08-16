@@ -17,7 +17,7 @@
 - 🎓 **Smart "Not Found" State**: Shows a random irregular verb to learn when a search query yields no results.
 - 🔊 **Pronunciation**: Click a speaker icon to hear the verb forms spoken via the Web Speech API.
 - 🔗 **Translation Links**: Each verb links to its translation on Reverso Context (language detected from browser locale).
-- 🌙 **Modern UI/UX**: Sticky header, scroll-to-top with reading progress indicator, and light/dark theme that follows the system preference.
+- 🌙 **Modern UI/UX**: Sticky header, scroll-to-top with reading progress indicator, and a theme switcher with light, dark, and system modes (choice is remembered across sessions).
 - ⚡ **Performance Optimized**: Built with Vue 3, Vite, and Tailwind CSS for rapid loading.
 - 📱 **Mobile Responsive**: Perfectly adapts to any screen size.
 
@@ -30,6 +30,8 @@
 | [Vite](https://vite.dev/)                     | Fast build tool                   |
 | [Tailwind CSS](https://tailwindcss.com/)      | Utility-first CSS (v4, CSS-first config) |
 | [Oxlint](https://oxc.rs/)                     | The JavaScript Oxidation Compiler |
+| [Oxfmt](https://oxc.rs/)                      | Code formatter                    |
+| [vue-gtag](https://vue-gtag-js.netlify.app/)  | Google Analytics for Vue          |
 
 ## 📆 Installation
 
@@ -77,16 +79,18 @@ Deployment is fully automated via a GitHub Actions workflow (`.github/workflows/
 
 ```
 ├── .github/workflows/       # CI/CD (build & deploy to GitHub Pages)
-├── public/                  # Static assets (favicon, meta image, robots.txt, verbs.json)
+├── public/                  # Static assets (favicon, meta image, robots.txt, llms.txt, verbs.json)
 ├── src/
 │   ├── assets/              # SVG icons and CSS
 │   │   ├── css/index.css    # Tailwind CSS entry point
 │   │   └── *.svg            # Inline SVG icons
 │   ├── components/          # Vue components
+│   ├── composables/         # Reusable logic (useTheme, useSpeechSynthesis)
 │   ├── consts/              # App constants
 │   ├── data/                # Verb data (JSON) and language maps
-│   ├── enums/               # Enums (table columns)
+│   ├── enums/               # Enums (table columns, theme)
 │   ├── interfaces/          # TypeScript interfaces
+│   ├── utils/               # Helper functions (search)
 │   ├── App.vue              # Root Vue component
 │   ├── main.ts              # App entry point
 │   └── style.css            # Global styles
@@ -95,6 +99,7 @@ Deployment is fully automated via a GitHub Actions workflow (`.github/workflows/
 ├── tsconfig.json            # TypeScript config
 ├── postcss.config.cjs       # PostCSS config
 ├── .oxlintrc.json           # Oxlint config
+├── .oxfmtrc.json            # Oxfmt config
 └── package.json
 ```
 
