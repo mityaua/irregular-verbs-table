@@ -1,6 +1,8 @@
 User-agent: *
 Allow: /
 
+Sitemap: https://mityaua.github.io/irregular-verbs-table/sitemap.xml
+
 # Specifically allow major AI indexing bots
 User-agent: GPTBot
 Allow: /

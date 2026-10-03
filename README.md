@@ -67,7 +67,9 @@ The compiled files will be in the `dist/` folder.
 
 ## 🚀 Deploy to GitHub Pages
 
-Deployment is fully automated via a GitHub Actions workflow (`.github/workflows/deploy.yml`). Every push to the `main` branch builds the project and publishes the `dist/` folder to the `gh-pages` branch, which GitHub Pages serves automatically.
+Deployment is fully automated via a GitHub Actions workflow (`.github/workflows/deploy.yml`). Every push to the `main` branch (or a manual run via `workflow_dispatch`) builds the project and publishes the `dist/` folder using the official GitHub Pages deployment (`actions/deploy-pages` with OIDC) — no `gh-pages` branch is created.
+
+> **Setup requirement:** In the repository settings, set **Settings → Pages → Source** to **GitHub Actions**.
 
 > **Note:** The `base` option in `vite.config.ts` is set for GitHub Pages:
 >
@@ -79,7 +81,7 @@ Deployment is fully automated via a GitHub Actions workflow (`.github/workflows/
 
 ```
 ├── .github/workflows/       # CI/CD (build & deploy to GitHub Pages)
-├── public/                  # Static assets (favicon, meta image, robots.txt, llms.txt, verbs.json)
+├── public/                  # Static assets (favicon, meta image, robots.txt, sitemap.xml, llms.txt, verbs.json)
 ├── src/
 │   ├── assets/              # SVG icons and CSS
 │   │   ├── css/index.css    # Tailwind CSS entry point
