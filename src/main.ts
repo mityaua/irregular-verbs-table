@@ -10,6 +10,7 @@ import "./style.css";
 configure({
 	appName: "EVT",
 	tagId: import.meta.env.VITE_GA_ID,
+	config: { send_page_view: true },
 });
 
 const app = createApp(App);
