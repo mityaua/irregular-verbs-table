@@ -19,8 +19,10 @@ export const APP_LOCALE = "uk-UA";
 export const ANALYTICS = {
 	EVENTS: {
 		SEARCH: "search",
+		WORD_OF_DAY: "word_of_day",
 	},
 	CATEGORIES: {
 		VERBS_SEARCH: "verbs-search",
+		WORD_OF_DAY: "word-of-day",
 	},
 };

@@ -7,11 +7,12 @@ import IVerb from "@/interfaces/IVerb";
 
 import { verbs } from "@/data/verbs.json";
 
-import TableRow from "@/components/TableRow.vue";
 import EmptyTableData from "@components/EmptyTableData.vue";
 import SearchInput from "@components/SearchInput.vue";
 import SearchResults from "@components/SearchResults.vue";
 import TableHead from "@components/TableHead.vue";
+import TableRow from "@components/TableRow.vue";
+import WordOfDay from "@components/WordOfDay.vue";
 
 const verbsData = ref<IVerb[]>(verbs);
 
@@ -49,18 +50,24 @@ const onSort = (columnName: string): void => {
 			<caption
 				class="sticky top-0 z-20 bg-blue-100 p-2 text-center text-lg font-semibold text-gray-900 transition-all duration-300 md:rounded-t-md dark:border dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400"
 			>
-				<div class="mx-auto flex w-full max-w-7xl flex-col items-center gap-1">
-					<!-- Title and Results -->
-					<div class="flex items-center gap-2">
+				<!-- Title and Results -->
+				<div class="relative flex w-full items-center justify-center">
+					<div class="mx-auto flex w-full max-w-7xl items-center justify-center gap-2">
 						<h1 class="text-sm font-bold tracking-tight text-gray-900 uppercase dark:text-gray-400">
 							List of irregular <span class="text-blue-600 dark:text-blue-400">verbs</span>
 						</h1>
-						<search-results :results="searchResults.length" />
+						<SearchResults :results="searchResults.length" />
 					</div>
 
-					<!-- Search input -->
-					<div class="w-full md:w-1/2 lg:max-w-2xl">
-						<search-input v-model="searchQuery" />
+					<div class="absolute top-1/2 right-0 z-30 -translate-y-1/2">
+						<WordOfDay />
+					</div>
+				</div>
+
+				<!-- Search input -->
+				<div class="mx-auto w-full max-w-7xl pt-1">
+					<div class="mx-auto w-full md:w-1/2 lg:max-w-2xl">
+						<SearchInput v-model="searchQuery" />
 					</div>
 				</div>
 			</caption>
