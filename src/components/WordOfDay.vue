@@ -14,6 +14,7 @@ import { useReversoLink } from "@/composables/useReversoLink";
 import { useWordOfDay } from "@/composables/useWordOfDay";
 
 import PronounceButton from "@components/PronounceButton.vue";
+import Tooltip from "@components/Tooltip.vue";
 
 import CloseIcon from "@assets/close-icon.svg";
 import LightBulbIcon from "@assets/light-bulb.svg";
@@ -93,17 +94,12 @@ useDismissable({
 			aria-haspopup="dialog"
 			:aria-expanded="isOpen"
 			aria-label="Word of the day"
-			title="Word of the day"
-			class="relative cursor-pointer rounded p-1 text-gray-500 transition-all duration-300 hover:bg-gray-100 focus:ring-2 focus:ring-blue-500/40 focus:outline-none dark:text-gray-400 dark:hover:bg-gray-700"
+			class="group relative cursor-pointer rounded p-1 text-gray-500 transition-all duration-300 hover:bg-gray-100 focus:ring-2 focus:ring-blue-500/40 focus:outline-none dark:text-gray-400 dark:hover:bg-gray-700"
 			@click="toggle"
 		>
-			<LightBulbIcon aria-hidden="true" class="size-4" />
+			<LightBulbIcon aria-hidden="true" class="size-4" :class="{ 'lamp-blink': !isSeenToday }" />
 
-			<span
-				v-if="!isSeenToday"
-				aria-hidden="true"
-				class="absolute top-0 right-0 size-2 animate-pulse rounded-full bg-blue-600 dark:bg-blue-400"
-			/>
+			<Tooltip v-if="!isOpen" text="Word of the day" />
 		</button>
 
 		<transition
@@ -193,3 +189,30 @@ useDismissable({
 		</transition>
 	</div>
 </template>
+
+<style scoped>
+@keyframes lamp-blink {
+	0%,
+	100% {
+		color: var(--color-gray-500);
+		opacity: 0.5;
+		filter: drop-shadow(0 0 1px rgb(250 204 21 / 0));
+	}
+
+	50% {
+		color: var(--color-yellow-400);
+		opacity: 1;
+		filter: drop-shadow(0 0 6px rgb(250 204 21 / 0.9));
+	}
+}
+
+.lamp-blink {
+	animation: lamp-blink 1.4s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.lamp-blink {
+		animation: none;
+	}
+}
+</style>
